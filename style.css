@@ -1,0 +1,98 @@
+:root {
+  --webpage_background_color: #f4f1e8;
+  --nav_bar_background_color: #000;
+  --nav_bar_hover_background_color: rgb(151, 130, 115);
+  --text_color: #E4D4C8;
+}
+
+*, *::before, *::after{
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: var(--text_color);
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  background-color: var(--webpage_background_color);
+}
+
+/*-------------------------- Navigation Bar Styling --------------------------*/
+
+.nav_bar {
+  position: relative;
+  width: 100vw;
+  height: 3rem;
+  background-color: var(--nav_bar_background_color);
+}  
+
+.nav_container.active{
+  left: 0vw;
+}
+
+.nav_container {
+  position: absolute;
+  left: -127px;
+  transition: left 0.5s ease;
+}
+
+.nav_content {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  grid-template-rows: repeat(6, 1fr);
+  list-style-type: none; 
+}
+
+.nav_items_container {
+  width: 8rem;
+}
+
+.nav_item {
+  display: flex;
+  height: 3rem;
+  align-items: center;
+  justify-content: space-around;
+  text-decoration: none;
+  text-align: center;
+  background-color: var(--nav_bar_background_color);
+  transition: background-color 0.5s;
+}
+
+.nav_item:hover {
+  background-color: var(--nav_bar_hover_background_color);
+}
+
+.nav_icon {
+  position: absolute;
+  width: 3rem;
+  padding: 0.3rem;
+  transition: transform 0.5s ease;
+}
+
+.nav_icon.active{
+  transform: translateX(126px) rotate(90deg);
+}
+
+.nav_icon:hover {
+  cursor: pointer;
+}
+
+.nav_icon_lines {
+  width: 1.57rem;
+}
+
+/*-------------------------- Section Styling --------------------------*/
+
+.section_header {
+  text-align: center;
+}
+
+.text_content {
+  padding: 0 100px;
+  transition: padding-left 0.5s ease;
+}
+
+.text_content.active{
+  padding-left: 179px;
+}
