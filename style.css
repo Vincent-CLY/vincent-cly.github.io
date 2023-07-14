@@ -106,10 +106,11 @@ body {
   inset: 0;
   background-color: var(--webpage-background-color) ;
   animation: typing-words-effect var(--header-animation-speed) forwards steps(var(--header-text-count));
+  z-index: 1;
 }
 
 .section_header {
-  display: block;
+  display: inline-flex;
   position: relative;
   margin: 1rem;
   font-family: "Space Mono", monospace;
@@ -125,6 +126,7 @@ body {
     typing-cursor-effect 0.5s var(--header-cursor-effect) steps(var(--header-text-count)) var(--header-cursor-animation-timeout);
     /* 0.5s is when stop */
   width: 0.125rem;
+  z-index: 2;
 }
 
 .header_text {
@@ -164,7 +166,7 @@ body {
   }
 }
 
-/* For Tablet/Desktop */
+/* For Tablet/Desktop
 @media only screen and (min-width: 341px) {
   .section_header {
     display: inline-flex;
@@ -179,10 +181,10 @@ body {
   .header_text.left {
     padding-left: 0;
   }
-}
+} */
 
 /* For Small Device */
-@media only screen and (min-width: 222px) {
+/* @media only screen and (min-width: 222px) {
   .section_header::before {
     display: none;
   }
@@ -235,13 +237,7 @@ body {
       typing-cursor-effect 0.5s var(--header-cursor-effect) steps(var(--header-text-count)) var(--header-cursor-animation-timeout);
     width: 0.125rem;
   }
-
-  @keyframes typing-words-effect {
-    to {
-      left: 100%;
-    }
-  }
-}
+} */
 
 
 /*-------------------------- Welcome Message Styling--------------------------*/
