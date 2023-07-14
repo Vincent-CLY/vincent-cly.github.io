@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>V_C</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital@1&display=swap" rel="stylesheet">
     <script src="script.js" defer></script>
   </head>
   <body>
-    <header>
+    <!-- <header>
       <nav class="nav_bar">
         <div class="nav_container">
           <ul class="nav_content">
@@ -38,16 +41,17 @@
           <hr class="nav_icon_lines">
         </div>
       </nav>
-    </header>
+    </header> -->
     <section class="main_content" id="About Us">
-      <div class="section_header">
-        <h1>Hello, I am Vincent !</h1>
-      </div>
+      <span class="section_header" data-section-header>
+        <h1 class="header_text"> Hello,&nbsp; </h1>
+        <h1 class="header_text right"> I am Vincent! </h1>
+      </span>
       <div class="text_content">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, provident perspiciatis. Inventore quidem exercitationem numquam quam ducimus voluptatum neque cumque pariatur maiores saepe laboriosam omnis rerum, suscipit totam ad dicta!
       </div>
     </section>
     
-    
+    <button onclick="testing()">Start Animation</button>
   </body>
 </html>
