@@ -3,9 +3,24 @@ const navIcon = document.querySelector('.nav_icon');
 const textContent = document.querySelectorAll('.text_content');
 const sectionHeader = document.querySelector('.section_header');
 const headerTextCount = sectionHeader.innerText.split('\n').join('').length;
-const r = document.querySelector(':root');
-const button = document.querySelector('button');
 
+// Set steps() number to CSS animation
+sectionHeader.style.setProperty('--header-text-count', headerTextCount);
+
+// Change typing-cursor-effect color
+sectionHeader.addEventListener('animationiteration', e => {
+    if (e.elapsedTime === 1.5) {
+        sectionHeader.style.setProperty('--header-text-color', 'var(--header-text-right-color)');
+    }
+})
+
+// Change typing-cursor-effect style
+sectionHeader.addEventListener('animationend', e => {
+    if (e.animationName === 'typing-words-effect') {
+        sectionHeader.style.setProperty('--header-cursor-effect', 'alternate');
+    }
+    console.log(e);
+});
 
 // Able To Click Menu 
 navIcon.addEventListener('click', () => {
@@ -28,10 +43,3 @@ document.addEventListener('click', e => {
         navIcon.classList.remove('active');
     }
 })
-console.log('Before')
-// Set steps() number to CSS animation
-function testing() {
-    r.style.setProperty('--header-text-count', headerTextCount);
-    console.log(headerTextCount);
-}
-console.log('After')
