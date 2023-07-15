@@ -2,7 +2,7 @@ const navContainer = document.querySelector('.nav_container');
 const navIcon = document.querySelector('.nav_icon');
 const textContent = document.querySelectorAll('.text_content');
 const sectionHeader = document.querySelector('.section_header');
-const headerTextCount = sectionHeader.innerText.length;
+const headerTextCount = sectionHeader.innerText.split('\n').join('').length;
 
 // Set steps() number to CSS animation
 sectionHeader.style.setProperty('--header-text-count', headerTextCount);

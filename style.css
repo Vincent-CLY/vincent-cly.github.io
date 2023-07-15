@@ -1,5 +1,11 @@
+/* General Styling */
+
 :root {
-  --webpage-background-color: hsl(40, 78%, 95%); /* Supporting colors stay close to base's colors' S, B */
+  --webpage-background-color: hsl(
+    40,
+    78%,
+    95%
+  ); /* Supporting colors stay close to base's colors' S, B */
   --nav-bar-background-color: #000;
   --nav-bar-hover-background-color: rgb(147, 147, 147);
   --nav-text-color: #fff;
@@ -10,7 +16,7 @@
   --header-animation-speed: 5s;
   --header-cursor-animation-timeout: infinite;
   --header-cursor-effect: normal;
-} 
+}
 
 *,
 *::before,
@@ -21,11 +27,23 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
 body {
   padding: 0;
   margin: 0;
   background-color: var(--webpage-background-color);
   margin-inline: auto;
+}
+
+section {
+  height: 100svh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  text-align: center;
 }
 
 /*-------------------------- Navigation Bar Styling --------------------------*/
@@ -96,16 +114,13 @@ body {
 
 /*-------------------------- Header Styling --------------------------*/
 
-.main_content {
-  text-align: center;
-}
-
 .section_header::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-color: var(--webpage-background-color) ;
-  animation: typing-words-effect var(--header-animation-speed) forwards steps(var(--header-text-count));
+  background-color: var(--webpage-background-color);
+  animation: typing-words-effect var(--header-animation-speed) forwards
+    steps(var(--header-text-count));
   z-index: 1;
 }
 
@@ -121,10 +136,11 @@ body {
   position: absolute;
   inset: 0;
   background-color: var(--header-text-color);
-  animation: 
-    typing-words-effect var(--header-animation-speed) forwards steps(var(--header-text-count)),
-    typing-cursor-effect 0.5s var(--header-cursor-effect) steps(var(--header-text-count)) var(--header-cursor-animation-timeout);
-    /* 0.5s is when stop */
+  animation: typing-words-effect var(--header-animation-speed) forwards
+      steps(var(--header-text-count)),
+    typing-cursor-effect 0.5s var(--header-cursor-effect)
+      steps(var(--header-text-count)) var(--header-cursor-animation-timeout);
+  /* 0.5s is when stop */
   width: 0.125rem;
   z-index: 2;
 }
@@ -134,10 +150,6 @@ body {
   position: relative;
   margin: 0;
   font-family: "Space Mono", monospace;
-}
-
-.header_text.left {
-  padding-left: 15px;
 }
 
 .header_text.right {
@@ -166,25 +178,8 @@ body {
   }
 }
 
-/* For Tablet/Desktop
-@media only screen and (min-width: 341px) {
-  .section_header {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .header_text {
-    display: inline;
-  }
-
-  .header_text.left {
-    padding-left: 0;
-  }
-} */
-
 /* For Small Device */
-/* @media only screen and (min-width: 222px) {
+/* @media screen and (max-width: 222px) {
   .section_header::before {
     display: none;
   }
@@ -239,7 +234,6 @@ body {
   }
 } */
 
-
 /*-------------------------- Welcome Message Styling--------------------------*/
 
 .welcome_message {
@@ -262,4 +256,3 @@ body {
     transform: translateY(0);
   }
 }
-  
