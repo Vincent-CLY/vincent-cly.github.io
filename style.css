@@ -50,7 +50,15 @@ section {
   text-align: center;
 }
 
-/*-------------------------- Navigation Bar Styling --------------------------*/
+section:nth-of-type(1) {
+  background: linear-gradient(167deg, hsla(39, 85%, 95%, 1) 75%, hsla(191, 33%, 23%, 1) 76%)
+}
+
+section:nth-of-type(2) {
+  background:  hsla(191, 33%, 23%, 1);
+}
+
+/* -------------------------- Navigation Bar Styling --------------------------
 
 .nav_bar {
   position: relative;
@@ -114,7 +122,7 @@ section {
 
 .nav_icon_lines {
   width: 1.57rem;
-}
+} */
 
 /*-------------------------- Header Styling --------------------------*/
 
@@ -150,6 +158,7 @@ section {
 }
 
 .header_text {
+  font-size: 6svw;
   display: inline-flex;
   position: relative;
   margin: 0;
@@ -159,16 +168,6 @@ section {
 .header_text.right {
   color: var(--header-text-right-color);
 }
-
-/* .text_content {
-  padding: 0 100px;
-  text-align: left;
-  transition: padding-left 0.5s ease;
-} */
-
-/* .text_content.active {
-  padding-left: 179px;
-} */
 
 @keyframes typing-words-effect {
   to {
@@ -182,8 +181,8 @@ section {
   }
 }
 
-/* For Small Device */
-/* @media screen and (max-width: 222px) {
+ /* For Small Device 
+@media screen and (max-width: 222px) {
   .section_header::before {
     display: none;
   }
@@ -236,7 +235,7 @@ section {
       typing-cursor-effect 0.5s var(--header-cursor-effect) steps(var(--header-text-count)) var(--header-cursor-animation-timeout);
     width: 0.125rem;
   }
-} */
+}   */
 
 /*-------------------------- Welcome Message Styling--------------------------*/
 
@@ -246,6 +245,7 @@ section {
   align-items: center;
   margin: 1rem;
   opacity: 0;
+  font-size: 5svw;
   transform: translateY(50px);
   animation: fade-in-drop 2s ease-in-out 6s forwards;
 }
