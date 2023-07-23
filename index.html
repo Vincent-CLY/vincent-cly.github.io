@@ -43,22 +43,65 @@
       </nav>
     </header> -->
     <main>
-      <section id="Home">
-        <span class="section_header" data-section-header>
-          <h1 class="header_text left"> Hello,&nbsp; </h1>
-          <h1 class="header_text right"> I am Vincent! </h1>
-        </span>
-        <div class="welcome_message"> Welcome to my website. </div>
-        <svg class="up_arrow">
-          <use href="#arrow"></use>
-        </svg>
+      <section class="home" id="home">
+        <div class="content_wrapper">
+          <span class="section_header" data-section-header>
+            <h1 class="header_text left"> Hello,&nbsp; </h1>
+            <h1 class="header_text right"> I am Vincent! </h1>
+          </span>
+          <div class="welcome_message"> Welcome to my website. </div>
+          <div class="arrow_wrapper">
+            <a href="#about_me">
+              <svg class="arrow" data-arrow="invisible" viewBox="405 282 35 45">
+                <use href="#arrow"></use>
+              </svg>
+            </a>
+          </div>
+        </div>
       </section>
-      <section id="About Me">
+      <section id="about_me">
         <span data-section-header>
-          Testing
+          Home
         </span>
         <div>
           <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, provident perspiciatis. Inventore quidem exercitationem numquam quam ducimus voluptatum neque cumque pariatur maiores saepe laboriosam omnis rerum, suscipit totam ad dicta! -->
+        </div>
+        <div class="arrow_wrapper">
+          <a href="#my_hobbies">
+            <svg class="arrow" data-arrow="invisible" viewBox="405 282 35 45">
+              <use href="#arrow"></use>
+            </svg>
+          </a>
+        </div>
+      </section>
+      <section id="my_hobbies">
+        <span data-section-header>
+          Hobbies
+        </span>
+        <div>
+          <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, provident perspiciatis. Inventore quidem exercitationem numquam quam ducimus voluptatum neque cumque pariatur maiores saepe laboriosam omnis rerum, suscipit totam ad dicta! -->
+        </div>
+        <div class="arrow_wrapper">
+          <a href="#My_Hobbies">
+            <svg class="arrow" data-arrow="invisible" viewBox="405 282 35 45">
+              <use href="#arrow"></use>
+            </svg>
+          </a>
+        </div>
+      </section>
+      <section id="contact">
+        <span data-section-header>
+          Contact
+        </span>
+        <div>
+          <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, provident perspiciatis. Inventore quidem exercitationem numquam quam ducimus voluptatum neque cumque pariatur maiores saepe laboriosam omnis rerum, suscipit totam ad dicta! -->
+        </div>
+        <div class="arrow_wrapper">
+          <a href="#My_Hobbies">
+            <svg class="arrow" data-arrow="invisible" viewBox="405 282 35 45">
+              <use href="#arrow"></use>
+            </svg>
+          </a>
         </div>
       </section>
     </main>
@@ -68,8 +111,16 @@
 
     <!-- svg -->
 
-    <svg id="arrow">
-      
-    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg">
+      <defs>
+       <lineargradient id="svg_25" x1="0" y1="0" x2="1" y2="0" spreadMethod="pad">
+        <stop stop-color="#e5e5e5" stop-opacity="0.99609" offset="0"/>
+        <stop stop-color="#999999" stop-opacity="0.99609" offset="1"/>
+       </lineargradient>
+      </defs>
+      <g>
+       <path fill="url(#svg_25)" opacity="NaN" d="m425.93396,303.99298l-20.49948,-21.68966l13.50052,0l20.49948,21.68966l-20.49948,21.68964l-13.50052,0l20.49948,-21.68964z" id="arrow" transform="rotate(90 422.434 303.993)"/>
+      </g>
+     </svg>
   </body>
 </html>

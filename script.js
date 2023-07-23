@@ -1,7 +1,6 @@
 const navContainer = document.querySelector('.nav_container');
 const navIcon = document.querySelector('.nav_icon');
-const textContent = document.querySelectorAll('.text_content');
-const sectionHeader = document.querySelector('.section_header');
+const sectionHeader = document.querySelector('[data-section-header]');
 const headerTextCount = sectionHeader.innerText.split('\n').join('').length;
 
 // Set steps() number to CSS animation
@@ -20,6 +19,39 @@ sectionHeader.addEventListener('animationend', e => {
         sectionHeader.style.setProperty('--header-cursor-effect', 'alternate');
     }
     console.log(e);
+});
+
+// Change Arrow to Visible Class
+// Function to Check if Element is Visible
+function isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    const viewportHeight = (window.innerHeight || document.documentElement.clientHeight);
+    const viewportWidth = (window.innerWidth || document.documentElement.clientWidth);
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= viewportHeight &&
+        rect.right <= viewportWidth
+    );
+}
+// Function to Set Arrow to be Visible
+function setVisible(element) {
+    if (!element.classList.contains('visible')) {   
+        element.classList.add('visible');
+        console.log(element.dataset);
+    }
+}
+// Initial First Arrow
+const invisibleArrow = document.querySelectorAll('[data-arrow="invisible"]');
+setVisible(invisibleArrow[0]);
+// For Each Arrow Expect First Arrow 
+document.addEventListener('scroll', () => {
+    for (let eachArrow of invisibleArrow) {
+        if (isInViewport(eachArrow)) {
+            setVisible(eachArrow);
+            eachArrow.dataset.arrow = 'visible';
+        }
+    }    
 });
 
 // Able To Click Menu 
