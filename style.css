@@ -1,15 +1,25 @@
 /* General Styling */
 
+@font-face {
+  font-family: "SF Pro";
+  src: url(./sf-pro-display-cufonfonts/SFPRODISPLAYREGULAR.OTF);
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SF Pro";
+  src: url(./sf-pro-display-cufonfonts/SFPRODISPLAYMEDIUM.OTF);
+  font-weight: bold;
+  font-style: normal;
+}
+
 :root {
-  --webpage-background-color: hsl(
-    40,
-    78%,
-    95%
-  ); /* Supporting colors stay close to base's colors' S, B */
+  --section-background-color: hsl(216, 29%, 17%);
   --nav-bar-background-color: #000;
   --nav-bar-hover-background-color: rgb(147, 147, 147);
   --nav-text-color: #fff;
-  --text-color: hsl(235.748, 94%, 22%);
+  --text-color: #fff;
   --header-text-right-color: hsl(21.692, 72%, 35%);
   --header-text-count: 0;
   --header-text-color: var(--text-color);
@@ -35,7 +45,6 @@ html {
 body {
   padding: 0;
   margin: 0;
-  background-color: var(--webpage-background-color);
   margin-inline: auto;
 }
 
@@ -48,14 +57,7 @@ section {
   scroll-snap-align: start;
   scroll-snap-stop: always;
   text-align: center;
-}
-
-section:nth-of-type(1) {
-  background: linear-gradient(167deg, hsla(39, 85%, 95%, 1) 75%, hsla(191, 33%, 23%, 1) 76%)
-}
-
-section:nth-of-type(2) {
-  background:  hsla(191, 33%, 23%, 1);
+  background-color: var(--section-background-color);
 }
 
 /* -------------------------- Navigation Bar Styling --------------------------
@@ -181,7 +183,7 @@ section:nth-of-type(2) {
   }
 }
 
- /* For Small Device 
+/* For Small Device 
 @media screen and (max-width: 222px) {
   .section_header::before {
     display: none;
@@ -262,6 +264,119 @@ section:nth-of-type(2) {
 }
 
 /* SVG Styling */
+
+/*-------------------------- hello --------------------------*/
+.hello_wrapper {
+  position: absolute;
+  animation: move-up 2s forwards 4.4s;
+}
+
+.hello {
+  height: 100%;
+  width: 100%;
+  scale: 1;
+  stroke-dasharray: 2023.04443359375;
+  stroke-dashoffset: 2023.04443359375;
+  animation: writing-hello 4s ease-in-out forwards;
+}
+
+@keyframes writing-hello {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes move-up {
+  to {
+    scale: 0.6;
+    transform: translateY(-150%);
+  }
+}
+
+.intro {
+  font-size: 15svw;
+  position: relative;
+  opacity: 1;
+  font-family: 'Bilbo Swash Caps', cursive;
+  padding: 0 1rem 0 0;
+  margin: 0;
+}
+
+.intro::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  background-color: var(--section-background-color);
+  animation: visible 1.9s forwards 4.5s;
+}
+
+@keyframes visible {
+  to {
+    height: 0%
+  }
+}
+
+.intro_wrapper {
+  position: relative;
+}
+
+.intro_wrapper::before {
+  content: "";
+  position: absolute;
+  background-color: var(--section-background-color);
+  left: 50%;
+  bottom: -25px;
+  padding-right: 0;
+  z-index: 1;
+  border-bottom: 12px solid black;
+  animation: expand-up 4s forwards 4s, lift-up 1.9s forwards 4.4s;
+}
+
+.intro_wrapper::after {
+  content: "";
+  position: absolute;
+  background-color: var(--section-background-color);
+  right: 50%;
+  bottom: -25px;
+  padding-left: 0;
+  border-top: 12px solid black;
+  animation: expand-down 4s forwards 4s, lift-down 1.9s forwards 4.4s;
+}
+
+@keyframes expand-up {
+  18% {
+    left: -7%;
+    padding-right: 110%;
+  }
+  100% {
+    left: -7%;
+    padding-right: 110%;
+  }
+}
+
+@keyframes expand-down {
+  18% {
+    right: -3%;
+    padding-left: 110%;
+  }
+  100% {
+    right: -3%;
+    padding-left: 110%;
+  }
+}
+
+@keyframes lift-up {
+  to {
+    bottom: 100%;
+  }
+}
+
+@keyframes lift-down {
+  to {
+    bottom: 0;
+  }
+}
 
 .arrow {
   opacity: 0;
