@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital@1&display=swap" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Bilbo+Swash+Caps&family=Space+Mono:ital@1&display=swap" rel="stylesheet" type="text/css">
+    <script src="https://kit.fontawesome.com/d401c7f6b6.js" defer crossorigin="anonymous"></script>
     <script src="script.js" defer></script>
   </head>
   <body>
@@ -46,81 +46,118 @@
     </header> -->
     <main>
       <section id="home">
-        <div class="intro_wrapper">
-          <p class="intro visibility">I am Vincent</p>
-        </div>
         <div class="hello_wrapper">
           <svg class="hello" viewBox="0 0 419 227">
             <use href="#hello"></use>
           </svg>
         </div>
-      </section>
-      <section id="learning">
-        <div class="content_wrapper">
-          <span class="section_header" data-section-header>
-            <h1 class="header_text left">Hello,&nbsp;</h1>
-            <h1 class="header_text right">I am Vincent!</h1>
-          </span>
-          <div class="welcome_message">Welcome to my website.</div>
-        </div>
-        <div class="arrow_wrapper">
-          <a href="#about_me">
-            <svg class="arrow" data-arrow="invisible" viewBox="405 282 35 45">
-              <use href="#arrow"></use>
-            </svg>
-          </a>
+        <div class="intro_wrapper">
+          <p class="intro">I am Vincent</p>
         </div>
       </section>
       <section id="about_me">
-        <span data-section-header> Home </span>
-        <div>
-          <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, provident perspiciatis. Inventore quidem exercitationem numquam quam ducimus voluptatum neque cumque pariatur maiores saepe laboriosam omnis rerum, suscipit totam ad dicta! -->
-        </div>
-        <div class="arrow_wrapper">
-          <a href="#my_hobbies">
-            <svg class="arrow" data-arrow="invisible" viewBox="405 282 35 45">
-              <use href="#arrow"></use>
-            </svg>
-          </a>
+        <h1 class="header"> About Me </h1>
+        <div class="content_wrapper">
+          <div class="content">
+            <p>I am a Year 2 student studying Computer Engineering (CE) at HKU. I love discovering new techniques and methods to specialize my skill set and 
+            </p>
+            <div class="hobbies_container">
+              <p class="hobbies_header sub_header">Hobbies</p>
+              <div class="hobbies_item_wrapper">
+                <p class="hobbies_item">Listening Music</p>
+                <div class="time_spend"><!-- show daily time spend here --></div>
+              </div>
+              <div class="hobbies_item_wrapper">
+                <p class="hobbies_item">Gaming</p>
+                <div class="time_spend"><!-- show daily time spend here --></div>
+              </div>
+              <div class="hobbies_item_wrapper">
+                <p class="hobbies_item">Watch tutorials/videos</p>              
+                <div class="time_spend"><!-- show daily time spend here --></div>
+              </div>
+              <div class="hobbies_item_wrapper">
+                <p class="hobbies_item">Coding</p>
+                <div class="time_spend"><!-- show daily time spend here --></div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
-      <section id="my_hobbies">
-        <span data-section-header> Hobbies </span>
-        <div>
-          <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, provident perspiciatis. Inventore quidem exercitationem numquam quam ducimus voluptatum neque cumque pariatur maiores saepe laboriosam omnis rerum, suscipit totam ad dicta! -->
-        </div>
-        <div class="arrow_wrapper">
-          <a href="#My_Hobbies">
-            <svg class="arrow" data-arrow="invisible" viewBox="405 282 35 45">
-              <use href="#arrow"></use>
-            </svg>
-          </a>
+      <section id="learning">
+        <h1 class="header"> Learning </h1>
+        <div class="content_wrapper">
+          <span class="section_header sub_header">
+            <p class="header_text left">I am learning:&nbsp;</p>
+            <p class="header_text right" data-languages>Languages</p>
+          </span>
+          <div class="welcome_message">Welcome to my website.</div>
         </div>
       </section>
       <section id="contact">
-        <span data-section-header> Contact </span>
-        <div>
-          <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, provident perspiciatis. Inventore quidem exercitationem numquam quam ducimus voluptatum neque cumque pariatur maiores saepe laboriosam omnis rerum, suscipit totam ad dicta! -->
-        </div>
-        <div class="arrow_wrapper">
-          <a href="#My_Hobbies">
-            <svg class="arrow" data-arrow="invisible" viewBox="405 282 35 45">
-              <use href="#arrow"></use>
-            </svg>
-          </a>
-        </div>
+        <h1 class="header"> Contact </h1>
+        <form action="./" method="GET" class="contact_form">
+          <fieldset class="form_container">
+            <legend class="sub_header">Get In Touch</legend>
+            <div class="contact_input" data-form="name">
+              <label for="name" class="icon_wrapper">
+                <svg class="icon" data-icon="name">
+                  <use href="#name_icon"></use>
+                </svg>
+                <span>Name:</span>
+              </label>
+              <input type="text" id="name" name="name" placeholder="Your name" title="Your Name" required>
+            </div>
+            <div class="contact_input" data-form="email">
+              <label for="email" class="icon_wrapper">
+                <svg class="icon" data-icon="email">
+                  <use href="#email_icon"></use>
+                </svg>
+                <span>Email:</span>
+              </label>
+              <input type="email" id="email" name="email" placeholder="Your email" title="Your Email" required>
+            </div>
+            <div class="contact_input" data-form="message">
+              <label for="message" class="icon_wrapper">
+                <svg class="icon" data-icon="message">
+                  <use href="#message_icon"></use>
+                </svg>
+                <span>Message:</span>
+              </label>
+              <textarea class="message" id="message" name="message" placeholder="Write something.." title="Your Message" required></textarea>
+            </div>
+            <div class="contact_btn">
+              <input type="submit" value="Contact">
+            </div>
+            <div class="reset_btn">
+              <input type="reset" value="Reset">
+            </div>
+          </fieldset> 
+        </form>
       </section>
     </main>
     <footer></footer>
 
     <!-- svg -->
-
-    <svg style="position: absolute; left: -200svw;" width="419" height="227" viewBox="0 0 419 227" fill="none" xmlns="http://www.w3.org/2000/svg" id="hello">
-      <path
-        d="M9 130.503C19.1931 130.503 31.0925 122.326 39.4067 117.575C58.3092 106.773 73.9918 93.9177 88.249 77.5909C100.258 63.8388 118.667 35.7141 109.079 16.5381C101.588 1.55664 82.5286 15.7683 77.9538 24.9179C63.6594 53.5067 57.3981 84.9726 47.7865 115.18C41.8028 133.986 37.8396 154.02 33.9 173.36C31.2895 186.175 26.0229 199.649 24.2033 212.386C23.1102 220.038 26.7279 209.739 27.4356 207.717C32.8696 192.191 41.1696 178.657 51.6173 165.938C54.3685 162.589 92.815 121.422 95.0725 131.581C98.7965 148.339 87.9202 164.344 84.897 180.064C82.5847 192.088 79.1563 201.723 88.7278 210.231C101.956 221.989 120.858 201.308 129.669 194.07C142.655 183.403 167.908 159.897 168.456 141.277C168.735 131.789 167.232 113.634 153.492 123.081C137.93 133.78 134.94 154.3 132.303 171.445C130.425 183.652 134.052 209.822 147.027 215.498C171.015 225.993 203.188 183.183 215.382 169.29C241.753 139.247 265.458 98.7707 273.921 59.2751C276.376 47.8179 275.975 15.259 255.605 32.8189C230.107 54.8007 219.372 91.5683 213.707 123.56C210.04 144.263 202.09 184.516 222.326 200.415C240.904 215.012 276.549 173.672 286.012 161.628C307.57 134.191 325.954 108.562 338.206 75.4361C340.783 68.4708 353.049 34.3314 337.488 31.502C321.11 28.5242 311.001 46.767 304.687 59.3948C291.395 85.9782 282.66 123.381 282.66 153.009C282.66 168.611 278.096 193.632 292.357 204.724C301.727 212.012 338.885 170.654 346.107 164.501C353.636 158.088 363.255 151.35 368.852 142.953C373.159 136.494 370.973 139.381 367.655 141.277C356.918 147.413 343.362 162.917 342.995 175.754C342.774 183.479 342.725 203.527 354.846 203.527C367.395 203.527 374.52 191.694 375.317 180.543C376.284 166.998 373.402 153.681 373.402 140.32C373.402 138.715 384.713 138.428 386.091 138.045C395.142 135.531 401.661 128.686 409.794 124.039"
-        stroke="white"
-        stroke-width="18"
-        stroke-linecap="round"/>
-    </svg>
+    <div class="svg_container">
+      
+      <svg width="419" height="227" viewBox="0 0 419 227" fill="none" xmlns="http://www.w3.org/2000/svg" id="hello">
+        <path
+          d="M9 130.503C19.1931 130.503 31.0925 122.326 39.4067 117.575C58.3092 106.773 73.9918 93.9177 88.249 77.5909C100.258 63.8388 118.667 35.7141 109.079 16.5381C101.588 1.55664 82.5286 15.7683 77.9538 24.9179C63.6594 53.5067 57.3981 84.9726 47.7865 115.18C41.8028 133.986 37.8396 154.02 33.9 173.36C31.2895 186.175 26.0229 199.649 24.2033 212.386C23.1102 220.038 26.7279 209.739 27.4356 207.717C32.8696 192.191 41.1696 178.657 51.6173 165.938C54.3685 162.589 92.815 121.422 95.0725 131.581C98.7965 148.339 87.9202 164.344 84.897 180.064C82.5847 192.088 79.1563 201.723 88.7278 210.231C101.956 221.989 120.858 201.308 129.669 194.07C142.655 183.403 167.908 159.897 168.456 141.277C168.735 131.789 167.232 113.634 153.492 123.081C137.93 133.78 134.94 154.3 132.303 171.445C130.425 183.652 134.052 209.822 147.027 215.498C171.015 225.993 203.188 183.183 215.382 169.29C241.753 139.247 265.458 98.7707 273.921 59.2751C276.376 47.8179 275.975 15.259 255.605 32.8189C230.107 54.8007 219.372 91.5683 213.707 123.56C210.04 144.263 202.09 184.516 222.326 200.415C240.904 215.012 276.549 173.672 286.012 161.628C307.57 134.191 325.954 108.562 338.206 75.4361C340.783 68.4708 353.049 34.3314 337.488 31.502C321.11 28.5242 311.001 46.767 304.687 59.3948C291.395 85.9782 282.66 123.381 282.66 153.009C282.66 168.611 278.096 193.632 292.357 204.724C301.727 212.012 338.885 170.654 346.107 164.501C353.636 158.088 363.255 151.35 368.852 142.953C373.159 136.494 370.973 139.381 367.655 141.277C356.918 147.413 343.362 162.917 342.995 175.754C342.774 183.479 342.725 203.527 354.846 203.527C367.395 203.527 374.52 191.694 375.317 180.543C376.284 166.998 373.402 153.681 373.402 140.32C373.402 138.715 384.713 138.428 386.091 138.045C395.142 135.531 401.661 128.686 409.794 124.039"
+          stroke="white"
+          stroke-width="18"
+          stroke-linecap="round"/>
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" id="name_icon">
+        <path fill="currentColor" d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"/>
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 36 36" id="email_icon">
+        <path fill="currentColor" d="M32.33 6a2 2 0 0 0-.41 0h-28a2 2 0 0 0-.53.08l14.45 14.39Z" class="clr-i-solid clr-i-solid-path-1"/>
+        <path fill="currentColor" d="m33.81 7.39l-14.56 14.5a2 2 0 0 1-2.82 0L2 7.5a2 2 0 0 0-.07.5v20a2 2 0 0 0 2 2h28a2 2 0 0 0 2-2V8a2 2 0 0 0-.12-.61ZM5.3 28H3.91v-1.43l7.27-7.21l1.41 1.41Zm26.61 0h-1.4l-7.29-7.23l1.41-1.41l7.27 7.21Z" class="clr-i-solid clr-i-solid-path-2"/>
+        <path fill="none" d="M0 0h36v36H0z"/>
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" id="message_icon">
+        <path fill="currentColor" d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2M6 9h12v2H6m8 3H6v-2h8m4-4H6V6h12"/>
+      </svg>
+    </div>    
   </body>
 </html>

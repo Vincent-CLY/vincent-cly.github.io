@@ -1,77 +1,30 @@
-const navContainer = document.querySelector('.nav_container');
-const navIcon = document.querySelector('.nav_icon');
-const sectionHeader = document.querySelector('[data-section-header]');
-const headerTextCount = sectionHeader.innerText.split('\n').join('').length;
+// Change typing-cursor-effect text
+const languages = document.querySelector('[data-languages]');
+const languagesArr = ['HTML', 'CSS', 'JavaScript', 'Python', 'C++', 'PHP', 'SQL'];
+let i = 1;
+languages.innerText = languagesArr[0];
+languages.style.setProperty('--header-text-count', languages.innerText.length);
 
-// Set steps() number to CSS animation
-sectionHeader.style.setProperty('--header-text-count', headerTextCount);
-
-// Change typing-cursor-effect color
-sectionHeader.addEventListener('animationiteration', e => {
-    if (e.elapsedTime === 1.5) {
-        sectionHeader.style.setProperty('--header-text-color', 'var(--header-text-right-color)');
+languages.addEventListener('animationiteration', e => {
+    if (e.animationName === 'languages-typing' && e.pseudoElement === '::after') {
+        languages.innerText = languagesArr[i];
+        // Set steps() number to CSS animation
+        languages.style.setProperty('--header-text-count', languages.innerText.length);
+        i++;
+        if (i === languagesArr.length) {
+            i = 0;
+        }
     }
-})
-
-// Change typing-cursor-effect style
-sectionHeader.addEventListener('animationend', e => {
-    if (e.animationName === 'typing-words-effect') {
-        sectionHeader.style.setProperty('--header-cursor-effect', 'alternate');
-    }
-    console.log(e);
 });
 
-// Change Arrow to Visible Class
-// Function to Check if Element is Visible
-function isInViewport(element) {
-    const rect = element.getBoundingClientRect();
-    const viewportHeight = (window.innerHeight || document.documentElement.clientHeight);
-    const viewportWidth = (window.innerWidth || document.documentElement.clientWidth);
-    return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= viewportHeight &&
-        rect.right <= viewportWidth
-    );
-}
-// Function to Set Arrow to be Visible
-function setVisible(element) {
-    if (!element.classList.contains('visible')) {   
-        element.classList.add('visible');
-        console.log(element.dataset);
-    }
-}
-// Initial First Arrow
-const invisibleArrow = document.querySelectorAll('[data-arrow="invisible"]');
-setVisible(invisibleArrow[0]);
-// For Each Arrow Expect First Arrow 
-document.addEventListener('scroll', () => {
-    for (let eachArrow of invisibleArrow) {
-        if (isInViewport(eachArrow)) {
-            setVisible(eachArrow);
-            eachArrow.dataset.arrow = 'visible';
-        }
-    }    
+// Change hello svg size
+const helloSvg = document.querySelector('.hello');
+window.addEventListener('resize', () => {
+    // Get intro text font size
+    const introText = document.querySelector('.intro');
+    const introTextFontSize = getComputedStyle(introText).fontSize;
+    const scale = introTextFontSize.replace('px', '')/140;
+    console.log(scale);
+    // Set hello svg size
+    helloSvg.style.transform = `scale(${scale})`;
 });
-
-// Able To Click Menu 
-navIcon.addEventListener('click', () => {
-    navContainer.classList.toggle('active');
-    navIcon.classList.toggle('active');
-    for (let eachTextContent of textContent) {
-        eachTextContent.classList.toggle('active');
-    }
-})
-
-// Able To Click Away The Menu
-document.addEventListener('click', e => {
-    if (!navIcon.contains(e.target)) {
-        if (navContainer.classList.contains('active')) {
-            for (let eachTextContent of textContent) {
-                eachTextContent.classList.remove('active');
-            }
-        }
-        navContainer.classList.remove('active');
-        navIcon.classList.remove('active');
-    }
-})
