@@ -21,6 +21,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "SF Mono";
+  src: url(./sf-mono-cufonfonts-webfont/SFMonoBold.woff);
+  font-weight: bold;
+  font-style: normal;
+}
+
 :root {
   --section-background-color: hsl(216, 29%, 17%);
   --nav-bar-background-color: #000;
@@ -382,6 +389,7 @@ input:active {
 .header_text.right {
   position: relative;
   font-family: "SF Mono";
+  font-weight: bold;
   color: springgreen;
   animation: typing-words-effect 3s forwards steps(var(--header-text-count));
 }
