@@ -24,7 +24,6 @@ window.addEventListener('resize', () => {
     const introText = document.querySelector('.intro');
     const introTextFontSize = getComputedStyle(introText).fontSize;
     const scale = introTextFontSize.replace('px', '')/140;
-    console.log(scale);
     // Set hello svg size
     helloSvg.style.transform = `scale(${scale})`;
 });
