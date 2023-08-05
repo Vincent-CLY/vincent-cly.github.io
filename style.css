@@ -115,12 +115,16 @@ input:active {
 .header {
   position: absolute;
   top: 0;
-  font-size: 3.5rem;
+  font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: bold;
 }
 
 .sub_header {
   font-size: clamp(1.5rem, 5vw, 3rem);
+}
+
+.content {
+  font-size: clamp(1rem, 3vw, 1.5rem);
 }
 
 .svg_container {
@@ -200,7 +204,6 @@ input:active {
   transform: translateY(50%);
   animation: move-up 2s forwards 4.4s;
   z-index: 1;
- 
 }
 
 .hello {
@@ -210,7 +213,6 @@ input:active {
   stroke-dasharray: 2023.04443359375;
   stroke-dashoffset: 2023.04443359375;
   animation: writing-hello 4s ease-in-out forwards;
-  transition: all 0.1s ease-in-out;
 }
 
 @keyframes writing-hello {
@@ -326,26 +328,31 @@ input:active {
   display: flex;
   align-items: center;
   color: rgb(95, 95, 95);
+  margin: auto;
 } 
 
-.hobbies_header {
-  margin: 0;
-  justify-content: center;
-}
-
 .hobbies_item {
-  position: relative;
+  margin: 0 0 1rem 5%;
 }
 
-.hobbies_item::before {
+.time_spend {
+  position: relative;
+  margin: auto;
+  display: flex;
+  background-color: var(--section-background-color);
+  width: 90%;
+  height: 1.3rem;
+  border-radius: 1rem;
+
+}
+
+.time_spend::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-color: var(--section-background-color);
+  background-color: aqua;
   border-radius: 1rem;
-  right: 57%;
-  left: 40%;
-  animation: progress-bar 3s ease-in-out forwards;
+  /* animation: progress-bar 3s ease-in-out forwards; */
 }
 
 .hobbies_item:nth-child(1) {
