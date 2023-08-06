@@ -1,15 +1,15 @@
 // Change typing-cursor-effect text
-const languages = document.querySelector('[data-languages]');
-const languagesArr = ['HTML', 'CSS', 'JavaScript', 'Python', 'C++', 'PHP', 'SQL'];
+const toolkit = document.querySelector('[data-toolkit]');
+const toolkitArr = ['HTML', 'CSS', 'JavaScript', 'jQuery', 'Regex', 'Python', 'C++', 'PHP', 'SQL'];
 let i = 1;
-languages.innerText = languagesArr[0];
-languages.style.setProperty('--header-text-count', languages.innerText.length);
+toolkit.innerText = toolkitArr[0];
+toolkit.style.setProperty('--header-text-count', toolkit.innerText.length);
 
-languages.addEventListener('animationiteration', e => {
-    if (e.animationName === 'languages-typing' && e.pseudoElement === '::after') {
-        languages.innerText = languagesArr[i];
+toolkit.addEventListener('animationiteration', e => {
+    if (e.animationName === 'toolkit-typing' && e.pseudoElement === '::after') {
+        toolkit.innerText = languagesArr[i];
         // Set steps() number to CSS animation
-        languages.style.setProperty('--header-text-count', languages.innerText.length);
+        toolkit.style.setProperty('--header-text-count', toolkit.innerText.length);
         i++;
         if (i === languagesArr.length) {
             i = 0;

@@ -336,46 +336,48 @@ input:active {
 }
 
 .time_spend {
-  position: relative;
   margin: auto;
   display: flex;
   background-color: var(--section-background-color);
   width: 90%;
-  height: 1.3rem;
+  height: 2rem;
   border-radius: 1rem;
-
+  overflow: hidden;
 }
 
 .time_spend::before {
   content: "";
-  position: absolute;
   inset: 0;
+  width: 1.65%;
   background-color: aqua;
+  margin: 0.5rem;
   border-radius: 1rem;
-  /* animation: progress-bar 3s ease-in-out forwards; */
+  animation: progress-bar 3s ease-in-out forwards;
 }
 
-.hobbies_item:nth-child(1) {
-  animation-name: progress-bar;}
-
-.hobbies_item:nth-child(2) {
-  animation-name: progress-bar;
-  animation-delay: 2s;
+[data-hobbies="Vibing"] .time_spend::before {
+  animation-delay: 1s;
+  --width: 0.6;
 }
 
-.hobbies_item:nth-child(3) {
-  animation-name: progress-bar;
-  animation-delay: 2s;
+[data-hobbies="Gaming"] .time_spend::before {
+  animation-delay: 4s;
+  --width: 0.4;
 }
 
-.hobbies_item:nth-child(4) {
-  animation-name: progress-bar;
-  animation-delay: 2s;
+[data-hobbies="Learning"] .time_spend::before {
+  animation-delay: 7s;
+  --width: 0.8;
+}
+
+[data-hobbies="Coding"] .time_spend::before {
+  animation-delay: 10s;
+  --width: 1;
 }
 
 @keyframes progress-bar {
   to {
-    right: 10%;
+    width: calc(98.5% * var(--width));
   }
 }
 
@@ -406,11 +408,11 @@ input:active {
   position: absolute;
   inset: 0;
   background-color: var(--section-background-color);
-  animation: languages-typing 5s forwards steps(var(--header-text-count))
+  animation: toolkit-typing 5s forwards steps(var(--header-text-count))
     infinite;
 }
 
-@keyframes languages-typing {
+@keyframes toolkit-typing {
   20% {
     left: 0;
   }
@@ -428,7 +430,7 @@ input:active {
   position: absolute;
   inset: 0;
   width: 0.5rem;
-  animation: languages-typing 5s forwards steps(var(--header-text-count))
+  animation: toolkit-typing 5s forwards steps(var(--header-text-count))
       infinite,
     blink 1s infinite;
   background-color: #fff;
