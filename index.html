@@ -84,24 +84,9 @@
           </div>
         </div>
       </section>
-      <section id="learning">
-        <h1 class="header"> Learning </h1>
-        <div class="content_wrapper">
-          <span class="section_header sub_header">
-            <p class="header_text left">I am learning:&nbsp;</p>
-            <p class="header_text right" data-toolkit>Toolkit</p>
-          </span>
-          <div class="content">I am now trying to build up a project: Online Anime Viewing Website.</div>
-          <br>
-          <div class="content">I think it will be a good way to practice my skills with the below features:</div>
-          <ul>
-            <!-- <li></li> -->
-          </ul>
-        </div>
-      </section>
       <section id="contact">
         <h1 class="header"> Contact </h1>
-        <form action="./" method="GET" class="contact_form">
+        <form action="send_email.php" method="post" class="contact_form">
           <fieldset class="form_container">
             <legend class="sub_header">Get In Touch</legend>
             <div class="contact_input" data-form="name">
@@ -111,7 +96,7 @@
                 </svg>
                 <span>Name:</span>
               </label>
-              <input title="Your Name" id="name" type="text" name="name" placeholder="Your name"  required>
+              <input type="text" id="name" name="name" placeholder="Your name" title="Your Name" required>
             </div>
             <div class="contact_input" data-form="email">
               <label for="email" class="icon_wrapper">
@@ -120,8 +105,8 @@
                 </svg>
                 <span>Email:</span>
               </label>
-              <input title="Your Email" id="email" type="email" name="email" placeholder="Your email"  required>
-            </div>
+              
+<input pattern="[a-zA-z0-9!#$%^&*()_=-+]+@[a-zA-z0-9!#$%^&*()_=-+]+\.+[a-zA-z0-9!#$%^&*()_=-+]{2, 4}" type="email" id="email" name="email" placeholder="Your email" title="Your Email" required>            </div>
             <div class="contact_input" data-form="message">
               <label for="message" class="icon_wrapper">
                 <svg class="icon" data-icon="message">
@@ -129,7 +114,10 @@
                 </svg>
                 <span>Message:</span>
               </label>
-              <textarea class="message" title="Your Message" id="message" name="message" placeholder="Write something.."  required></textarea>
+              <div class="message">
+                <input type="text" name="subject" id="subject" placeholder="Subject" title="Your subject" required>
+                <textarea id="message" name="message" placeholder="Write something.." title="Your Message" required></textarea>
+              </div>
             </div>
             <div class="contact_btn">
               <input type="submit" value="Contact">
