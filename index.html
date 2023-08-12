@@ -111,7 +111,7 @@
                 </svg>
                 <span>Name:</span>
               </label>
-              <input type="text" id="name" name="name" placeholder="Your name" title="Your Name" required>
+              <input type="text" id="name" name="name" placeholder="Your name" title="Please input your name" required>
             </div>
             <div class="contact_input" data-form="email">
               <label for="email" class="icon_wrapper">
@@ -121,7 +121,8 @@
                 <span>Email:</span>
               </label>
               
-<input pattern="([a-zA-Z0-9\-]+)@([a-zA-Z0-9]+)\.([a-zA-Z0-9]){2,4}" type="email" id="email" name="email" placeholder="Your email" title="Your Email" required>            </div>
+<input pattern="(^[a-zA-Z0-9][a-zA-Z0-9-.%$&^#!*+:;,/(\)?<>'\x22[]{}
+|`~]+)@(([A-Za-z0-9-]+.)+)([a-z]{2,4})" type="email" id="email" name="email" placeholder="Your email" title="Invalid email format" required>            </div>
             <div class="contact_input" data-form="message">
               <label for="message" class="icon_wrapper">
                 <svg class="icon" data-icon="message">
@@ -130,8 +131,8 @@
                 <span>Message:</span>
               </label>
               <div class="message">
-                <input type="text" name="subject" id="subject" placeholder="Subject" title="Your subject" required>
-                <textarea id="message" name="message" placeholder="Write something.." title="Your Message" required></textarea>
+                <input type="text" name="subject" id="subject" placeholder="Subject" title="Please input the subject" required>
+                <textarea id="message" name="message" placeholder="Write something.." title="Please input the message" required></textarea>
               </div>
             </div>
             <div class="contact_btn">
