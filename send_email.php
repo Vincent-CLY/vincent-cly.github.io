@@ -1,7 +1,12 @@
 <?php
 
-$to = "vincentchung413@gmail.com"
+if ($_SERVER["REQUEST_METHOD"] == "POST"]) {
+    $to = "vincentchung413@gmail.com"
 
-$subject = "Test mail";
+    $subject = $_POST["subject"];
 
-mail($to, $subject, $message);
+    $message = $_POST["message"];
+
+    mail($to, $subject, $message);
+
+}

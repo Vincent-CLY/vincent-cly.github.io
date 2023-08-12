@@ -101,9 +101,11 @@
       </section>
       <section id="contact">
         <h1 class="header"> Contact </h1>
+        <!-- Contact Form -->
         <form action="send_email.php" method="post" class="contact_form">
           <fieldset class="form_container">
             <legend class="sub_header">Get In Touch</legend>
+            <!-- Name -->
             <div class="contact_input" data-form="name">
               <label for="name" class="icon_wrapper">
                 <svg class="icon" data-icon="name">
@@ -113,6 +115,7 @@
               </label>
               <input type="text" id="name" name="name" placeholder="Your name" title="Please input your name" required>
             </div>
+            <!-- Email -->
             <div class="contact_input" data-form="email">
               <label for="email" class="icon_wrapper">
                 <svg class="icon" data-icon="email">
@@ -120,9 +123,9 @@
                 </svg>
                 <span>Email:</span>
               </label>
-              
-<input pattern="(^[a-zA-Z0-9][a-zA-Z0-9-.%$&^#!*+:;,/(\)?<>'\x22[]{}
-|`~]+)@(([A-Za-z0-9-]+.)+)([a-z]{2,4})" type="email" id="email" name="email" placeholder="Your email" title="Invalid email format" required>            </div>
+              <input pattern="(^[a-zA-Z0-9][a-zA-Z0-9-.%$&^#!*+:;,/(\)?<>'\x22[]{}|`~]+)@(([A-Za-z0-9-]+.)+)([a-z]{2,4})" type="email" id="email" name="email" placeholder="Your email" title="Invalid email format" required>            
+            </div>
+            <!-- Message   -->
             <div class="contact_input" data-form="message">
               <label for="message" class="icon_wrapper">
                 <svg class="icon" data-icon="message">
@@ -135,9 +138,11 @@
                 <textarea id="message" name="message" placeholder="Write something.." title="Please input the message" required></textarea>
               </div>
             </div>
+            <!-- Submit -->
             <div class="contact_btn">
               <input type="submit" value="Contact">
             </div>
+            <!-- Reset -->
             <div class="reset_btn">
               <input type="reset" value="Reset">
             </div>
