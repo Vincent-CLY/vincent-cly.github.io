@@ -40,6 +40,8 @@
   --header-animation-speed: 5s;
   --header-cursor-animation-timeout: infinite;
   --header-cursor-effect: normal;
+  --valid-color: #3ecf8f;
+  --invalid-color: #e65849;
 }
 
 *,
@@ -355,6 +357,7 @@ input:active {
 .hobby {
   position: absolute;
   left: 100px;
+  top: 49px;
   scale: 3.5;
   animation: progress-bar__icon 3s ease-in-out forwards;
 }
@@ -595,6 +598,10 @@ input:active {
   display: flex;
   align-items: center;
   transition: transform 0.5s ease-in-out;
+}
+
+.icon_wrapper:hover {
+  cursor: text;
 }
 
 .icon {

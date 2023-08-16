@@ -50,28 +50,66 @@ function setIconTransform(index) {
 contactInputs.forEach(function (inputField, index) {
     inputField.addEventListener('focus', () => iconWrappers[index].style.transform = 'translateY(-30px) scale(0.9)');
     inputField.addEventListener('blur', () => setIconTransform(index));
+    inputField.addEventListener('input', () => setIconTransform(index));
 });
 
-// Validate input email
-function emailValidate() {
-    const email = document.querySelector('#email');
-    if (!email.value.match(/(^\w[\w-]+)@([\w-]+\.)+([a-z]{2,4})/g)) {
-        
+// Validate email
+const email = document.getElementById('email');
+email.addEventListener('input', () => {
+    const emailValidity = email.validity;
+    console.log(emailValidity);
+    switch (true) {
+        case emailValidity.valueMissing:
+            email.setCustomValidity('Please enter your email');
+            // set border to red
+        case !emailValidity.valid && emailValidity.typeMismatch:
+            let errorMsg = '';    
+            switch (true) {
+                case !/^[^\W_].+/.test(email):
+                    errorMsg += 'Email must start with a letter\n';
+                case !/^[^\W_][\w.\-_]+@.+/.test(email):
+                    errorMsg += 'Email can only contain letters, numbers, and symbols: . - _\n';
+                case !//.test(email):
+
+                case !//.test(email):
+
+                default:
+                    errorMsg = '';
+            }
+            email.setCustomValidity(errorMsg);
+            // set border to red
+        case emailValidity.valid:
+            // set border to green
+        default:
+            email.setCustomValidity('');
+            // set border to white
     }
-}
+});
 
 // Send email
 $('document').ready(function() {
-    $('#submit').on('submit', e => {
+    $('#form').on('submit', e => {
         e.preventDefault();
-        Email.send({
-            SecureToken : "af41342d-9a12-4e52-88b6-5e4cab3fd052",
-            From : $("#email").val(),
-            To : "vincentchung413@gmail.com",
-            Subject : $("#subject").val(),
-            Body : $("#message").val()
-        }).then(
-          message => alert(message)
-        );
+        // Validate email
+        const email = $('#email').val();
+
+        const content = `
+        <b>Name: </b>${$('#name').val()}
+        <br>
+        <b>Email: </b>${$('#email').val()}
+        <br>
+        <b>Subject: </b>${$('#subject').val()}
+        <br>
+        <b>Message: </b>${$('#message').val()}
+        `
+        // Email.send({
+        //     SecureToken : 'f7d0d542-2898-431d-9564-28ba217abaab',
+        //     From : 'vincentchung413@gmail.com',
+        //     To : 'vincentchung413@gmail.com',
+        //     Subject : $('#subject').val(),
+        //     Body : content
+        // }).then(
+        //   message => alert(message)
+        // );
     });
 });

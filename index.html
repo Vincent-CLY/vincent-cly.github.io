@@ -145,7 +145,7 @@
                 </svg>
                 <span>Email</span>
               </label>
-              <input type="email" id="email" name="email" title="Invalid email format" data-form="email" oninput="emailValidate()" required>            
+              <input type="email" pattern="^[^\W_][\w.\-_]+@([^\W_]+(-|_)?(?!(\.))([^\W_]+)?\.)+[a-zA-Z]{2,10}$" id="email" name="email" title="Please input a valid email address" data-form="email" required>        
             </div>
             <!-- Subject -->
             <div class="contact_input">
@@ -166,7 +166,6 @@
                 <span>Message</span>
               </label>  
                 <textarea id="message" name="message" class="no_scrollbar" title="Please input the message" data-form="message" required></textarea>
-              </div>
             </div>
             <!-- Submit -->
             <div class="contact_btn">
