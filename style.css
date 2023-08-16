@@ -78,19 +78,32 @@ section {
 }
 
 input[type="text"],
-input[type="email"] {
+input[type="email"],
+textarea {
   background-color: var(--section-background-color);
-  /* accent-color: #000; */
+  font-size: large;
   border: 0;
+  padding-bottom: 10px;
   border-bottom: 2px solid white;
   height: 30px;
   width: 60%;
 }
 
 textarea {
-  width: 60%;
-  height: 160px;
-  color: #000;
+  overflow: auto;
+  resize: none;
+  color: #ffffff;
+  overflow-y: scroll;
+  max-height: 20%;
+}
+
+.no_scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no_scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 input[type="reset"],
@@ -324,6 +337,10 @@ input:active {
   height: 60svh;
 }
 
+.hobbies_item_wrapper {
+  position: relative;
+}
+
 .hobbies_header, .hobbies_item {
   display: flex;
   align-items: center;
@@ -334,6 +351,17 @@ input:active {
 .hobbies_item {
   margin: 0 0 1rem 5%;
 }
+
+.hobby {
+  position: absolute;
+  left: 100px;
+  scale: 3.5;
+  animation: progress-bar__icon 3s ease-in-out forwards;
+}
+
+/* .hobby[data-hobby="music"] {
+  left: 90px;
+} */
 
 .time_spend {
   margin: auto;
@@ -355,24 +383,30 @@ input:active {
   animation: progress-bar 3s ease-in-out forwards;
 }
 
-[data-hobbies="Vibing"] .time_spend::before {
+[data-hobbies="Vibing"] .time_spend::before, [data-hobby="music"] {
   animation-delay: 1s;
   --width: 0.6;
 }
 
-[data-hobbies="Gaming"] .time_spend::before {
+[data-hobbies="Gaming"] .time_spend::before, [data-hobby="game"] {
   animation-delay: 4s;
   --width: 0.4;
 }
 
-[data-hobbies="Learning"] .time_spend::before {
+[data-hobbies="Learning"] .time_spend::before, [data-hobby="learn"] {
   animation-delay: 7s;
   --width: 0.8;
 }
 
-[data-hobbies="Coding"] .time_spend::before {
+[data-hobbies="Coding"] .time_spend::before, [data-hobby="code"] {
   animation-delay: 10s;
   --width: 1;
+}
+
+@keyframes progress-bar__icon {
+  to {
+    left: calc(95% * var(--width));
+  }
 }
 
 @keyframes progress-bar {
@@ -542,6 +576,7 @@ input:active {
 }
 
 .contact_input {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -549,14 +584,17 @@ input:active {
   margin: 1rem auto;
 }
 
-.contact_input[data-form="message"] {
-  padding-right: 14px;
+.icon[data-icon="subject"] {
+  scale: 1.2;
 }
 
 .icon_wrapper {
-  margin-right: 0.5rem;
+  position: absolute;
+  left: 0;
+  translate: 14.5svw -5px;
   display: flex;
   align-items: center;
+  transition: transform 0.5s ease-in-out;
 }
 
 .icon {

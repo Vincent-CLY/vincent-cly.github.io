@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Bilbo+Swash+Caps&family=Space+Mono:ital@1&display=swap" rel="stylesheet" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/d401c7f6b6.js" defer crossorigin="anonymous"></script>
     <script src="script.js" defer></script>
   </head>
@@ -66,19 +67,39 @@
               <p class="hobbies_header sub_header">Hobbies</p>
               <div class="hobbies_item_wrapper" data-hobbies="Vibing">
                 <p class="hobbies_item">Vibing</p>
-                <div class="time_spend"><!-- show daily time spend here --></div>
+                <div class="time_spend">
+                  <!-- show daily time spend here -->
+                  <svg class="hobby icon" viewbox="0 0 24 24" data-hobby="music">
+                    <use href="#music_icon"></use>
+                  </svg>
+                </div>
               </div>
               <div class="hobbies_item_wrapper" data-hobbies="Gaming">
                 <p class="hobbies_item">Gaming</p>
-                <div class="time_spend"><!-- show daily time spend here --></div>
+                <div class="time_spend">
+                  <!-- show daily time spend here -->
+                  <svg class="hobby icon" viewbox="0 0 24 24" data-hobby="game">
+                    <use href="#game_icon"></use>
+                  </svg>
+                </div>
               </div>
               <div class="hobbies_item_wrapper" data-hobbies="Learning">
                 <p class="hobbies_item">Learning</p>              
-                <div class="time_spend"><!-- show daily time spend here --></div>
+                <div class="time_spend">
+                  <!-- show daily time spend here -->
+                  <svg class="hobby icon" viewbox="0 0 24 24" data-hobby="learn">
+                    <use href="#learn_icon"></use>
+                  </svg>
+                </div>
               </div>
               <div class="hobbies_item_wrapper" data-hobbies="Coding">
                 <p class="hobbies_item">Coding</p>
-                <div class="time_spend"><!-- show daily time spend here --></div>
+                <div class="time_spend">
+                  <!-- show daily time spend here -->
+                  <svg class="hobby icon" viewbox="0 0 24 24" data-hobby="code">
+                    <use href="#code_icon"></use>
+                  </svg>
+                </div>
               </div>
             </div>
           </div>
@@ -102,49 +123,57 @@
       <section id="contact">
         <h1 class="header"> Contact </h1>
         <!-- Contact Form -->
-        <form action="send_email.php" method="post" class="contact_form">
+        <form id="contact_form" class="contact_form">
           <fieldset class="form_container">
             <legend class="sub_header">Get In Touch</legend>
             <!-- Name -->
-            <div class="contact_input" data-form="name">
-              <label for="name" class="icon_wrapper">
+            <div class="contact_input">
+            <label for="name" class="icon_wrapper">
                 <svg class="icon" data-icon="name">
                   <use href="#name_icon"></use>
                 </svg>
-                <span>Name:</span>
+                <span>Name</span>
               </label>
-              <input type="text" id="name" name="name" placeholder="Your name" title="Please input your name" required>
+              <input type="text" id="name" name="name" title="Please input your name" data-form="name" required>
             </div>
             <!-- Email -->
-            <div class="contact_input" data-form="email">
+            <div class="contact_input">
               <label for="email" class="icon_wrapper">
                 <svg class="icon" data-icon="email">
                   <use href="#email_icon"></use>
                 </svg>
-                <span>Email:</span>
+                <span>Email</span>
               </label>
-              <input pattern="(^[a-zA-Z0-9][a-zA-Z0-9-.%$&^#!*+:;,/(\)?<>'\x22[]{}|`~]+)@(([A-Za-z0-9-]+.)+)([a-z]{2,4})" type="email" id="email" name="email" placeholder="Your email" title="Invalid email format" required>            
+              <input type="email" id="email" name="email" title="Invalid email format" data-form="email" oninput="emailValidate()" required>            
+            </div>
+            <!-- Subject -->
+            <div class="contact_input">
+              <label for="subject" class="icon_wrapper">
+                <svg class="icon" data-icon="subject">
+                  <use href="#subject_icon"></use>
+                </svg>
+                <span>Subject</span>
+              </label>
+              <input type="text" name="subject" id="subject" title="Please input the subject" data-form="subject" required>
             </div>
             <!-- Message   -->
-            <div class="contact_input" data-form="message">
+            <div class="contact_input">
               <label for="message" class="icon_wrapper">
                 <svg class="icon" data-icon="message">
                   <use href="#message_icon"></use>
                 </svg>
-                <span>Message:</span>
-              </label>
-              <div class="message">
-                <input type="text" name="subject" id="subject" placeholder="Subject" title="Please input the subject" required>
-                <textarea id="message" name="message" placeholder="Write something.." title="Please input the message" required></textarea>
+                <span>Message</span>
+              </label>  
+                <textarea id="message" name="message" class="no_scrollbar" title="Please input the message" data-form="message" required></textarea>
               </div>
             </div>
             <!-- Submit -->
             <div class="contact_btn">
-              <input type="submit" value="Contact">
+              <input type="submit" name="submit" id="submit" value="Send">
             </div>
             <!-- Reset -->
             <div class="reset_btn">
-              <input type="reset" value="Reset">
+              <input type="reset" name="reset" id="reset" value="Reset">
             </div>
           </fieldset> 
         </form>
@@ -162,6 +191,23 @@
           stroke-width="18"
           stroke-linecap="round"/>
       </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" id="music_icon">
+        <rect x="4" y="8" width="15" height="15" fill="#fff"/>
+        <rect x="4" y="8" width="5" height="10" fill="#1f2938"/>
+        <path fill="#F312C2" d="M4 6H2v14a2 2 0 0 0 2 2h14v-2H4M18 7h-3v5.5a2.5 2.5 0 0 1-2.5 2.5a2.5 2.5 0 0 1-2.5-2.5a2.5 2.5 0 0 1 2.5-2.5c.57 0 1.08.19 1.5.5V5h4m2-3H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2Z"/>
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" id="game_icon">
+        <rect x="4" y="8" width="6" height="5" fill="#fff"/>
+        <rect x="11" y="8" width="8" height="5" fill="#000"/>
+        <path fill="#FF5733" d="M7.97 16L5 19c-.33.3-.77.5-1.25.5A1.75 1.75 0 0 1 2 17.75v-.25l1-7.38A4.524 4.524 0 0 1 7.5 6h9c2.36 0 4.29 1.81 4.5 4.12l1 7.38v.25a1.75 1.75 0 0 1-1.75 1.75c-.48 0-.92-.2-1.25-.5l-2.97-3H7.97M7 8v2H5v1h2v2h1v-2h2v-1H8V8H7m9.5 0a.75.75 0 0 0-.75.75a.75.75 0 0 0 .75.75a.75.75 0 0 0 .75-.75a.75.75 0 0 0-.75-.75m-1.75 1.75a.75.75 0 0 0-.75.75a.75.75 0 0 0 .75.75a.75.75 0 0 0 .75-.75a.75.75 0 0 0-.75-.75m3.5 0a.75.75 0 0 0-.75.75a.75.75 0 0 0 .75.75a.75.75 0 0 0 .75-.75a.75.75 0 0 0-.75-.75M16.5 11.5a.75.75 0 0 0-.75.75a.75.75 0 0 0 .75.75a.75.75 0 0 0 .75-.75a.75.75 0 0 0-.75-.75Z"/>
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" id="learn_icon">
+        <path fill="#3385ff" d="M6.012 18H21V4a2 2 0 0 0-2-2H6c-1.206 0-3 .799-3 3v14c0 2.201 1.794 3 3 3h15v-2H6.012C5.55 19.988 5 19.805 5 19s.55-.988 1.012-1zM8 6h9v2H8V6z"/>
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256" id="code_icon">
+        <rect x="27" y="50" width="180" height="150" fill="#fff"/>
+        <path fill="#9E9E9E" d="M216 40H40a16 16 0 0 0-16 16v144a16 16 0 0 0 16 16h176a16 16 0 0 0 16-16V56a16 16 0 0 0-16-16ZM92.8 145.6a8 8 0 1 1-9.6 12.8l-32-24a8 8 0 0 1 0-12.8l32-24a8 8 0 0 1 9.6 12.8L69.33 128Zm58.89-71.4l-32 112a8 8 0 1 1-15.38-4.4l32-112a8 8 0 0 1 15.38 4.4Zm53.11 60.2l-32 24a8 8 0 0 1-9.6-12.8l23.47-17.6l-23.47-17.6a8 8 0 1 1 9.6-12.8l32 24a8 8 0 0 1 0 12.8Z"/>
+      </svg>
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" id="name_icon">
         <path fill="currentColor" d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"/>
       </svg>
@@ -170,6 +216,8 @@
         <path fill="currentColor" d="m33.81 7.39l-14.56 14.5a2 2 0 0 1-2.82 0L2 7.5a2 2 0 0 0-.07.5v20a2 2 0 0 0 2 2h28a2 2 0 0 0 2-2V8a2 2 0 0 0-.12-.61ZM5.3 28H3.91v-1.43l7.27-7.21l1.41 1.41Zm26.61 0h-1.4l-7.29-7.23l1.41-1.41l7.27 7.21Z" class="clr-i-solid clr-i-solid-path-2"/>
         <path fill="none" d="M0 0h36v36H0z"/>
       </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 2048 2048" id="subject_icon">
+        <path fill="currentColor" d="M1720 128q41 0 77 16t63 43t43 63t16 78q0 37-10 65t-29 53t-41 46t-47 46v1254H256V256h1254q24-24 46-47t47-41t52-29t65-11zm0 128q-29 0-50 21l-948 948l-34 135l135-34l948-948q21-21 21-50q0-30-21-51t-51-21zm-56 410l-775 776l-377 94l94-377l776-775H384v1280h1280V666z"/>      </svg>
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" id="message_icon">
         <path fill="currentColor" d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2M6 9h12v2H6m8 3H6v-2h8m4-4H6V6h12"/>
       </svg>
