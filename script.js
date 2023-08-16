@@ -59,3 +59,19 @@ function emailValidate() {
         
     }
 }
+
+// Send email
+$('document').ready(function() {
+    $('#submit').on('submit', e => {
+        e.preventDefault();
+        Email.send({
+            SecureToken : "af41342d-9a12-4e52-88b6-5e4cab3fd052",
+            From : $("#email").val(),
+            To : "vincentchung413@gmail.com",
+            Subject : $("#subject").val(),
+            Body : $("#message").val()
+        }).then(
+          message => alert(message)
+        );
+    });
+});
