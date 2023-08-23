@@ -32,8 +32,8 @@
   --section-background-color: hsl(216, 29%, 17%);
   --nav-bar-background-color: #000;
   --nav-bar-hover-background-color: rgb(147, 147, 147);
-  --nav-text-color: #fff;
-  --text-color: #fff;
+  --nav-text-color: #fdf6e3;
+  --text-color: #fdf6e3;
   --header-text-right-color: hsl(21.692, 72%, 35%);
   --header-text-count: 0;
   --header-text-color: var(--text-color);
