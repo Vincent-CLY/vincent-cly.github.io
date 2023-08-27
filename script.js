@@ -53,46 +53,45 @@ contactInputs.forEach(function (inputField, index) {
     inputField.addEventListener('input', () => setIconTransform(index));
 });
 
-// Validate email
-const email = document.getElementById('email');
-email.addEventListener('input', () => {
-    const emailValidity = email.validity;
-    console.log(emailValidity);
-    switch (true) {
-        case emailValidity.valueMissing:
-            email.setCustomValidity('Please enter your email');
-            // set border to red
-        case !emailValidity.valid && emailValidity.typeMismatch:
-            let errorMsg = '';    
-            switch (true) {
-                case !/^[^\W_].+/.test(email):
-                    errorMsg += 'Email must start with a letter\n';
-                case !/^[^\W_][\w.\-_]+@.+/.test(email):
-                    errorMsg += 'Email can only contain letters, numbers, and symbols: . - _\n';
-                case !//.test(email):
+// // Validate email
+// const email = document.getElementById('email');
+// email.addEventListener('input', () => {
+//     const emailValidity = email.validity;
+//     console.log(emailValidity);
+//     switch (true) {
+//         case emailValidity.valueMissing:
+//             email.setCustomValidity('Please enter your email');
+//             // set border to red
+//         case !emailValidity.valid && emailValidity.typeMismatch:
+//             let errorMsg = '';    
+//             switch (true) {
+//                 case !/^[^\W_].+/.test(email):
+//                     errorMsg += 'Email must start with a letter\n';
+//                 case !/^[^\W_][\w.\-_]+@.+/.test(email):
+//                     errorMsg += 'Email can only contain letters, numbers, and symbols: . - _\n';
+//                 case !//.test(email):
 
-                case !//.test(email):
+//                 case !//.test(email):
 
-                default:
-                    errorMsg = '';
-            }
-            email.setCustomValidity(errorMsg);
-            // set border to red
-        case emailValidity.valid:
-            // set border to green
-        default:
-            email.setCustomValidity('');
-            // set border to white
-    }
-});
+//                 default:
+//                     errorMsg = '';
+//             }
+//             email.setCustomValidity(errorMsg);
+//             // set border to red
+//         case emailValidity.valid:
+//             // set border to green
+//         default:
+//             email.setCustomValidity('');
+//             // set border to white
+//     }
+// });
 
 // Send email
 $('document').ready(function() {
-    $('#form').on('submit', e => {
+    $('#contact_form').on('submit', e => {
         e.preventDefault();
         // Validate email
         const email = $('#email').val();
-
         const content = `
         <b>Name: </b>${$('#name').val()}
         <br>
@@ -102,14 +101,15 @@ $('document').ready(function() {
         <br>
         <b>Message: </b>${$('#message').val()}
         `
-        // Email.send({
-        //     SecureToken : 'f7d0d542-2898-431d-9564-28ba217abaab',
-        //     From : 'vincentchung413@gmail.com',
-        //     To : 'vincentchung413@gmail.com',
-        //     Subject : $('#subject').val(),
-        //     Body : content
-        // }).then(
-        //   message => alert(message)
-        // );
+        Email.send({
+            SecureToken : 'f7d0d542-2898-431d-9564-28ba217abaab',
+            From : 'received-contact-form@protonmail.com',
+            To : 'vincentchung413@gmail.com',
+            ReplyTo : $('#email').val(), 
+            Subject : $('#subject').val(),
+            Body : content
+        }).then(
+          message => alert(message)
+        );
     });
 });
