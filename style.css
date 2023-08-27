@@ -357,7 +357,7 @@ input:active {
 .hobby {
   position: absolute;
   left: 100px;
-  top: 49px;
+  top: 45px;
   scale: 3.5;
   animation: progress-bar__icon 3s ease-in-out forwards;
 }
@@ -547,7 +547,7 @@ input:active {
   align-items: center;
   margin: 1rem;
   opacity: 0;
-  font-size: 5svw;
+  font-size: 3.5rem;
   transform: translateY(50px);
   animation: fade-in-drop 2s ease-in-out 6s forwards;
 }
