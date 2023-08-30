@@ -113,3 +113,40 @@ $('document').ready(function() {
         );
     });
 });
+
+// Observe if scrolled to About Me
+// const aboutMeObserver = new IntersectionObserver(entries => {
+
+// });
+
+// const aboutMe = document.querySelectorAll('.hobbies_item_wrapper');
+
+// Header Observer
+const headerObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in');
+        }
+    });
+}, {threshold: 0.8});
+
+const headers = document.getElementsByClassName('header');
+for (let i = 0; i < headers.length; i++) {
+    headerObserver.observe(headers[i]);
+};
+
+// Content Wrapper Observer
+const contentWrapperObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in');
+        }
+    });
+}, {threshold: 0.5});
+
+
+const contentWrappers = document.getElementsByClassName('content_wrapper');
+for (let i = 0; i < contentWrappers.length; i++) {
+    console.log(contentWrappers[i]);
+    contentWrapperObserver.observe(contentWrappers[i]);
+};
