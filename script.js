@@ -1,22 +1,3 @@
-// Change typing-cursor-effect text
-const toolkit = document.querySelector('[data-toolkit]');
-const toolkitArr = ['HTML', 'CSS', 'JavaScript', 'jQuery', 'Regex', 'Python', 'C++', 'PHP', 'SQL', 'AJAX'];
-let i = 1;
-toolkit.innerText = toolkitArr[0];
-toolkit.style.setProperty('--header-text-count', toolkit.innerText.length);
-
-toolkit.addEventListener('animationiteration', e => {
-    if (e.animationName === 'toolkit-typing' && e.pseudoElement === '::after') {
-        toolkit.innerText = toolkitArr[i];
-        // Set steps() number to CSS animation
-        toolkit.style.setProperty('--header-text-count', toolkit.innerText.length);
-        i++;
-        if (i === toolkitArr.length) {
-            i = 0;
-        }
-    }
-});
-
 // Change hello svg size
 const helloSvg = document.querySelector('.hello');
 window.addEventListener('resize', () => {
@@ -140,7 +121,37 @@ const contentWrapperObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('fade-in');
-        }
+            contentWrapperObserver.unobserve(entry.target);
+        };
+        // About Me animation
+        if (entry.target.parentElement.id == 'about_me' && entry.target.classList.contains('fade-in')) {
+            const hobbies = document.getElementsByClassName('hobby');
+            for (let i = 0; i < hobbies.length; i++) {
+                hobbies[i].classList.add('start-animation');
+                document.getElementsByClassName('time_spend')[i].classList.add('start-animation');
+            };
+        };
+        // Learning animation
+        if (entry.target.parentElement.id == 'learning' && entry.target.classList.contains('fade-in')) {
+            // Change typing-cursor-effect text
+            const toolkit = document.querySelector('[data-toolkit]');
+            const toolkitArr = ['HTML', 'CSS', 'JavaScript', 'jQuery', 'Regex', 'Python', 'C++', 'PHP', 'SQL', 'AJAX'];
+            let i = 1;
+            toolkit.innerText = toolkitArr[0];
+            toolkit.style.setProperty('--header-text-count', toolkit.innerText.length);
+
+            toolkit.addEventListener('animationiteration', e => {
+                if (e.animationName === 'toolkit-typing' && e.pseudoElement === '::after') {
+                    toolkit.innerText = toolkitArr[i];
+                    // Set steps() number to CSS animation
+                    toolkit.style.setProperty('--header-text-count', toolkit.innerText.length);
+                    i++;
+                    if (i === toolkitArr.length) {
+                        i = 0;
+                    };
+                };
+            });
+        };
     });
 }, {threshold: 0.5});
 

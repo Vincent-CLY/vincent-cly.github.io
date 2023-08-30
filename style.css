@@ -330,8 +330,7 @@ input:active {
 }
 
 .intro {
-  font-size: clamp(4rem, 12vw + 1rem, 12rem);
-  width: fit-content;
+  font-size: clamp(4rem, 12vw + 1rem, 10rem);
   position: relative;
   opacity: 1;
   font-family: "Bilbo Swash Caps", cursive;
@@ -386,6 +385,7 @@ input:active {
   left: 0px;
   top: 18%;
   animation: progress-bar__icon 3s ease-in-out forwards;
+  animation-play-state: paused;
 }
 
 .time_spend {
@@ -406,6 +406,11 @@ input:active {
   margin: 0.5rem;
   border-radius: 1rem;
   animation: progress-bar 3s ease-in-out forwards;
+  animation-play-state: paused;
+}
+
+.time_spend.start-animation::before, .start-animation {
+  animation-play-state: running;
 }
 
 [data-hobbies="Vibing"] .time_spend::before, [data-hobby="music"] {
