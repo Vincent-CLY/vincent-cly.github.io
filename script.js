@@ -1,13 +1,15 @@
 // Change hello svg size
 const helloSvg = document.querySelector('.hello');
-window.addEventListener('resize', () => {
+function setHelloSvgSize() {
     // Get intro text font size
-    const introText = document.querySelector('.intro');
-    const introTextFontSize = getComputedStyle(introText).fontSize;
-    const scale = introTextFontSize.replace('px', '')/140;
+    const introText = document.querySelector('.intro_wrapper');
+    const introTextFontSize = getComputedStyle(introText).width;
+    const scale = introTextFontSize.replace('px', '')/600;
     // Set hello svg size
     helloSvg.style.transform = `scale(${scale})`;
-});
+}
+window.addEventListener('resize', setHelloSvgSize);
+setHelloSvgSize();
 
 // Contact form textarea auto expand
 const message = document.querySelector('#message');
@@ -161,3 +163,11 @@ for (let i = 0; i < contentWrappers.length; i++) {
     console.log(contentWrappers[i]);
     contentWrapperObserver.observe(contentWrappers[i]);
 };
+
+const intro = document.querySelector('#intro');
+const introPaths = intro.querySelectorAll('path');
+introPaths.forEach(path => {
+    path.style.strokeDasharray = path.getTotalLength();
+    path.style.strokeDashoffset = path.getTotalLength();
+    console.log(`This is ${path.id} total length: `+ path.getTotalLength());
+});
