@@ -97,6 +97,26 @@ $('document').ready(function() {
     });
 });
 
+// Intro Scroll Animation
+// Registering the plugin
+// gsap.registerPlugin(ScrollTrigger);
+
+// // Animate intro-text__svg
+// gsap.to("#intro__svg", {
+//     // insert your animation properties here (e.g., x: 100, scale: 2, etc.)
+//     scrollTrigger: {
+//       trigger: ".intro_wrapper",
+//       start: "50% center",
+//       end: "130% center",
+//       scrub: true,
+//       markers: true
+//     },
+//     "stroke-dashoffset": 800,
+//     duration: 1
+// });
+
+
+
 // Observe if scrolled to About Me
 // const aboutMeObserver = new IntersectionObserver(entries => {
 
@@ -164,10 +184,55 @@ for (let i = 0; i < contentWrappers.length; i++) {
     contentWrapperObserver.observe(contentWrappers[i]);
 };
 
+
+// Animate intro svg
 const intro = document.querySelector('#intro');
 const introPaths = intro.querySelectorAll('path');
 introPaths.forEach(path => {
     path.style.strokeDasharray = path.getTotalLength();
     path.style.strokeDashoffset = path.getTotalLength();
     console.log(`This is ${path.id} total length: `+ path.getTotalLength());
+});
+
+
+// Nav bar
+const navContainers = document.querySelectorAll('.nav_items_container');
+const checkBox = document.querySelector('.menu-icon input');
+checkBox.addEventListener('change', function() {
+    if(this.checked) {
+        let i = 3;
+        navContainers.forEach(navContainer => {
+            navContainer.style.transitionDelay = `${i * 150}ms`;
+            navContainer.classList.add('checked');
+            console.log(i);
+            i--;
+        });
+    } else {
+        let i = 0;
+        navContainers.forEach(navContainer => {
+            navContainer.style.transitionDelay = `${i * 150}ms`;
+            console.log(`${i * 1000}%`);
+            navContainer.classList.remove('checked');
+            i++;
+        });
+    }
+});
+
+window.addEventListener('click', e => {
+    // Get the header element
+    var header = document.querySelector('header');
+
+    // Check if the click event's target is inside the header
+    if (!header.contains(e.target)) {
+        // If it's not, set checkBox.checked to false
+        checkBox.checked = false;
+
+        // Update the navContainers
+        let i = 0;
+        navContainers.forEach(navContainer => {
+            navContainer.style.transitionDelay = `${i * 150}ms`;
+            navContainer.classList.remove('checked');
+            i++;
+        });
+    }
 });

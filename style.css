@@ -47,8 +47,10 @@
 *,
 *::before,
 *::after {
+  padding: 0;
+  margin: 0;
   font-family: "SF Pro", "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   color: var(--text-color);
   box-sizing: border-box;
 }
@@ -57,11 +59,10 @@ html {
   font-size: 16px;
   color: #fff;
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 body {
-  padding: 0;
-  margin: 0;
   margin-inline: auto;
   display: grid;
 }
@@ -172,9 +173,99 @@ input:active {
   left: -200svw;
 }
 
-/* -------------------------- Navigation Bar Styling --------------------------
-
+/* -------------------------- Navigation Bar Styling -------------------------- */
 .nav_bar {
+  position: fixed;
+  width: 100svw;
+  z-index: 9999;
+  font-size: clamp(0.5rem, 45vw + 1em, 1rem);
+}
+
+.nav_item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-decoration: none;
+  padding-inline: 1.81rem;
+  padding-block: 1rem;
+  font-size: clamp(1rem, 2vw, 2rem);
+  background-color: var(--nav-bar-background-color);
+
+}
+
+.nav_items_container {
+  opacity: 0.8;
+  /* position: absolute; */
+  /* top: 0; */
+  z-index: -10;
+  /* width: 100svw; */
+  transition: all 1s ease-in-out;
+}
+
+.nav_items_container:nth-child(1) {
+  transform: translateY(-100%);
+}
+
+.nav_items_container:nth-child(2) {
+  transform: translateY(-200%);
+}
+
+.nav_items_container:nth-child(3) {
+  transform: translateY(-300%);
+}
+.nav_items_container:nth-child(4) {
+  transform: translateY(-400%);
+}
+
+li.nav_items_container.checked {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.menu-icon {
+  position: relative;
+}
+
+.nav_icon {
+  position: absolute;
+  z-index: 100;
+  width: 3rem;
+  height: calc(3rem + 2svw);
+  background-color: #000;
+}
+
+.menu-icon {
+  z-index: 999999;
+}
+
+.menu-icon input {
+  z-index: 99999999;
+  position: absolute;
+  width: 100svw;
+  height: calc(2rem + 2svw);
+  top: 0;
+  left: 0;
+  outline: none;
+  /* display: none; */
+  appearance: none;
+  cursor: pointer;
+}
+
+[data-menu] {
+  width: 100svw;
+  padding-bottom: 0;
+  padding-top: 0.3rem;
+}
+
+@media only screen and (min-width: 600px) {
+  section {
+  }
+}
+  
+
+
+/* .nav_bar {
   position: relative;
   width: 100vw;
   height: 3rem;
@@ -327,7 +418,7 @@ input:active {
   fill: transparent;
   opacity: 0;
   animation: draw 31s forwards ease 2s,
-             fade-in 4s forwards ease-in-out 1s,
+             fade-in 6s forwards ease-in-out 1s,
              fill_white 1s forwards ease 6.4s;
 }
 
@@ -354,6 +445,31 @@ input:active {
     fill: #fff;
   }
 }
+
+/*-------------------------- Welcome Message Styling--------------------------*/
+
+.welcome_message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+  opacity: 0;
+  font-size: 3.5rem;
+  transform: translateY(50px);
+  animation: fade-in-drop 1.5s ease-in-out 5.5s forwards;
+}
+
+@keyframes fade-in-drop {
+  50% {
+    opacity: 0.6;
+    transform: translateY(-15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
 /* .intro {
   opacity: 0;
@@ -390,7 +506,7 @@ input:active {
   }
 } */
 
-/* About Me Styling */
+/*-------------------------- About Me Styling --------------------------*/
 
 .hobbies_container {
   display: grid;
@@ -551,8 +667,8 @@ input:active {
   }
 }
 
-/* For Small Device 
-@media screen and (max-width: 222px) {
+/* For Small Device  */
+/* @media screen and (max-width: 222px) {
   .section_header::before {
     display: none;
   }
@@ -606,30 +722,6 @@ input:active {
     width: 0.125rem;
   }
 }   */
-
-/*-------------------------- Welcome Message Styling--------------------------*/
-
-.welcome_message {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 1rem;
-  opacity: 0;
-  font-size: 3.5rem;
-  transform: translateY(50px);
-  animation: fade-in-drop 1.5s ease-in-out 5.5s forwards;
-}
-
-@keyframes fade-in-drop {
-  50% {
-    opacity: 0.6;
-    transform: translateY(-15px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
 /* Contact Form Styling */
 

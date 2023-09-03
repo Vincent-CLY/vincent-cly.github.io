@@ -12,44 +12,38 @@
     <link href="https://fonts.googleapis.com/css2?family=Bilbo+Swash+Caps&display=swap" rel="stylesheet" type="text/css">
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" integrity="sha512-Ic9xkERjyZ1xgJ5svx3y0u3xrvfT/uPkV99LBwe68xjy/mGtO+4eURHZBW2xW4SZbFrF1Tf090XqB+EVgXnVjw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>    
     <script src="https://kit.fontawesome.com/d401c7f6b6.js" defer crossorigin="anonymous"></script>
     <script src="script.js" defer></script>
     <script src="https://smtpjs.com/v3/smtp.js" defer></script>
   </head>
   <body>
-    <!-- <header>
+    <header>
       <nav class="nav_bar">
         <div class="nav_container">
+          <label title="Menu Icon" class="menu-icon">
+            <svg class="nav_item" height="2" width="45" data-menu="">
+              <use href="#menu_icon"></use>
+            </svg>
+            <input type="checkbox" />
+          </label>
           <ul class="nav_content">
             <li class="nav_items_container">
-              <a href="#Home" class="nav_item">Home</a>
+              <a href="#home" class="nav_item">Home</a>
             </li>
             <li class="nav_items_container">
-              <a href="#About_Me" class="nav_item">About Me</a>
+              <a href="#about_me" class="nav_item">About Me</a>
             </li>
             <li class="nav_items_container">
-              <a href="#My_Hobbies" class="nav_item">My Hobbies</a>
+              <a href="#learning" class="nav_item">My Hobbies</a>
             </li>
             <li class="nav_items_container">
-              <a href="#Awards" class="nav_item">Awards</a>
-            </li>
-            <li class="nav_items_container">
-              <a href="#Album" class="nav_item">Album</a>
-            </li>
-            <li class="nav_items_container">
-              <a href="#Social_Media" class="nav_item">Social Media</a>
+              <a href="#contact" class="nav_item">Contact</a>
             </li>
           </ul>
         </div>
-        <div class="nav_icon" data-nav-icon>
-          <hr class="nav_icon_lines">
-          <hr class="nav_icon_lines">
-          <hr class="nav_icon_lines">
-        </div>
       </nav>
-    </header> -->
+    </header>
     <main>
       <section id="home">
         <div class="hello_wrapper">
@@ -228,6 +222,11 @@
         <path class="intro-elements" id="lower_main__left" d="M9.281 236.516c4.883 2.672 14.25.343 15.418-5.813.414-2.172-.32-4.558-1.594-6.328-1.668-2.305-3.886-2.926-6.168-4.316-1.703-1.036-6.546-3.762-6.636-3.88.511.758 28.226.563 33.898.54 11.34-.047 22.684-.098 34.028-.14 22.683-.099 45.37-.192 68.054-.29 14.067-.059 28.133-.117 42.2-.18 2.019-.007 4.843-.953 4.21-2.695-1.617-.242-130.148.188-191.48.45 4.34 2.863 8.676 5.722 13.016 8.581 2.187 1.442 4.503 3.047 5.296 5.395 1.762 5.234-8.93 8.18-9.683 3.46-.399-2.488 3.305-3.991 1.879-6.8-1.106-2.18-3.914-1.953-5.727-2.918 3.09 1.637 4.89 3.164 3.082 6.148-1.57 2.59-4.797 4.95-.742 8.16.293.235.613.442.95.626"/>
         <path class="intro-elements" id="lower_main__right" d="M592.152 236.516c-4.882 2.672-14.254.343-15.425-5.813-.414-2.172.32-4.558 1.597-6.328 1.664-2.305 3.883-2.926 6.168-4.316 1.7-1.036 6.543-3.762 6.633-3.88-.512.758-28.223.563-33.89.54-11.348-.047-22.692-.098-34.036-.14-22.683-.099-45.37-.192-68.054-.29-14.067-.059-28.13-.117-42.2-.18-2.015-.007-4.843-.953-4.207-2.695 1.617-.242 130.145.188 191.477.45-4.336 2.863-8.676 5.722-13.012 8.581-2.183 1.442-4.504 3.047-5.297 5.395-1.761 5.234 8.926 8.18 9.68 3.46.402-2.488-3.305-3.991-1.875-6.8 1.101-2.18 3.91-1.953 5.723-2.918-3.086 1.637-4.891 3.164-3.079 6.148 1.57 2.59 4.797 4.95.743 8.16a6.944 6.944 0 0 1-.946.626"/>
         <path class="intro-elements" id="lower_crown" d="M300.715 253.602c-.89 1.207-1.89 2.328-2.723 3.59-2.488 3.726-6.07 6.523-9.84 8.847-4.941 3.043-9.707 6.55-15.203 8.543-6.058 2.195-12.156 1.684-18.168-.55-5.504-2.044-9.875-6.118-10.488-12.227-.606-5.957 3.144-12.063 8.176-15.086 3.469-2.074 8.031-2.52 11.574-.586 1.992 1.086 3.672 3.086 3.633 5.351.765-1.394.375-3.168-.422-4.547-1.848-3.218-5.707-5.011-9.414-4.851-3.707.168-7.203 2.113-9.715 4.844-2.512 2.73-4.113 6.195-5.105 9.773-.797 2.871-1.227 5.942-.485 8.824 1.031 4.008 4.113 6.989 7.29 9.434 1.534 1.18 3.12 2.406 4.831 3.3 1.203.637 4.95 2.696 6.328 2.094-4.062 1.778-7.175 6.145-6.43 10.637.637 3.809 3.872 6.778 7.778 7.274 3.027.386 8.543-1.348 8.863-4.875-3.949 6.32-13.734-2.22-8.601-7.856 3.48-3.816 9.562-4.594 14.152-6.418 5.567-2.215 11.117-5.09 15.379-9.379 3.191-3.195 6.016-7.472 8.59-11.281 2.578 3.809 5.394 8.086 8.586 11.281 4.265 4.29 9.812 7.164 15.383 9.38 4.593 1.823 10.668 2.6 14.148 6.417 5.137 5.637-4.652 14.176-8.598 7.856.317 3.527 5.84 5.261 8.86 4.875 3.91-.496 7.14-3.465 7.777-7.274.75-4.492-2.367-8.86-6.426-10.637 1.375.602 5.125-1.457 6.325-2.093 1.71-.895 3.296-2.121 4.832-3.301 3.18-2.445 6.257-5.426 7.293-9.434.746-2.882.316-5.953-.489-8.824-.988-3.578-2.594-7.043-5.101-9.773-2.516-2.73-6.008-4.676-9.72-4.844-3.706-.16-7.562 1.633-9.413 4.851-.79 1.38-1.188 3.153-.414 4.547-.043-2.265 1.633-4.265 3.625-5.351 3.55-1.934 8.11-1.488 11.574.586 5.031 3.023 8.781 9.129 8.184 15.086-.621 6.11-4.989 10.183-10.493 12.226-6.011 2.235-12.113 2.746-18.168.551-5.5-1.992-10.265-5.5-15.207-8.543-3.77-2.324-7.351-5.121-9.832-8.848-.84-1.261-1.843-2.382-2.726-3.59"/>
+      </svg>
+      <svg id="menu_icon" viewBox="0 0 147 71" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect id="menu__first" x="48" y="14" width="50" height="8" rx="4" fill="white"/>
+        <rect id="menu__mid" x="48" y="28" width="50" height="8" rx="4" fill="white"/>
+        <rect id="menu__last" x="48" y="42" width="50" height="8" rx="4" fill="white"/>
       </svg>
       <svg width="419" height="227" viewBox="0 0 419 227" fill="none" xmlns="http://www.w3.org/2000/svg" id="hello">
         <path
