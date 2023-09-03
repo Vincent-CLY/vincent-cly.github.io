@@ -170,7 +170,8 @@ input:active {
 
 .svg_container {
   position: absolute; 
-  left: -200svw;
+  left: -9999svw;
+  opacity: 0;
 }
 
 /* -------------------------- Navigation Bar Styling -------------------------- */
@@ -217,7 +218,9 @@ input:active {
 .nav_items_container:nth-child(4) {
   transform: translateY(-400%);
 }
-
+.nav_items_container:nth-child(5) {
+  transform: translateY(-500%);
+}
 li.nav_items_container.checked {
   opacity: 1;
   transform: translateY(0);
@@ -225,6 +228,7 @@ li.nav_items_container.checked {
 
 .menu-icon {
   position: relative;
+  z-index: 999999;
 }
 
 .nav_icon {
@@ -235,8 +239,9 @@ li.nav_items_container.checked {
   background-color: #000;
 }
 
-.menu-icon {
-  z-index: 999999;
+.media-icons {
+  width: 80%;
+  height: 80%;
 }
 
 .menu-icon input {
@@ -262,7 +267,14 @@ li.nav_items_container.checked {
   section {
   }
 }
-  
+ 
+.profile-pic {
+  border-radius: 50%;
+  width: 10%;
+}
+
+.menu-icons {
+}
 
 
 /* .nav_bar {
@@ -758,7 +770,6 @@ li.nav_items_container.checked {
   align-items: center;
   gap: 40%;
 }
-
 
 /* -------------------------- JavaScript Styling -------------------------- */
 .fade-in {

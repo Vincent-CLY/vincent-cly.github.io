@@ -220,7 +220,7 @@ checkBox.addEventListener('change', function() {
 
 window.addEventListener('click', e => {
     // Get the header element
-    var header = document.querySelector('header');
+    const header = document.querySelector('header');
 
     // Check if the click event's target is inside the header
     if (!header.contains(e.target)) {
