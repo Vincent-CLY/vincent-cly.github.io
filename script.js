@@ -97,44 +97,21 @@ $('document').ready(function() {
     });
 });
 
-// Intro Scroll Animation
-// Registering the plugin
-// gsap.registerPlugin(ScrollTrigger);
-
-// // Animate intro-text__svg
-// gsap.to("#intro__svg", {
-//     // insert your animation properties here (e.g., x: 100, scale: 2, etc.)
-//     scrollTrigger: {
-//       trigger: ".intro_wrapper",
-//       start: "50% center",
-//       end: "130% center",
-//       scrub: true,
-//       markers: true
-//     },
-//     "stroke-dashoffset": 800,
-//     duration: 1
-// });
-
-
-
-// Observe if scrolled to About Me
-// const aboutMeObserver = new IntersectionObserver(entries => {
-
-// });
-
-// const aboutMe = document.querySelectorAll('.hobbies_item_wrapper');
-
 // Header Observer
 const headerObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('fade-in');
         }
+        else {
+            entry.target.classList.remove('fade-in');
+        }
     });
 }, {threshold: 0.8});
 
 const headers = document.getElementsByClassName('header');
 for (let i = 0; i < headers.length; i++) {
+    console.log(headers[i]);
     headerObserver.observe(headers[i]);
 };
 
@@ -143,7 +120,9 @@ const contentWrapperObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('fade-in');
-            contentWrapperObserver.unobserve(entry.target);
+        }
+        else {
+            entry.target.classList.remove('fade-in');
         };
         // About Me animation
         if (entry.target.parentElement.id == 'about_me' && entry.target.classList.contains('fade-in')) {
@@ -175,14 +154,31 @@ const contentWrapperObserver = new IntersectionObserver(entries => {
             });
         };
     });
-}, {threshold: 0.5});
+}, {threshold: 0.2});
 
 
 const contentWrappers = document.getElementsByClassName('content_wrapper');
 for (let i = 0; i < contentWrappers.length; i++) {
-    console.log(contentWrappers[i]);
+    // console.log(contentWrappers[i]);
     contentWrapperObserver.observe(contentWrappers[i]);
 };
+
+// Form Observer
+const formObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in');
+        }
+        else {
+            entry.target.classList.remove('fade-in');
+        };
+    });
+}, {threshold: 0.2});
+
+const form = document.getElementsByClassName('contact_form');
+console.log(form[0]);
+formObserver.observe(form[0]);
+
 
 
 // Animate intro svg
@@ -191,7 +187,7 @@ const introPaths = intro.querySelectorAll('path');
 introPaths.forEach(path => {
     path.style.strokeDasharray = path.getTotalLength();
     path.style.strokeDashoffset = path.getTotalLength();
-    console.log(`This is ${path.id} total length: `+ path.getTotalLength());
+    // console.log(`This is ${path.id} total length: `+ path.getTotalLength());
 });
 
 
@@ -204,14 +200,14 @@ checkBox.addEventListener('change', function() {
         navContainers.forEach(navContainer => {
             navContainer.style.transitionDelay = `${i * 150}ms`;
             navContainer.classList.add('checked');
-            console.log(i);
+            // console.log(i);
             i--;
         });
     } else {
         let i = 0;
         navContainers.forEach(navContainer => {
             navContainer.style.transitionDelay = `${i * 150}ms`;
-            console.log(`${i * 1000}%`);
+            // console.log(`${i * 1000}%`);
             navContainer.classList.remove('checked');
             i++;
         });
