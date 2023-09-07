@@ -40,7 +40,7 @@ contactInputs.forEach(function (inputField, index) {
 // const email = document.getElementById('email');
 // email.addEventListener('input', () => {
 //     const emailValidity = email.validity;
-//     console.log(emailValidity);
+//     console.log(emailValidit™™y);
 //     switch (true) {
 //         case emailValidity.valueMissing:
 //             email.setCustomValidity('Please enter your email');
@@ -111,7 +111,6 @@ const headerObserver = new IntersectionObserver(entries => {
 
 const headers = document.getElementsByClassName('header');
 for (let i = 0; i < headers.length; i++) {
-    console.log(headers[i]);
     headerObserver.observe(headers[i]);
 };
 
@@ -125,12 +124,19 @@ const contentWrapperObserver = new IntersectionObserver(entries => {
             entry.target.classList.remove('fade-in');
         };
         // About Me animation
+        const hobbies = document.getElementsByClassName('hobby');
+        const timeSpend = document.getElementsByClassName('time_spend');
         if (entry.target.parentElement.id == 'about_me' && entry.target.classList.contains('fade-in')) {
-            const hobbies = document.getElementsByClassName('hobby');
             for (let i = 0; i < hobbies.length; i++) {
                 hobbies[i].classList.add('start-animation');
-                document.getElementsByClassName('time_spend')[i].classList.add('start-animation');
+                timeSpend[i].classList.add('start-animation');
             };
+        }
+        else {
+            for (let i = 0; i < hobbies.length; i++) {
+                hobbies[i].classList.remove('start-animation');
+                timeSpend[i].classList.remove('start-animation');
+            }
         };
         // Learning animation
         if (entry.target.parentElement.id == 'learning' && entry.target.classList.contains('fade-in')) {
@@ -156,10 +162,8 @@ const contentWrapperObserver = new IntersectionObserver(entries => {
     });
 }, {threshold: 0.2});
 
-
 const contentWrappers = document.getElementsByClassName('content_wrapper');
 for (let i = 0; i < contentWrappers.length; i++) {
-    // console.log(contentWrappers[i]);
     contentWrapperObserver.observe(contentWrappers[i]);
 };
 
@@ -176,7 +180,6 @@ const formObserver = new IntersectionObserver(entries => {
 }, {threshold: 0.2});
 
 const form = document.getElementsByClassName('contact_form');
-console.log(form[0]);
 formObserver.observe(form[0]);
 
 
@@ -187,7 +190,6 @@ const introPaths = intro.querySelectorAll('path');
 introPaths.forEach(path => {
     path.style.strokeDasharray = path.getTotalLength();
     path.style.strokeDashoffset = path.getTotalLength();
-    // console.log(`This is ${path.id} total length: `+ path.getTotalLength());
 });
 
 
@@ -200,14 +202,12 @@ checkBox.addEventListener('change', function() {
         navContainers.forEach(navContainer => {
             navContainer.style.transitionDelay = `${i * 150}ms`;
             navContainer.classList.add('checked');
-            // console.log(i);
             i--;
         });
     } else {
         let i = 0;
         navContainers.forEach(navContainer => {
             navContainer.style.transitionDelay = `${i * 150}ms`;
-            // console.log(`${i * 1000}%`);
             navContainer.classList.remove('checked');
             i++;
         });

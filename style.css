@@ -145,6 +145,7 @@ input:active {
 }
 
 .sub_header {
+  margin-bottom: 1.5rem;
   font-size: clamp(1.5rem, 5vw, 3rem);
 }
 
@@ -412,14 +413,6 @@ li.nav_items_container.checked {
 .intro_wrapper {
   position: relative;
   width: clamp(26em, 45vw, 56em);
-  display: hidden;
-  animation: visible 2s ease-in-out 4.4s forwards;
-}
-
-@keyframes visible {
-  to {
-    display: block;
-  }
 }
 
 .intro-elements {
