@@ -198,20 +198,20 @@ const navContainers = document.querySelectorAll('.nav_items_container');
 const checkBox = document.querySelector('.menu-icon input');
 checkBox.addEventListener('change', function() {
     if(this.checked) {
-        let i = 3;
-        navContainers.forEach(navContainer => {
-            navContainer.style.transitionDelay = `${i * 150}ms`;
-            navContainer.classList.add('checked');
-            i--;
-        });
-    } else {
         let i = 0;
         navContainers.forEach(navContainer => {
             navContainer.style.transitionDelay = `${i * 150}ms`;
-            navContainer.classList.remove('checked');
+            navContainer.classList.add('checked');
             i++;
         });
-    }
+    } else {
+        let i = 3;
+        navContainers.forEach(navContainer => {
+            navContainer.style.transitionDelay = `${i * 150}ms`;       
+            i--;
+            navContainer.classList.remove('checked');
+        });
+    };
 });
 
 window.addEventListener('click', e => {
