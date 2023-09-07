@@ -200,14 +200,14 @@ checkBox.addEventListener('change', function() {
     if(this.checked) {
         let i = 0;
         navContainers.forEach(navContainer => {
-            navContainer.style.transitionDelay = `${i * 150}ms`;
+            navContainer.style.transitionDelay = `${i * 100}ms`;
             navContainer.classList.add('checked');
             i++;
         });
     } else {
-        let i = 3;
+        let i = 4;
         navContainers.forEach(navContainer => {
-            navContainer.style.transitionDelay = `${i * 150}ms`;       
+            navContainer.style.transitionDelay = `${i * 100}ms`;       
             i--;
             navContainer.classList.remove('checked');
         });
@@ -224,11 +224,11 @@ window.addEventListener('click', e => {
         checkBox.checked = false;
 
         // Update the navContainers
-        let i = 0;
+        let i = 4;
         navContainers.forEach(navContainer => {
-            navContainer.style.transitionDelay = `${i * 150}ms`;
+            navContainer.style.transitionDelay = `${i * 100}ms`;
+            i--;
             navContainer.classList.remove('checked');
-            i++;
         });
     }
 });
