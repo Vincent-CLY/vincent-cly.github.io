@@ -24,14 +24,14 @@ const iconWrappers = document.querySelectorAll('.icon_wrapper');
 
 function setIconTransform(index) {
     if (contactInputs[index].value.length > 0) {
-        iconWrappers[index].style.transform = 'translateY(-30px) scale(0.9)';
+        iconWrappers[index].style.transform = 'translate(13.5svw, -30px) scale(0.9)';
     }
     else {
-        iconWrappers[index].style.transform = 'translateY(0px) scale(1)';
+        iconWrappers[index].style.transform = 'translate(14svw, -5px) scale(1)';
     };
 };
 contactInputs.forEach(function (inputField, index) {
-    inputField.addEventListener('focus', () => iconWrappers[index].style.transform = 'translateY(-30px) scale(0.9)');
+    inputField.addEventListener('focus', () => iconWrappers[index].style.transform = 'translate(13.5svw, -30px) scale(0.9)');
     inputField.addEventListener('blur', () => setIconTransform(index));
     inputField.addEventListener('input', () => setIconTransform(index));
 });
@@ -115,6 +115,12 @@ for (let i = 0; i < headers.length; i++) {
 };
 
 // Content Wrapper Observer
+const toolkit = document.querySelector('[data-toolkit]');
+const toolkitArr = ['HTML', 'CSS', 'JavaScript', 'jQuery', 'Regex', 'Python', 'C++', 'PHP', 'SQL', 'AJAX'];
+let toolkitIndex = 0;
+// Change typing-cursor-effect text
+toolkit.innerText = toolkitArr[toolkitIndex];
+toolkit.style.setProperty('--header-text-count', toolkit.innerText.length);
 const contentWrapperObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -140,22 +146,16 @@ const contentWrapperObserver = new IntersectionObserver(entries => {
         };
         // Learning animation
         if (entry.target.parentElement.id == 'learning' && entry.target.classList.contains('fade-in')) {
-            // Change typing-cursor-effect text
-            const toolkit = document.querySelector('[data-toolkit]');
-            const toolkitArr = ['HTML', 'CSS', 'JavaScript', 'jQuery', 'Regex', 'Python', 'C++', 'PHP', 'SQL', 'AJAX'];
-            let i = 1;
-            toolkit.innerText = toolkitArr[0];
-            toolkit.style.setProperty('--header-text-count', toolkit.innerText.length);
 
             toolkit.addEventListener('animationiteration', e => {
                 if (e.animationName === 'toolkit-typing' && e.pseudoElement === '::after') {
-                    toolkit.innerText = toolkitArr[i];
+                    toolkitIndex++;
+                    if (toolkitIndex === toolkitArr.length) {
+                        toolkitIndex = 0;
+                    };
+                    toolkit.innerText = toolkitArr[toolkitIndex];
                     // Set steps() number to CSS animation
                     toolkit.style.setProperty('--header-text-count', toolkit.innerText.length);
-                    i++;
-                    if (i === toolkitArr.length) {
-                        i = 0;
-                    };
                 };
             });
         };

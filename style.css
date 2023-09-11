@@ -6,7 +6,6 @@
   font-weight: normal;
   font-style: normal;
 }
-
 @font-face {
   font-family: "SF Pro";
   src: url(./sf-pro-display-cufonfonts/SFPRODISPLAYMEDIUM.OTF);
@@ -29,8 +28,8 @@
 }
 
 :root {
-  --website-background-color: hsl(216, 29%, 17%);
-  --nav-bar-background-color: #525252;
+  --website-background-color: #243c48;
+  --nav-bar-background-color: #295d73;
   --nav-bar-hover-background-color: rgb(147, 147, 147);
   --nav-text-color: #fff;
   --text-color: #fff;
@@ -91,7 +90,6 @@ textarea {
   background-color: var(--website-background-color);
   font-size: large;
   border: 0;
-  padding-bottom: 10px;
   border-bottom: 2px solid white;
   height: 30px;
   width: 60%;
@@ -121,6 +119,11 @@ input[type="submit"] {
   color: #000;
   font-size: 1rem;
   border-radius: 1rem;
+}
+
+input[type="reset"]:hover,
+input[type="submit"]:hover {
+  cursor: pointer;
 }
 
 input:focus,
@@ -156,7 +159,8 @@ input:active {
 .icon_wrapper {
   position: absolute;
   left: 0;
-  translate: 14.5svw -5px;
+  top: 5px;
+  transform: translate(14svw, -5px);
   display: flex;
   align-items: center;
   transition: transform 0.5s ease-in-out;
@@ -317,12 +321,6 @@ li.nav_items_container.checked {
   padding-top: 0.3rem;
 }
 
-@media only screen and (min-width: 600px) {
-  section {
-
-  }
-}
- 
 .profile-pic-wrapper {
   width: 8rem;
 }
@@ -341,6 +339,7 @@ li.nav_items_container.checked {
   /* background-color: var(--nav-bar-background-color); */
   /* transform: translateY(-100%); */
   /* opacity: 0.8; */
+  max-height: 0;
   transition: transform 1s ease, opacity 1s ease;
 }
 
@@ -407,6 +406,12 @@ li.nav_items_container.checked {
 .nav_icon_lines {
   width: 1.57rem;
 } */
+
+@media only screen and (min-width: 600px) {
+  section {
+
+  }
+}
 
 /* Intro Styling */
 
@@ -814,7 +819,6 @@ li.nav_items_container.checked {
   place-items: center;
   height: 100%;
   width: 100%;
-  overflow: hidden;
 }
 
 .contact_input {
@@ -830,12 +834,12 @@ li.nav_items_container.checked {
   scale: 1.2;
 }
 
-.contact_btn {
-  display: flex;
-  justify-content: center;
-  flex-grow: 1;
-  align-items: center;
-  gap: 40%;
+.form_btn {
+  margin-bottom: 1rem;
+}
+
+[data-form="message"] {
+  padding-bottom: 5px;
 }
 
 /* -------------------------- JavaScript Styling -------------------------- */
