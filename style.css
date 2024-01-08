@@ -39,6 +39,7 @@
   --header-animation-speed: 5s;
   --header-cursor-animation-timeout: infinite;
   --header-cursor-effect: normal;
+  --nav-items-number: 9;
   --valid-color: #3ecf8f;
   --invalid-color: #e65849;
 }
@@ -221,7 +222,7 @@ input:active {
   z-index: -10;
   /* width: 100svw; */
   background-color: var(--nav-bar-background-color);
-  transition: transform 0.5s ease, opacity 0.5s ease;
+  transition: transform 0.3s ease, opacity 0.5s ease;
 }
 
 .nav_items_container:nth-child(1) {
@@ -277,7 +278,7 @@ li.nav_items_container.checked {
   z-index: 99999999;
   position: absolute;
   width: 100svw;
-  height: calc(2rem + 2svw);
+  height: calc(2.5rem + 2svw);
   top: 0;
   left: 0;
   outline: none;
@@ -340,7 +341,6 @@ li.nav_items_container.checked {
 
 .profile-pic {
   border-radius: 50%;
-  width: 100%;
 }
 
 .media-wrapper {
@@ -420,8 +420,41 @@ li.nav_items_container.checked {
   width: 1.57rem;
 } */
 
-@media only screen and (min-width: 600px) {
-  section {
+@media only screen and (min-width: 770px) {
+  .menu-icon {
+    display: none;
+  }
+
+  .nav_content {
+    display: flex;
+    list-style: none;
+    position: fixed;
+    z-index: 99999;
+    background-color: var(--nav-bar-background-color);
+    min-width: 100svw;
+    max-height: calc(2svw + 2.5rem);
+  }
+
+  .nav_item {
+    padding-inline: calc(var(--nav-items-number) * 0.1svw) ;
+  }
+
+  .nav_item.media-items {
+    width: calc(100 / var(--nav-items-number) * 1%);
+    padding-inline: 0;
+  }
+
+  .media-wrapper {
+    margin-inline: calc(var(--nav-items-number) * 0.4svw);
+  }
+
+  ul.nav_content li.nav_items_container {
+    width: 100%;
+    transform: translateY(0);
+  }
+
+  ul.nav_content li.nav_items_container:hover {
+    /* z-index: 99999; */
 
   }
 }
@@ -429,11 +462,11 @@ li.nav_items_container.checked {
 /* Intro Styling */
 
 #home {
-  z-index: 9999;
+  z-index: 999;
   background-color: var(--website-background-color);
-  position: fixed;
+  position: relative;
   opacity: 1;
-  animation: fade-out 1s ease-in-out 8s forwards;
+  /* animation: fade-out 1s ease-in-out 8s forwards; */
 }
 
 @keyframes fade-out {
@@ -786,6 +819,17 @@ li.nav_items_container.checked {
 .project-benefit {
   list-style: none;
   padding: 1.3rem;
+  transform: translateX(-100%);
+}
+
+.project-benefit.slide-in {
+  animation: slide-in 1.3s ease-in-out forwards;
+}
+
+@keyframes slide-in {
+  to {
+    transform: translateX(0);
+  }
 }
 
 /* For Small Device  */

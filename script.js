@@ -200,14 +200,14 @@ checkBox.addEventListener('change', function() {
     if(this.checked) {
         let i = 0;
         navContainers.forEach(navContainer => {
-            navContainer.style.transitionDelay = `${i * 100}ms`;
+            navContainer.style.transitionDelay = `${i * 50}ms`;
             navContainer.classList.add('checked');
             i++;
         });
     } else {
         let i = 4;
         navContainers.forEach(navContainer => {
-            navContainer.style.transitionDelay = `${i * 100}ms`;       
+            navContainer.style.transitionDelay = `${i * 50}ms`;       
             i--;
             navContainer.classList.remove('checked');
         });
@@ -226,9 +226,27 @@ window.addEventListener('click', e => {
         // Update the navContainers
         let i = 4;
         navContainers.forEach(navContainer => {
-            navContainer.style.transitionDelay = `${i * 100}ms`;
+            navContainer.style.transitionDelay = `${i * 50}ms`;
             i--;
             navContainer.classList.remove('checked');
         });
     }
+});
+
+// Slide in project benefits
+const projectBenefits = document.querySelectorAll('.project-benefit');
+// console.log(projectBenefits);
+// projectBenefits.forEach(projectBenefit => {
+//     projectBenefit.classList.add('slide-in');
+//     console.log('adding slide-in');
+// });
+const projectBenefitsObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        console.log(entry.isIntersecting);
+        entry.target.classList.toggle('slide-in', entry.isIntersecting);
+    });
+}, {threshold: 0});
+
+projectBenefits.forEach(projectBenefit => {
+    projectBenefitsObserver.observe(projectBenefit);
 });
