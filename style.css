@@ -199,7 +199,7 @@ input:active {
 /* -------------------------- Navigation Bar Styling -------------------------- */
 .nav_bar {
   position: fixed;
-  width: 100svw;
+  width: 100%;
   z-index: 9999;
   font-size: clamp(0.5rem, 45vw + 1em, 1rem);
 }
@@ -296,7 +296,7 @@ li.nav_items_container.checked {
 
 .nav-item-hover:hover {
   background-color: #6C6C6C;
-  transform: scale(1.2);
+  /* transform: scale(1.0); */
 }
 
 .nav-media-hover {
@@ -328,7 +328,7 @@ li.nav_items_container.checked {
 
 
 [data-menu="nav-bar"] {
-  width: 100svw;
+  width: 100%;
   height: calc(2svw + 2rem);
   background-color: var(--nav-bar-background-color);
   padding-bottom: 0;
@@ -441,7 +441,6 @@ li.nav_items_container.checked {
   }
 
   .nav_item.media-items {
-    width: calc(100 / var(--nav-items-number) * 1%);
     padding-inline: 0;
   }
 
