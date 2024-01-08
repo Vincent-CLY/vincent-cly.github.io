@@ -341,6 +341,7 @@ li.nav_items_container.checked {
 
 .profile-pic {
   border-radius: 50%;
+  width: clamp(3rem, 2vw + 1em, 5rem);
 }
 
 .media-wrapper {
