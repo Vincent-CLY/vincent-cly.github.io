@@ -437,6 +437,7 @@ li.nav_items_container.checked {
   }
 
   .nav_item {
+    text-align: center;
     padding-inline: calc(var(--nav-items-number) * 0.1svw) ;
   }
 
