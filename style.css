@@ -140,8 +140,13 @@ input[type="reset"]:hover {
 }
 
 input:focus,
-input:active {
-  outline: aqua 2px solid;
+input:active,
+textarea:focus,
+textarea:active {
+  outline: none;
+  border: deepskyblue 2px solid;
+  border-radius: 6px;
+  box-shadow: 0 0 10px deepskyblue;
 }
 
 .content_wrapper {
