@@ -50,7 +50,7 @@
   padding: 0;
   margin: 0;
   font-family: "SF Pro", "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-  "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   color: var(--text-color);
   box-sizing: border-box;
 }
@@ -191,7 +191,7 @@ input:active {
 }
 
 .svg_container {
-  position: absolute; 
+  position: absolute;
   left: -9999svw;
   opacity: 0;
 }
@@ -295,7 +295,7 @@ li.nav_items_container.checked {
 }
 
 .nav-item-hover:hover {
-  background-color: #6C6C6C;
+  background-color: #6c6c6c;
   /* transform: scale(1.0); */
 }
 
@@ -306,7 +306,7 @@ li.nav_items_container.checked {
 .nav-media-hover:hover {
   transform: scale(1.2);
   animation: swing 2s ease infinite forwards 0.4s;
-} 
+}
 
 @keyframes swing {
   20% {
@@ -325,7 +325,6 @@ li.nav_items_container.checked {
     transform: scale(1.2) rotate3d(0, 0, 1, 0deg);
   }
 }
-
 
 [data-menu="nav-bar"] {
   width: 100%;
@@ -438,7 +437,7 @@ li.nav_items_container.checked {
 
   .nav_item {
     text-align: center;
-    padding-inline: calc(var(--nav-items-number) * 0.1svw) ;
+    padding-inline: calc(var(--nav-items-number) * 0.1svw);
   }
 
   .nav_item.media-items {
@@ -456,7 +455,6 @@ li.nav_items_container.checked {
 
   ul.nav_content li.nav_items_container:hover {
     /* z-index: 99999; */
-
   }
 }
 
@@ -481,7 +479,7 @@ li.nav_items_container.checked {
 
 .hello_wrapper {
   transform: translateY(35%);
-  animation: shrink 2s forwards 4.4s;
+  animation: moveUp 2s forwards 4.4s;
   z-index: 1;
 }
 
@@ -500,9 +498,9 @@ li.nav_items_container.checked {
   }
 }
 
-@keyframes shrink {
+@keyframes moveUp {
   to {
-    transform: scale(0.6) ;
+    transform: translateY(-20%);
   }
 }
 
@@ -549,17 +547,15 @@ li.nav_items_container.checked {
 .intro-elements {
   stroke: #000;
   fill: transparent;
-  animation: draw 2s forwards ease 4.4s,
-             fill_black 1s forwards ease 6.4s;
+  animation: draw 2s forwards ease 4.4s, fill_black 1s forwards ease 6.4s;
 }
 
 .intro-text__svg {
   stroke: #fff;
   fill: transparent;
   opacity: 0;
-  animation: draw 31s forwards ease 2s,
-             fade-in 6s forwards ease-in-out 1s,
-             fill_white 1s forwards ease 6.4s;
+  animation: draw 31s forwards ease 2s, fade-in 6s forwards ease-in-out 1s,
+    fill_white 1s forwards ease 6.4s;
 }
 
 @keyframes fade-in {
@@ -583,7 +579,7 @@ li.nav_items_container.checked {
 @keyframes fill_black {
   to {
     fill: #000;
-  }  
+  }
 }
 
 @keyframes fill_white {
@@ -615,7 +611,6 @@ li.nav_items_container.checked {
     transform: translateY(0);
   }
 }
-
 
 /* .intro {
   opacity: 0;
@@ -666,12 +661,13 @@ li.nav_items_container.checked {
   position: relative;
 }
 
-.hobbies_header, .hobbies_item {
+.hobbies_header,
+.hobbies_item {
   display: flex;
   align-items: center;
   color: rgb(95, 95, 95);
   margin: auto;
-} 
+}
 
 .hobbies_item {
   margin: 0 0 1rem 5%;
@@ -708,11 +704,13 @@ li.nav_items_container.checked {
   animation-play-state: paused;
 }
 
-.time_spend.start-animation::before, .start-animation {
+.time_spend.start-animation::before,
+.start-animation {
   animation-play-state: running;
 }
 
-[data-hobbies="Vibing"] .time_spend::before, [data-hobby="music"] {
+[data-hobbies="Vibing"] .time_spend::before,
+[data-hobby="music"] {
   animation-delay: 1s;
   --width: 0.6;
 }
@@ -721,17 +719,20 @@ li.nav_items_container.checked {
   scale: 0.8;
 }
 
-[data-hobbies="Gaming"] .time_spend::before, [data-hobby="game"] {
+[data-hobbies="Gaming"] .time_spend::before,
+[data-hobby="game"] {
   animation-delay: 4s;
   --width: 0.4;
 }
 
-[data-hobbies="Learning"] .time_spend::before, [data-hobby="learn"] {
+[data-hobbies="Learning"] .time_spend::before,
+[data-hobby="learn"] {
   animation-delay: 7s;
   --width: 0.8;
 }
 
-[data-hobbies="Coding"] .time_spend::before, [data-hobby="code"] {
+[data-hobbies="Coding"] .time_spend::before,
+[data-hobby="code"] {
   animation-delay: 10s;
   --width: 1;
 }
@@ -775,8 +776,7 @@ li.nav_items_container.checked {
   position: absolute;
   inset: 0;
   background-color: var(--website-background-color);
-  animation: toolkit-typing 5s forwards steps(var(--header-text-count))
-    infinite;
+  animation: toolkit-typing 5s forwards steps(var(--header-text-count)) infinite;
 }
 
 @keyframes toolkit-typing {
@@ -797,8 +797,7 @@ li.nav_items_container.checked {
   position: absolute;
   inset: 0;
   width: 0.5rem;
-  animation: toolkit-typing 5s forwards steps(var(--header-text-count))
-      infinite,
+  animation: toolkit-typing 5s forwards steps(var(--header-text-count)) infinite,
     blink 1s infinite;
   background-color: #fff;
 }
@@ -930,5 +929,3 @@ li.nav_items_container.checked {
 .fade-in {
   opacity: 1;
 }
-
-

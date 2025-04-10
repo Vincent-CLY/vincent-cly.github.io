@@ -36,6 +36,7 @@ contactInputs.forEach(function (inputField, index) {
     inputField.addEventListener('input', () => setIconTransform(index));
 });
 
+
 // // Validate email
 // const email = document.getElementById('email');
 // email.addEventListener('input', () => {
@@ -194,9 +195,7 @@ introPaths.forEach(path => {
 
 
 // Nav bar
-const navContainers = document.querySelectorAll('.nav_items_container');
-const checkBox = document.querySelector('.menu-icon input');
-checkBox.addEventListener('change', function() {
+function menuSwitchFunction() {
     if(this.checked) {
         let i = 0;
         navContainers.forEach(navContainer => {
@@ -212,6 +211,18 @@ checkBox.addEventListener('change', function() {
             navContainer.classList.remove('checked');
         });
     };
+}
+
+const navContainers = document.querySelectorAll('.nav_items_container');
+const menuSwitch = document.querySelector('#menu_switch');
+menuSwitch.addEventListener('change', menuSwitchFunction);
+
+const navItems = document.querySelectorAll('nav .nav_container a');
+navItems.forEach(navItem => {
+    navItem.addEventListener('click', () => {
+        menuSwitch.checked = false;
+        menuSwitchFunction();
+    });
 });
 
 window.addEventListener('click', e => {
@@ -221,7 +232,7 @@ window.addEventListener('click', e => {
     // Check if the click event's target is inside the header
     if (!header.contains(e.target)) {
         // If it's not, set checkBox.checked to false
-        checkBox.checked = false;
+        menuSwitch.checked = false;
 
         // Update the navContainers
         let i = 4;
