@@ -1,0 +1,100 @@
+:root {
+  --secondary-color: #e5e7eb;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f9fafb;
+  padding-block: 2rem;
+  padding-inline: min(2rem, 5vw);
+}
+
+.name {
+  margin-top: 0;
+}
+
+hr.separator {
+  border: 1px solid var(--secondary-color);
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  max-width: 50rem;
+  padding: 2rem;
+}
+
+.section-header {
+  margin-bottom: 0;
+}
+
+.sub-header {
+  margin-block: 0 0.25rem;
+  font-weight: 500;
+  font-size: 1.25rem;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+.list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.pointed-list {
+  margin: 0;
+}
+
+.bordered-card {
+  border: 1px solid var(--secondary-color);
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  margin-right: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.tag {
+  display: inline-block;
+  border: 1px solid var(--secondary-color);
+  border-radius: 1rem;
+  padding: 0.25rem 0.75rem;
+  margin-right: 0.25rem;
+  margin-top: 0.25rem;
+}
+
+.url {
+  color: #4C5663;
+  text-decoration: none;
+}
+
+.note {
+  font-size: 0.9rem;
+  color: #4C5663;
+  background-color: #f3f3f3;
+  border-radius: 0.25rem;
+  padding: 0.75rem;
+  margin-block: 0.5rem;
+}
+
+.note-header {
+  font-weight: 600;
+}
+
+.svg-icons {
+  height: 1rem;
+  width: auto;
+  vertical-align: text-bottom;
+}

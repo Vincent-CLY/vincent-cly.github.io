@@ -351,6 +351,7 @@ li.nav_items_container.checked {
 .media-wrapper {
   text-align: center;
   width: clamp(3rem, 2vw + 1em, 5rem);
+  height: clamp(3rem, 2vw + 1em, 5rem);
 }
 
 .nav_content {
