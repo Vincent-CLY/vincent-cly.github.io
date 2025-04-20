@@ -139,8 +139,8 @@ input[type="reset"]:hover {
   background-color: var(--invalid-color);
 }
 
-input:focus,
-input:active,
+.contact_input > input:focus,
+.contact_input > input:active,
 textarea:focus,
 textarea:active {
   outline: none;
@@ -283,7 +283,7 @@ li.nav_items_container.checked {
   z-index: 99999999;
   position: absolute;
   width: 100svw;
-  height: calc(2.5rem + 2svw);
+  height: calc(3rem + 2svw);
   top: 0;
   left: 0;
   outline: none;
@@ -333,7 +333,7 @@ li.nav_items_container.checked {
 
 [data-menu="nav-bar"] {
   width: 100%;
-  height: calc(2svw + 2rem);
+  height: calc(2svw + 3rem);
   background-color: var(--nav-bar-background-color);
   padding-bottom: 0;
   padding-top: 0.3rem;
