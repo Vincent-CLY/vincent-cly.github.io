@@ -206,7 +206,8 @@ textarea:active {
   position: fixed;
   width: 100%;
   z-index: 9999;
-  font-size: clamp(0.5rem, 45vw + 1em, 1rem);
+  /* font-size: clamp(0.5rem, 45vw + 1em, 1rem); */
+  font-size: 26px;
 }
 
 .nav_item {
@@ -217,7 +218,8 @@ textarea:active {
   text-decoration: none;
   padding-inline: 1.81rem;
   padding-block: 1rem;
-  font-size: clamp(1rem, 2vw, 2rem);
+  /* font-size: clamp(1rem, 2vw, 2rem); */
+  font-size: 26px;
 }
 
 .nav_items_container {
@@ -270,7 +272,8 @@ li.nav_items_container.checked {
   position: absolute;
   z-index: 100;
   width: 3rem;
-  height: calc(3rem + 2svw);
+  /* height: calc(3rem + 2svw); */
+  height: calc(3rem);
   background-color: #000;
 }
 
@@ -282,8 +285,10 @@ li.nav_items_container.checked {
 .menu-icon input {
   z-index: 99999999;
   position: absolute;
-  width: 100svw;
-  height: calc(3rem + 2svw);
+  /* width: 100svw; */
+  width: 100%;
+  height: calc(3rem);
+  /* height: calc(3rem + 2svw); */
   top: 0;
   left: 0;
   outline: none;
@@ -333,7 +338,8 @@ li.nav_items_container.checked {
 
 [data-menu="nav-bar"] {
   width: 100%;
-  height: calc(2svw + 3rem);
+  /* height: calc(2svw + 3rem); */
+  height: calc(3rem);
   background-color: var(--nav-bar-background-color);
   padding-bottom: 0;
   padding-top: 0.3rem;
@@ -345,13 +351,16 @@ li.nav_items_container.checked {
 
 .profile-pic {
   border-radius: 50%;
-  width: clamp(3rem, 2vw + 1em, 5rem);
+  width: 3rem;
+  /* width: clamp(3rem, 2vw + 1em, 5rem); */
 }
 
 .media-wrapper {
   text-align: center;
+  width: 3rem;
   width: clamp(3rem, 2vw + 1em, 5rem);
-  height: clamp(3rem, 2vw + 1em, 5rem);
+  /* height: clamp(3rem, 2vw + 1em, 5rem); */
+  height: 3rem
 }
 
 .nav_content {
