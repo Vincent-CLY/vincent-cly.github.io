@@ -1,0 +1,1336 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="description" content="Portfolio of Vincent Chung: computer engineering student at HKU building full-stack web apps, retrieval systems and AI developer tooling."/>
+<meta name="theme-color" content="#0b0b0a"/>
+<title>Vincent Chung — Software engineer, Hong Kong</title>
+<link rel="icon" href="data:,"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+/* Base palette and type carried over from the project: ink / graphite / line /
+   bone / sand / dim, one accent — flame. Archivo does the display work through
+   its width axis; JetBrains Mono carries labels and code. */
+:root{
+  --ink:#0b0b0a; --graphite:#151513; --line:#2a2926; --bone:#e9e5db; --sand:#d5d0c3; --dim:#8b887f; --flame:#f2461f;
+  --ease-out-expo:cubic-bezier(0.16,1,0.3,1);
+  --ui:#e9e5db; --ui-dim:rgba(233,229,219,.55);
+  color-scheme:dark;
+}
+html[data-tone="ink"]{--ui:#0b0b0a;--ui-dim:rgba(11,11,10,.55)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ink);color:var(--bone);font-family:"Archivo","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:clip}
+::selection{background:var(--flame);color:var(--ink)}
+a{color:inherit;text-decoration:none}
+button{font:inherit;background:none;border:0;color:inherit;cursor:pointer}
+img{display:block;max-width:100%}
+:focus-visible{outline:2px solid var(--flame);outline-offset:3px}
+.t-mega{font-weight:800;font-stretch:125%;line-height:.82;letter-spacing:-.045em;text-transform:uppercase}
+.t-display{font-weight:800;font-stretch:112%;line-height:.9;letter-spacing:-.035em;text-transform:uppercase}
+.t-narrow{font-weight:700;font-stretch:75%;letter-spacing:-.01em;text-transform:uppercase}
+.t-mono{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:.72rem;letter-spacing:.04em;text-transform:uppercase}
+.mask{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
+.char{display:inline-block;will-change:transform}
+.outline-text{color:transparent;-webkit-text-stroke:1.5px var(--bone)}
+@supports not (-webkit-text-stroke:1px black){.outline-text{color:var(--line)}}
+.u-link{position:relative;display:inline-block}
+.u-link::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:1px;background:currentColor;transform-origin:right;transform:scaleX(0);transition:transform .6s var(--ease-out-expo)}
+.u-link:hover::after{transform-origin:left;transform:scaleX(1)}
+/* grain overlay — keeps flat colour from looking digital */
+.grain::after{content:"";position:fixed;inset:-50%;z-index:90;pointer-events:none;opacity:.07;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.9 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");animation:grain 1.2s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
+/* terrain-lines backdrop — fixed WebGL layer behind all content (z-0);
+   page content sits at z-10, grain at z-90, chrome above that */
+#terrainBg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+#terrainBg canvas{display:block;width:100%;height:100%}
+@keyframes eq{0%,100%{transform:scaleY(.15)}50%{transform:scaleY(1)}}
+@keyframes fall{from{transform:translateY(-120%)}to{transform:translateY(520%)}}
+@keyframes notefall{from{transform:translateY(-110%)}to{transform:translateY(1450%)}}
+@keyframes blink{50%{opacity:0}}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.35}}
+
+/* ---------- preloader ---------- */
+#preloader{position:fixed;inset:0;z-index:200;background:var(--bone);color:var(--ink);display:flex;flex-direction:column;justify-content:space-between;padding:20px 20px 28px;will-change:transform}
+@media(min-width:768px){#preloader{padding:32px}}
+#preloader .pre-top{display:flex;justify-content:space-between;align-items:flex-start}
+#preloader .pre-num{font-variant-numeric:tabular-nums;font-size:clamp(6rem,26vw,24rem)}
+#preBarWrap{margin-top:16px;height:1px;background:rgba(11,11,10,.2)}
+#preBar{height:100%;background:var(--ink);transform-origin:0 50%;transform:scaleX(0)}
+
+/* ---------- chrome: top nav + cursor ---------- */
+#topNav{position:fixed;left:50%;transform:translateX(-50%);top:calc(10px + env(safe-area-inset-top));z-index:120;width:calc(100% - 20px);max-width:560px;display:flex;justify-content:space-between;align-items:stretch;gap:2px;padding:6px 10px;color:var(--bone);background:rgba(11,11,10,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:999px}
+#topNavProgress{position:absolute;left:14px;right:14px;bottom:0;height:2px;pointer-events:none;border-radius:999px;overflow:hidden}
+#topNavProgress i{display:block;height:100%;background:var(--flame);transform-origin:0 50%;transform:scaleX(0)}
+#topNav a{flex:1;display:flex;align-items:center;justify-content:center;min-height:44px;padding:0 4px;font-size:.68rem;letter-spacing:.06em;text-align:center;white-space:nowrap}
+#topNav a:active{color:var(--flame)}
+@media(min-width:768px){#topNav{top:14px}}
+#cursorDot,#cursorRing{position:fixed;top:0;left:0;pointer-events:none;z-index:300;border-radius:50%}
+#cursorDot{width:8px;height:8px;background:var(--ui);border:1px solid transparent;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;transition:width .3s,height .3s,background-color .3s,border-color .3s}
+#cursorDot.is-ring{width:44px;height:44px;background:transparent;border-color:var(--ui)}
+#cursorDot.is-label{width:92px;height:92px;background:var(--flame);border-color:transparent}
+#cursorDot .cursor-label{font-family:"JetBrains Mono",monospace;font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);opacity:0;transition:opacity .2s}
+#cursorDot.is-label .cursor-label{opacity:1}
+@media(hover:none),(pointer:coarse){#cursorDot{display:none}}
+
+/* ---------- hero ---------- */
+/* #top is 200dvh tall: the stage inside is sticky for the first ~100dvh of
+   scroll, and the following content is pulled up over that second 100dvh
+   (see .marquee margin) so the next section slides OVER the still-visible
+   hero instead of the hero fading or blinking out. After the pinned phase
+   the stage releases and scrolls away by translation only. */
+#top{position:relative;z-index:10;height:200svh;height:200dvh;padding:0;margin:0}
+.hero-stage{position:sticky;top:0;height:100svh;height:100dvh;overflow:clip}
+.hero-stage::after{content:"";position:absolute;left:0;right:0;bottom:0;height:52%;z-index:3;pointer-events:none;background:linear-gradient(to bottom,transparent 18%,rgba(11,11,10,.55) 58%,var(--ink) 98%)}
+.hero-stage::before{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;background:radial-gradient(ellipse 70% 52% at 50% 42%,transparent 42%,rgba(11,11,10,.18) 78%,rgba(11,11,10,.42) 100%);mix-blend-mode:multiply}
+.hero-halo{position:absolute;left:50%;top:44%;translate:-50% -50%;width:min(118vmin,1060px);aspect-ratio:1;z-index:1;pointer-events:none;border-radius:50%;background:radial-gradient(closest-side,rgba(233,229,219,.34),rgba(242,70,31,.20) 42%,rgba(242,70,31,.06) 62%,transparent 74%);filter:blur(18px);will-change:transform}
+/* hero black-out: a separate ink layer ABOVE terrain + name + portrait
+   (z 4, over .hero-visual z 2 and the stage fades z 3) but below the fixed
+   nav (z 120). GSAP scrubs its opacity 0 -> 1 linearly across the whole
+   hero-exit range, so the hero slowly blacks out as the next section
+   arrives and fades back in on scroll-up. The layer's own bottom edge is
+   a gradient (solid ink to 84%, easing to transparent at 100%) so it
+   never presents a hard rectangle edge. */
+.hero-blackout{position:absolute;inset:0;z-index:4;pointer-events:none;opacity:0;background:linear-gradient(to bottom,var(--ink) 0,var(--ink) 84%,rgba(11,11,10,0) 100%);will-change:opacity}
+.hero-rings{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:0;color:var(--flame)}
+.hero-rings svg{width:min(80vmin,680px);height:auto;opacity:.28}
+.hero-grid-bg{position:absolute;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(233,229,219,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(233,229,219,.05) 1px,transparent 1px);background-size:72px 72px}
+.giant{position:absolute;left:0;right:0;top:-7%;bottom:7%;margin:0;z-index:1;display:flex;flex-direction:column;justify-content:center;text-align:center;font-weight:800;font-stretch:125%;text-transform:uppercase;font-size:clamp(4.2rem,19vw,20rem);line-height:.86;letter-spacing:-.03em;pointer-events:none}
+.giant-back{color:var(--bone);-webkit-text-stroke:2px rgba(11,11,10,.9);paint-order:stroke fill;text-shadow:0 6px 28px rgba(0,0,0,.6),0 2px 6px rgba(0,0,0,.85),0 0 44px rgba(0,0,0,.35)}
+.giant-back .char.flame-char{color:var(--flame);-webkit-text-stroke:2px rgba(11,11,10,.9)}
+.giant-line{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em;white-space:nowrap;will-change:transform}
+.giant-line .char{display:inline-block;will-change:transform}
+.hero-visual{position:absolute;left:50%;bottom:-6%;translate:-50% 0;height:98%;aspect-ratio:880/1184;max-width:98vw;z-index:2;will-change:transform;mix-blend-mode:normal;-webkit-mask-image:linear-gradient(to bottom,#000 0,#000 52%,rgba(0,0,0,.72) 72%,rgba(0,0,0,.28) 88%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0,#000 52%,rgba(0,0,0,.72) 72%,rgba(0,0,0,.28) 88%,transparent 100%)}
+/* No overlay pseudo-elements on .hero-visual: a multiply / soft-light wash
+   painted over the whole portrait BOX also darkened the transparent area
+   around the cut-out, so the figure read as sitting on a semi-transparent
+   black rectangle ("black base") instead of floating on the terrain. The
+   silhouette melt now lives in the pixel sampler itself (edge cells are
+   darkened toward ink by their neighbourhood alpha), which follows the
+   figure's actual outline and never touches the background. The only
+   full-frame fades left are the stage-level bottom gradient and this
+   element's own bottom mask — both span the full stage width, no box. */
+.hero-visual img{width:100%;height:100%;object-fit:contain;object-position:bottom center;pointer-events:none;filter:sepia(.22) saturate(.76) contrast(1.07) brightness(.92)}
+.hero-corner{position:absolute;z-index:4;font-family:"JetBrains Mono",monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;will-change:transform}
+.hero-corner.tl{top:6px;left:20px}
+.hero-corner.bl{bottom:12px;left:20px}
+.hero-corner.br{bottom:12px;right:20px;text-align:right}
+@media(min-width:768px){.hero-corner.tl{left:32px}.hero-corner.bl{left:32px}.hero-corner.br{right:32px}}
+.hero-meta{display:grid;grid-template-columns:repeat(12,1fr);gap:1.6rem 2rem;align-items:end;padding:0;position:relative;z-index:4;margin-bottom:9vh}
+@media(min-width:768px){.hero-meta{margin-bottom:11vh}}
+.hero-intro{grid-column:1/-1;max-width:36rem;font-size:1.12rem;font-weight:500;line-height:1.35;margin:0}
+@media(min-width:768px){.hero-intro{grid-column:1/7;font-size:1.5rem}}
+.hero-current{grid-column:1/7;color:var(--dim)}
+@media(min-width:768px){.hero-current{grid-column:8/11}}
+.hero-current p{margin:0;line-height:1.55;text-transform:none;letter-spacing:0;font-size:.8rem}
+.hero-current .hc-title{color:var(--bone);text-transform:uppercase;letter-spacing:.04em;font-size:.72rem;margin-bottom:.5rem}
+.hero-worklink{grid-column:7/-1;display:flex;align-items:center;justify-content:flex-end;gap:.8rem}
+@media(min-width:768px){.hero-worklink{grid-column:11/13}}
+.fall-track{position:relative;display:block;width:1px;height:40px;overflow:hidden;background:var(--line);flex:none}
+.fall-track i{position:absolute;left:0;right:0;top:0;height:50%;background:var(--flame);animation:fall 1.6s var(--ease-out-expo) infinite}
+@media(max-width:760px){.giant{font-size:19vw}.hero-visual{height:96%;bottom:-5%}}
+
+/* ---------- marquee ---------- */
+.marquee{position:relative;z-index:10;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--ink);padding:24px 0;margin-top:-100svh;margin-top:-100dvh}
+@media(min-width:768px){.marquee{padding:32px 0}}
+.marquee-track{display:flex;width:max-content;white-space:nowrap;will-change:transform}
+.marquee-row{display:flex}
+.marquee-item{display:flex;align-items:center;gap:4vw;padding-right:4vw}
+.marquee-item .mq-word{font-size:clamp(3rem,9vw,9rem)}
+.mq-dot{display:block;width:1.4vw;height:1.4vw;min-width:12px;min-height:12px;transform:rotate(45deg);background:var(--flame);flex:none;animation:pulse-dot 2.4s ease-in-out infinite}
+
+/* ---------- sections shared ---------- */
+section.block{position:relative;z-index:10;padding:18vh 20px}
+@media(min-width:768px){section.block{padding-left:32px;padding-right:32px}}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:2.5rem}
+@media(min-width:768px){.sec-head{margin-bottom:4rem}}
+.sec-head .no{color:var(--flame)}
+.sec-head .nm{color:var(--dim)}
+
+/* ---------- about ---------- */
+/* About starts SOLID ink from its very top edge: the marquee (and the
+   solid craft strip) must sit directly against opaque content so the
+   hero portrait / terrain can never show through a transparent band
+   between the marquee and this section. No gradient, no see-through
+   gap — the hero is only visible inside the hero stage itself. */
+#about{background:var(--ink)}
+.about-statement{max-width:26ch;font-size:clamp(2rem,5.6vw,6.2rem);font-weight:600;line-height:1.02;letter-spacing:-.03em;margin:0}
+.about-word{display:inline-block;padding-right:.22em}
+.about-word.acc{color:var(--flame)}
+.about-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:3.5rem 2rem;margin-top:16vh}
+.portrait-box{grid-column:1/-1;position:relative;aspect-ratio:1/1;width:100%;max-width:22rem;overflow:hidden;background:var(--graphite)}
+@media(min-width:768px){.portrait-box{grid-column:1/5}}
+.portrait-inner{position:absolute;inset:-8%;will-change:transform}
+.portrait-inner img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:bottom center;filter:grayscale(1) contrast(1.12) brightness(.92);transition:filter .7s}
+.portrait-box:hover .portrait-inner img{filter:grayscale(0)}
+.portrait-box .flame-wash{pointer-events:none;position:absolute;inset:0;background:var(--flame);mix-blend-mode:multiply;opacity:.3;transition:opacity .7s}
+.portrait-box:hover .flame-wash{opacity:0}
+.portrait-box .cap{position:absolute;bottom:12px;left:12px;color:var(--bone);z-index:2}
+.facts{grid-column:1/-1;margin:0}
+@media(min-width:768px){.facts{grid-column:6/13}}
+.fact{position:relative;display:grid;grid-template-columns:repeat(12,1fr);gap:1rem;padding:1.25rem 0}
+@media(min-width:768px){.fact{padding:1.5rem 0}}
+.fact-rule{position:absolute;left:0;right:0;top:0;height:1px;background:var(--line);transform-origin:0 50%}
+.fact dt{grid-column:1/-1;overflow:hidden;color:var(--dim);margin:0}
+@media(min-width:768px){.fact dt{grid-column:1/4}}
+.fact dd{grid-column:1/-1;overflow:hidden;margin:0;font-size:1.25rem;font-weight:500;line-height:1.3}
+@media(min-width:768px){.fact dd{grid-column:4/13;font-size:1.5rem}}
+.fact-t{display:block}
+.facts-end{height:1px;background:var(--line)}
+
+/* ---------- work ---------- */
+#work{position:relative;z-index:10}
+.work-head{background:var(--ink);padding:16vh 20px 4rem}
+@media(min-width:768px){.work-head{padding-left:32px;padding-right:32px}}
+.work-title{font-size:clamp(2.4rem,10vw,12rem);margin:0}
+.work-title .l2{padding-left:0}
+@media(min-width:768px){.work-title .l2{padding-left:12vw}}
+.work-title .fl{color:var(--flame)}
+/* Every work card is exactly one viewport page: width 100% of the
+   viewport (never 100vw, so no horizontal scrollbar), height exactly
+   100svh / 100dvh at every width, sticky-stacked, overflow clipped.
+   The section therefore ends exactly at the 4th card's bottom edge —
+   no min-height growth on mobile, no trailing space after it. */
+.project{position:sticky;top:0;display:flex;flex-direction:column;width:100%;height:100svh;height:100dvh;overflow:hidden}
+.project-inner{position:relative;flex:1;min-height:0;display:flex;flex-direction:column;padding:76px 16px 18px;will-change:transform}
+@media(min-width:768px){.project-inner{padding:88px 32px 48px}}
+.project .veil{pointer-events:none;position:absolute;inset:0;background:var(--ink);opacity:0}
+.theme-bone{--cardbg:var(--bone);background:var(--bone);color:var(--ink)}
+.theme-graphite{--cardbg:var(--graphite);background:var(--graphite);color:var(--bone)}
+.theme-flame{--cardbg:var(--flame);background:var(--flame);color:var(--ink)}
+.theme-ink{--cardbg:var(--ink);background:var(--ink);color:var(--bone);border-top:1px solid var(--line)}
+.proj-meta{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid;padding-bottom:.75rem}
+.theme-bone .proj-meta{border-color:rgba(11,11,10,.2)} .theme-flame .proj-meta{border-color:rgba(11,11,10,.25)}
+.theme-graphite .proj-meta,.theme-ink .proj-meta{border-color:var(--line)}
+.proj-sub{opacity:.6}
+.proj-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:2rem;flex:1;padding-top:2rem;min-height:0}
+.proj-left{grid-column:1/-1;display:flex;flex-direction:column;justify-content:space-between;gap:2rem}
+@media(min-width:768px){.proj-left{grid-column:1/8}}
+.proj-right{grid-column:1/-1;display:flex;flex-direction:column;gap:1.5rem;min-height:0}
+@media(min-width:768px){.proj-right{grid-column:8/13}}
+.proj-name{font-size:clamp(2.6rem,7.4vw,8.4rem);margin:0}
+.proj-blurb{margin:1.5rem 0 0;max-width:36rem;font-size:1rem;font-weight:500;line-height:1.45}
+@media(min-width:768px){.proj-blurb{font-size:1.12rem}}
+.tagrow{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1.5rem;padding:0;list-style:none}
+.tagrow li{border:1px solid;padding:.3rem .65rem}
+.theme-bone .tagrow li{border-color:rgba(11,11,10,.3)} .theme-flame .tagrow li{border-color:rgba(11,11,10,.35)}
+.theme-graphite .tagrow li,.theme-ink .tagrow li{border-color:var(--line)}
+.proj-links{display:flex;flex-wrap:wrap;gap:1rem 2rem}
+.proj-links a{font-weight:600}
+.proj-visual{height:18rem;flex:none}
+@media(min-width:768px){.proj-visual{height:auto;flex:1;min-height:0}}
+.proj-points{list-style:none;margin:0;padding:0}
+.proj-points li{display:flex;gap:.75rem;border-top:1px solid;padding:.65rem 0;font-size:.88rem;line-height:1.4}
+.theme-bone .proj-points li{border-color:rgba(11,11,10,.2)} .theme-flame .proj-points li{border-color:rgba(11,11,10,.25)}
+.theme-graphite .proj-points li,.theme-ink .proj-points li{border-color:var(--line)}
+.proj-points .sq{margin-top:.45em;width:6px;height:6px;flex:none;background:currentColor}
+/* phone fit: the card is locked to exactly one viewport tall, so the
+   column compresses — tighter gaps and the visual flexes to whatever
+   height is left instead of forcing the card past 100dvh */
+@media(max-width:767px){
+  .proj-grid{display:flex;flex-direction:column;gap:1rem;padding-top:1rem;flex:1;min-height:0}
+  .proj-left{flex:none;gap:1rem}
+  .proj-right{flex:1;min-height:0;gap:1rem}
+  .proj-visual{flex:1;height:auto;min-height:5.5rem}
+  .proj-blurb{margin-top:1rem;font-size:.95rem}
+  .proj-points li{padding:.5rem 0;font-size:.82rem}
+  .tagrow{margin-bottom:1rem}
+}
+/* project visuals */
+.rag-svg{width:100%;height:100%}
+.term{display:flex;height:100%;width:100%;flex-direction:column;border:1px solid var(--line);background:var(--ink);color:var(--bone);font-family:"JetBrains Mono",monospace;font-size:.72rem;line-height:1.65}
+@media(min-width:768px){.term{font-size:.8rem}}
+.term-bar{display:flex;align-items:center;gap:.5rem;border-bottom:1px solid var(--line);padding:.6rem 1rem}
+.term-bar i{width:8px;height:8px;border-radius:50%;background:var(--line)}
+.term-bar span{margin-left:.75rem;color:var(--dim)}
+.term-body{flex:1;padding:1rem}
+.term .ok{color:var(--bone)} .term .dm{color:var(--dim)} .term .fl{color:var(--flame)}
+.term-caret{display:inline-block;height:1em;width:.55em;transform:translateY(2px);background:var(--bone);animation:blink 1s steps(1) infinite}
+.music-vis{display:flex;height:100%;width:100%;flex-direction:column;justify-content:space-between;color:var(--ink)}
+.music-eq{display:flex;flex:1;align-items:flex-end;gap:3px;padding:1.5rem 0}
+@media(min-width:768px){.music-eq{gap:6px}}
+.music-eq span{display:block;height:100%;flex:1;transform-origin:bottom;background:var(--ink)}
+.music-prog{height:3px;width:100%;background:rgba(11,11,10,.2)}
+.music-prog i{display:block;height:100%;width:62%;background:var(--ink)}
+.rhythm-vis{position:relative;height:100%;width:100%;overflow:hidden;border:1px solid var(--line)}
+.rhythm-lanes{position:absolute;inset:0;display:grid;grid-template-columns:repeat(4,1fr)}
+.rhythm-lane{position:relative}
+.rhythm-lane + .rhythm-lane{border-left:1px solid var(--line)}
+.rhythm-note{position:absolute;left:18%;top:0;display:block;height:6%;width:64%;background:var(--flame);will-change:transform}
+.rhythm-hit{position:absolute;left:0;right:0;bottom:18%;height:1px;background:var(--bone)}
+.rhythm-pads{position:absolute;left:0;right:0;bottom:0;height:18%;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);background:var(--ink)}
+.rhythm-pads div{display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--dim)}
+.rhythm-pads b{color:var(--bone);font-weight:500}
+/* Work → Toolkit transition: a short 12vh strip directly after the
+   last card. It starts at the last card's black background colour
+   (#0b0b0a, the Rhythm Trainer ink theme) and fades seamlessly to
+   transparent, so the fixed terrain backdrop shows through the gap
+   and through Toolkit below — shorter and faster than the previous
+   40vh strip, for a tighter, more seamless handoff. The last card
+   itself stays plain solid ink at exactly 100svh / 100dvh — no
+   gradient on the card. */
+.work-fade{height:12vh;background:linear-gradient(to bottom,#0b0b0a 0%,transparent 100%);pointer-events:none}
+
+/* ---------- toolkit: categorised groups of separated icon boxes ---------- */
+/* Toolkit is transparent so the terrain backdrop shows through it —
+   the .work-fade strip above eases the last card's black into this
+   transparency slowly and seamlessly. */
+#toolkit{background:transparent}
+.tk-count{color:var(--dim);margin:-1.5rem 0 0}
+@media(min-width:768px){.tk-count{margin-top:-2.5rem}}
+.tk-count b{color:var(--bone);font-weight:500}
+.tk-group{margin-top:3.25rem}
+.tk-group-head{display:flex;align-items:baseline;gap:1rem;border-top:1px solid var(--line);padding-top:1.5rem;margin-bottom:1.25rem}
+.tk-group-head .n{color:var(--flame)}
+.tk-group-head h3{font-size:1.5rem;margin:0}
+@media(min-width:768px){.tk-group-head h3{font-size:1.9rem}}
+.tk-group-head .cnt{margin-left:auto;color:var(--dim)}
+.tk-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;list-style:none;margin:0;padding:0}
+@media(min-width:640px){.tk-grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1024px){.tk-grid{grid-template-columns:repeat(4,1fr);gap:1rem}}
+.tk-box{display:flex;align-items:center;gap:.85rem;background:var(--graphite);border:1px solid var(--line);border-radius:10px;padding:.9rem 1rem;min-height:76px;transition:transform .3s var(--ease-out-expo),border-color .3s}
+.tk-box:hover{transform:translateY(-2px);border-color:rgba(242,70,31,.55)}
+.tk-chip{flex:none;width:44px;height:44px;border-radius:10px;background:var(--bone);display:flex;align-items:center;justify-content:center;gap:5px;padding:7px}
+.tk-chip img{width:26px;height:26px;object-fit:contain}
+.tk-chip.duo{width:58px}
+.tk-chip.duo img{width:20px;height:20px}
+.tk-name{font-weight:600;font-size:.98rem;line-height:1.25;letter-spacing:-.01em}
+.tk-box--text{justify-content:center;text-align:center}
+.tk-end{height:1px;background:var(--line);margin-top:3.25rem}
+
+/* ---------- contact ---------- */
+#contact{min-height:100svh;display:flex;flex-direction:column;justify-content:space-between;padding-top:16vh}
+.ct-title{font-size:clamp(3rem,12.4vw,14rem);margin:0}
+.ct-title .fl{color:var(--flame)}
+.ct-lower{margin-top:10vh}
+.ct-email-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:2.5rem 2rem;align-items:end}
+.ct-email-main{grid-column:1/-1}
+@media(min-width:768px){.ct-email-main{grid-column:1/9}}
+.ct-email-main .lbl{color:var(--dim);margin:0 0 .75rem}
+.ct-email{word-break:break-all;font-size:clamp(1.4rem,4.2vw,4.6rem);font-weight:600;line-height:1;letter-spacing:-.03em}
+.ct-actions{grid-column:1/-1;display:flex;gap:1rem}
+@media(min-width:768px){.ct-actions{grid-column:9/13;justify-content:flex-end}}
+.magnet{display:inline-block;will-change:transform}
+.circle-btn{display:flex;width:112px;height:112px;border-radius:50%;border:1px solid rgba(233,229,219,.4);align-items:center;justify-content:center;text-align:center;transition:background-color .3s,border-color .3s,color .3s;padding:.5rem}
+@media(min-width:768px){.circle-btn{width:144px;height:144px}}
+.circle-btn:hover{border-color:var(--flame);background:var(--flame);color:var(--ink)}
+.circle-btn.fill{background:var(--bone);color:var(--ink);border-color:var(--bone)}
+.circle-btn.fill:hover{background:var(--flame);border-color:var(--flame)}
+.socials{list-style:none;margin:4rem 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
+@media(min-width:768px){.socials{grid-template-columns:repeat(4,1fr)}}
+.socials li{border-bottom:1px solid var(--line)}
+@media(min-width:768px){.socials li{border-bottom:0;border-right:1px solid var(--line)}.socials li:last-child{border-right:0}}
+.socials a{display:flex;height:100%;flex-direction:column;justify-content:space-between;gap:1.5rem;padding:1rem;transition:background-color .3s,color .3s}
+@media(min-width:768px){.socials a{padding:1.5rem}}
+.socials a:hover{background:var(--bone);color:var(--ink)}
+.socials .s-top{display:flex;align-items:center;justify-content:space-between}
+.socials .s-top b{transition:transform .3s;font-weight:400}
+.socials a:hover .s-top b{transform:translate(2px,-2px)}
+.socials .handle{font-size:.88rem;color:var(--dim);transition:color .3s}
+.socials a:hover .handle{color:rgba(11,11,10,.7)}
+footer.site-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.75rem 1.5rem;margin-top:2.5rem;color:var(--dim)}
+footer.site-foot .to-top{color:var(--bone)}
+
+/* ---------- best-mix additions: square-grid hero, side markers, craft strip ---------- */
+/* identity strip (from the Awwwards version's framing, in this palette) */
+.craft-strip{position:relative;z-index:10;display:flex;flex-wrap:wrap;gap:.5rem 2rem;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);background:var(--ink);padding:14px 20px;color:var(--dim)}
+@media(min-width:768px){.craft-strip{padding:16px 32px}}
+.craft-strip .fl{color:var(--flame)}
+.craft-strip b{color:var(--bone);font-weight:500}
+/* serif-italic manifesto line (editorial polish, palette unchanged) */
+.manifesto{font-family:Georgia,"Times New Roman",serif;font-style:italic;font-weight:400;font-size:clamp(1.45rem,3.1vw,2.5rem);line-height:1.25;letter-spacing:0;color:var(--sand);max-width:30ch;margin:7vh 0 0}
+.manifesto .fl{color:var(--flame)}
+/* refinement pass: press states, linked-card lift, phone tap sizes */
+.circle-btn{transition:background-color .3s,border-color .3s,color .3s,transform .18s ease}
+.circle-btn:active{transform:scale(.95)}
+.proj-links a:active,.socials a:active{transform:scale(.98)}
+.socials a{transition:background-color .3s,color .3s,transform .3s var(--ease-out-expo)}
+.socials a:hover{transform:translateY(-2px)}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .grain::after,.fall-track i,.music-eq span,.rhythm-note,.mq-dot{animation:none}
+}
+</style>
+</head>
+<body class="grain">
+
+<!-- terrain-lines WebGL backdrop (Scene) — behind everything -->
+<div id="terrainBg" aria-hidden="true"></div>
+
+<!-- ================= PRELOADER ================= -->
+<div id="preloader" role="status" aria-label="Loading">
+  <div class="pre-top">
+    <span class="mask"><span class="pre-in t-mono" style="display:block">Vincent Chung</span></span>
+    <span class="mask"><span class="pre-in t-mono" style="display:block">Portfolio ’26</span></span>
+  </div>
+  <div>
+    <div class="mask"><div class="pre-in" style="display:flex;align-items:flex-end;justify-content:space-between">
+      <span class="pre-num t-mega" id="preNum">000</span>
+      <span class="t-mono" style="margin-bottom:2vw;text-align:right">Tuning signal<br/>22.32°N 114.17°E</span>
+    </div></div>
+    <div id="preBarWrap"><div id="preBar"></div></div>
+  </div>
+</div>
+
+<!-- ================= CHROME ================= -->
+<div id="cursorDot" aria-hidden="true"><span class="cursor-label" id="cursorLabel"></span></div>
+<nav id="topNav" class="t-mono" aria-label="Primary">
+  <a href="#work">Work</a><a href="#about">About</a><a href="#toolkit">Toolkit</a><a href="#contact">Contact</a>
+  <div id="topNavProgress" aria-hidden="true"><i id="scrollProgressBar"></i></div>
+</nav>
+<main>
+<!-- ================= HERO — nav + terrain + name + portrait only ================= -->
+<section id="top" aria-label="Vincent Chung">
+  <div class="hero-stage" id="heroStage">
+    <h1 class="giant giant-back" aria-label="Vincent Chung"><span class="giant-line" data-line="1" aria-hidden="true"><span class="char">V</span><span class="char">i</span><span class="char">n</span><span class="char">c</span><span class="char">e</span><span class="char">n</span><span class="char">t</span></span><span class="giant-line" data-line="2" aria-hidden="true"><span class="char">C</span><span class="char">h</span><span class="char">u</span><span class="char">n</span><span class="char flame-char">g</span></span></h1>
+    <div class="hero-halo" id="heroHalo" aria-hidden="true"></div>
+    <div class="hero-visual" id="heroVisual">
+      <img id="heroPortrait" src="assets/portrait-0.png" alt="Portrait of Chung Lai Yin Vincent" width="880" height="1184" fetchpriority="high"/>
+    </div>
+    <div class="hero-blackout" id="heroBlackout" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- ================= MARQUEE ================= -->
+<div class="marquee" id="marquee" aria-hidden="true">
+  <div class="marquee-track" id="marqueeTrack"></div>
+</div>
+
+<!-- identity strip -->
+<div class="craft-strip t-mono">
+  <span><b>CRAFT ID</b> // CLY-VINCENT · HKG · 22.32°N 114.17°E</span>
+  <span>Systems rigor <span class="fl">×</span> Editorial taste</span>
+</div>
+
+<!-- ================= ABOUT 01 ================= -->
+<section class="block" id="about" aria-label="About">
+  <div class="sec-head">
+    <span class="t-mono no">( 01 )</span>
+    <span class="t-mono nm">About</span>
+  </div>
+  <div class="hero-meta" id="heroMeta">
+    <p class="hero-intro hero-in">Computer engineering student at HKU. I build interfaces, services and the AI tooling around them.</p>
+    <div class="hero-current hero-in">
+      <p class="hc-title t-mono">Currently</p>
+      <p>Building a retrieval backend with Java&nbsp;21 and Python, and a rules layer for AI coding agents.</p>
+    </div>
+    <a href="#work" class="hero-worklink hero-in t-mono" data-cursor="Scroll">
+      <span>Selected work</span>
+      <span class="fall-track" aria-hidden="true"><i></i></span>
+    </a>
+  </div>
+  <p class="about-statement" id="aboutStatement"></p>
+  <p class="manifesto">I engineer software that feels <span class="fl">inevitable.</span></p>
+  <div class="about-grid" id="facts">
+    <div class="portrait-box" id="aboutPortrait" data-cursor="Hi">
+      <div class="portrait-inner" id="aboutPortraitInner">
+        <img src="assets/portrait-1.png" alt="Portrait of Vincent Chung" width="880" height="1184" loading="lazy"/>
+      </div>
+      <div class="flame-wash" aria-hidden="true"></div>
+      <span class="t-mono cap">HK · 22.32°N</span>
+    </div>
+    <dl class="facts" id="factsList"></dl>
+  </div>
+</section>
+
+<!-- ================= WORK 02 ================= -->
+<section id="work" aria-label="Selected work">
+  <div class="work-head">
+    <div class="sec-head">
+      <span class="t-mono no">( 02 )</span>
+      <span class="t-mono nm">Selected work · 04</span>
+    </div>
+    <h2 class="work-title t-mega">
+      <span class="mask"><span class="char-line" style="display:block">Things</span></span>
+      <span class="mask l2"><span class="char-line fl" style="display:block">I’ve built</span></span>
+    </h2>
+  </div>
+  <div id="projectStack"></div>
+  <div class="work-fade" aria-hidden="true"></div>
+</section>
+
+<!-- ================= TOOLKIT 03 ================= -->
+<section class="block" id="toolkit" aria-label="Toolkit">
+  <div class="sec-head">
+    <span class="t-mono no">( 03 )</span>
+    <span class="t-mono nm">Toolkit</span>
+  </div>
+  <p class="tk-count t-mono"><b>24 tools</b> · 4 disciplines</p>
+  <div id="tkGroups"></div>
+  <div class="tk-end"></div>
+</section>
+
+<!-- ================= CONTACT 04 ================= -->
+<section class="block" id="contact" aria-label="Contact">
+  <div>
+    <div class="sec-head">
+      <span class="t-mono no">( 04 )</span>
+      <span class="t-mono nm">Contact</span>
+    </div>
+    <h2 class="ct-title t-mega">
+      <span class="mask"><span class="ct-line" style="display:block">Let’s build</span></span>
+      <span class="mask"><span class="ct-line fl" style="display:block">something.</span></span>
+    </h2>
+  </div>
+  <div class="ct-lower">
+    <div class="ct-email-grid">
+      <div class="ct-email-main ct-fade">
+        <p class="t-mono lbl">Open to internships, collaborations and good conversations</p>
+        <a class="ct-email u-link" href="mailto:vincentchung413@gmail.com" data-cursor="Write">vincentchung413@gmail.com</a>
+      </div>
+      <div class="ct-actions ct-fade">
+        <span class="magnet"><button class="circle-btn t-mono" id="copyEmail" type="button" aria-live="polite">Copy&nbsp;email</button></span>
+        <span class="magnet"><a class="circle-btn fill t-mono" href="https://vincent-cly.github.io/resume/Web%20Dev%20Resume.pdf" target="_blank" rel="noreferrer">Résumé<br/>PDF ↗</a></span>
+      </div>
+    </div>
+    <ul class="socials ct-fade" id="socialsList"></ul>
+    <footer class="site-foot t-mono">
+      <span>© 2026 Vincent Chung</span>
+      <span>Designed &amp; built by hand · GSAP</span>
+      <span>Hong Kong</span>
+      <button class="to-top u-link" id="toTop" type="button" data-cursor="Top" style="text-transform:uppercase;font-family:inherit;font-size:inherit;letter-spacing:inherit">Back to top ↑</button>
+    </footer>
+  </div>
+</section>
+</main>
+
+<script src="assets/script-0.js"></script>
+<script src="assets/gsap.min.js"></script>
+<script src="assets/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+"use strict";
+var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var hasGsap = !!(window.gsap && window.ScrollTrigger);
+if (hasGsap) gsap.registerPlugin(ScrollTrigger);
+
+/* ================= data (from the project, verbatim) ================= */
+var EMAIL = "vincentchung413@gmail.com";
+var SOCIALS = [
+  { label:"GitHub", href:"https://github.com/Vincent-CLY", handle:"Vincent-CLY" },
+  { label:"LinkedIn", href:"https://linkedin.com/in/lai-yin-chung-45b0a1289", handle:"lai-yin-chung" },
+  { label:"Stack Overflow", href:"https://stackoverflow.com/users/22401621/chung-lai-yin-vincent", handle:"chung-lai-yin-vincent" },
+  { label:"Instagram", href:"https://instagram.com/v_c.413", handle:"@v_c.413" }
+];
+var MARQUEE = ["Interfaces","Backends","Retrieval","Agents","Systems","Motion"];
+var FACTS = [
+  ["Based","Hong Kong"],
+  ["Studying","BEng Computer Engineering, University of Hong Kong. Class of 2026"],
+  ["Focus","Full-stack web, retrieval systems, agent tooling"],
+  ["Languages","Cantonese · English · Mandarin · Japanese"],
+  ["Shipping since","2022, when the first PHP site went live"]
+];
+var STATEMENT = [
+  ["I",0],["build",0],["for",0],["the",0],["web",0],["end",0],["to",0],["end:",0],
+  ["interfaces",1],
+  ["that",0],["feel",0],["considered,",0],
+  ["services",1],
+  ["that",0],["stay",0],["out",0],["of",0],["the",0],["way,",0],
+  ["and",0],["the",0],
+  ["AI",1],["plumbing",1],
+  ["behind",0],["both.",0],["I",0],["learn",0],["fastest",0],["by",0],["shipping",0],
+  ["something",0],["real,",0],["then",0],["taking",0],["it",0],["apart.",0]
+];
+var PROJECTS = [
+  { id:"rag", index:"01", year:"2026", name:"RAG Backend", kind:"AI infrastructure", theme:"bone", visual:"rag",
+    blurb:"A multi-stage retrieval-augmented generation backend that ingests resumes, papers, slides and scans, keeps their layout intact, and answers over them through REST and MCP.",
+    points:["Java 21 gateway on virtual threads owns security, routing and rate limiting","Python data plane handles parsing, hybrid retrieval and LangGraph agents","Exposed as an MCP server so Claude Desktop or Cursor can query it directly"],
+    tags:["Java 21","Spring Boot","Python","FastAPI","Qdrant","LangGraph","MCP"],
+    links:[{label:"Source", href:"https://github.com/Vincent-CLY/RAG-Backend"}] },
+  { id:"agent", index:"02", year:"2026", name:"Agentic Skills OS", kind:"Developer tooling", theme:"graphite", visual:"agent",
+    blurb:"A zero-bloat rules system for AI coding agents. One command detects your editor and installs modular, context-triggered rules instead of one giant prompt.",
+    points:["Works across Cursor, Claude Code, Codex, Cline and Copilot","Auto-detected, one-click updates through an interactive truecolor CLI","Runs on demand through npx or uvx. Nothing to maintain locally"],
+    tags:["Node.js","CLI","MCP","Markdown rules"],
+    links:[{label:"Source", href:"https://github.com/Vincent-CLY/agentic-skills-mcp"}] },
+  { id:"music", index:"03", year:"2024 – 26", name:"YT Music Player", kind:"Full-stack web app", theme:"flame", visual:"music",
+    blurb:"A music player with its own backend. React and TypeScript on the front, Express behind it, pulling YouTube data through InnerTube and streaming audio over SSE.",
+    points:["RESTful API layer with server-sent events for stream data","Local-storage caching so repeat browsing feels instant","Deployed on Vercel. Frontend rewritten in TypeScript"],
+    tags:["React","TypeScript","Vite","Express","SSE","Vercel"],
+    links:[{label:"Live", href:"https://yt-music-player.vercel.app"},{label:"Frontend", href:"https://github.com/Vincent-CLY/yt-music-player--front-end"},{label:"Backend", href:"https://github.com/Vincent-CLY/yt-music-player--backend"}] },
+  { id:"rhythm", index:"04", year:"2026", name:"Rhythm Trainer", kind:"Embedded + Python", theme:"ink", visual:"rhythm",
+    blurb:"A rhythm game scaffold for Raspberry Pi 5 that treats timing as something you can train, with GPIO tap zones, chart files, judgment logic and session analytics.",
+    points:["Hardware abstraction so the same code runs on a Pi and a Windows dev box","JSON charts with optional training blocks and a randomised final round","CSV session logging for post-run analysis; optional camera air-detection"],
+    tags:["Python","Raspberry Pi 5","GPIO","Pygame","CSV analytics"],
+    links:[{label:"Source", href:"https://github.com/Vincent-CLY/rhythm-game-trainer"}] }
+];
+var TOOLKIT = [
+  { group:"Interface", items:["TypeScript","React","Vite","Next.js","GSAP","Three.js","Tailwind CSS"] },
+  { group:"Services", items:["Java · Spring Boot","Python · FastAPI","Node · Express","Django","PHP","REST · SSE"] },
+  { group:"Data & AI", items:["SQL · MySQL","SQLite · Turso","Qdrant","LangChain · LangGraph","MCP","Docling"] },
+  { group:"Ship", items:["Git · GitHub","Vercel","GitHub Pages","Let’s Encrypt","C++"] }
+];
+
+/* ================= render: marquee ================= */
+(function(){
+  var track = document.getElementById("marqueeTrack");
+  var rowHtml = MARQUEE.map(function(w,i){
+    return '<span class="marquee-item"><span class="mq-word t-display'+(i%2?' outline-text':'')+'">'+w+'</span><span class="mq-dot"></span></span>';
+  }).join("");
+  var group = '<div class="marquee-row">'+rowHtml+'</div>';
+  track.innerHTML = group+group+group+group;
+})();
+
+/* ================= render: about ================= */
+(function(){
+  var st = document.getElementById("aboutStatement");
+  st.innerHTML = STATEMENT.map(function(x){
+    return '<span class="about-word'+(x[1]?' acc':'')+'">'+x[0]+'</span>';
+  }).join("");
+  var dl = document.getElementById("factsList");
+  dl.innerHTML = FACTS.map(function(f){
+    return '<div class="fact"><span class="fact-rule"></span>'+
+      '<dt><span class="fact-t t-mono">'+f[0]+'</span></dt>'+
+      '<dd><span class="fact-t">'+f[1]+'</span></dd></div>';
+  }).join("") + '<div class="facts-end"></div>';
+})();
+
+/* ================= render: work visuals ================= */
+function ragVisual(){
+  var nodes = [
+    { y:18, label:"MCP / REST client", sub:"Claude Desktop · Cursor" },
+    { y:100, label:"Gateway", sub:"Spring Boot · virtual threads" },
+    { y:182, label:"AI plane", sub:"FastAPI · LangGraph · Docling" },
+    { y:264, label:"Vector store", sub:"Qdrant · hybrid retrieval" }
+  ];
+  var s = '<svg class="rag-svg" viewBox="0 0 400 340" role="img" aria-label="Architecture: client, Java gateway, Python AI plane, Qdrant">';
+  s += '<defs><path id="rag-path" d="M200 58 V100 M200 140 V182 M200 222 V264"/></defs>';
+  nodes.forEach(function(n,i){
+    s += '<g><rect x="30" y="'+n.y+'" width="340" height="40" fill="none" stroke="currentColor" stroke-width="1.2"/>';
+    s += '<text x="44" y="'+(n.y+17)+'" font-family="JetBrains Mono, monospace" font-size="11" font-weight="600" fill="currentColor" letter-spacing="0.5">'+("0"+(i+1)).slice(-2)+' · '+n.label.toUpperCase()+'</text>';
+    s += '<text x="44" y="'+(n.y+31)+'" font-family="JetBrains Mono, monospace" font-size="9.5" fill="currentColor" opacity="0.6">'+n.sub+'</text></g>';
+  });
+  [58,140,222].forEach(function(y){
+    s += '<g><line x1="200" y1="'+y+'" x2="200" y2="'+(y+42)+'" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 4"/>';
+    s += '<path d="M195 '+(y+34)+' L200 '+(y+42)+' L205 '+(y+34)+'" fill="none" stroke="currentColor" stroke-width="1.2"/></g>';
+  });
+  s += '<circle r="5" fill="#f2461f"><animateMotion dur="3.2s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear"><mpath href="#rag-path"/></animateMotion></circle>';
+  s += '<text x="30" y="326" font-family="JetBrains Mono, monospace" font-size="9.5" fill="currentColor" opacity="0.55" letter-spacing="0.5">EDGE / CONTROL PLANE → AI / DATA PLANE</text>';
+  s += '</svg>';
+  return s;
+}
+function agentVisual(){
+  return '<div class="term"><div class="term-bar"><i></i><i></i><i></i><span>~/project</span></div><div class="term-body" id="termBody"></div></div>';
+}
+function musicVisual(){
+  var bars = "";
+  for (var i=0;i<30;i++){
+    var dur = 0.7 + ((i*37)%11)/8, del = -((i*53)%17)/6;
+    bars += '<span style="animation:eq '+dur.toFixed(2)+'s ease-in-out '+del.toFixed(2)+'s infinite;transform:scaleY(0.2)"></span>';
+  }
+  return '<div class="music-vis"><div class="t-mono" style="display:flex;justify-content:space-between"><span>Now streaming · SSE</span><span style="font-variant-numeric:tabular-nums">02:41</span></div>'+
+    '<div class="music-eq">'+bars+'</div>'+
+    '<div><div class="music-prog"><i></i></div><div class="t-mono" style="margin-top:.75rem;display:flex;justify-content:space-between"><span>Cache: local</span><span>InnerTube → Express → React</span></div></div></div>';
+}
+function rhythmVisual(){
+  var notes = [[0,0.0],[2,0.4],[1,0.9],[3,1.3],[0,1.8],[1,2.1],[2,2.6],[3,3.0],[1,3.4],[0,3.9],[3,4.2],[2,4.7]];
+  var lanes = "";
+  for (var l=0;l<4;l++){
+    var ns = "";
+    notes.forEach(function(n){
+      if (n[0]!==l) return;
+      ns += '<span class="rhythm-note" style="animation:notefall 4.8s linear '+(-(4.8-n[1])).toFixed(1)+'s infinite"></span>';
+    });
+    lanes += '<div class="rhythm-lane">'+ns+'</div>';
+  }
+  var pads = "";
+  for (var k=1;k<=4;k++) pads += '<div class="t-mono"><b>'+k+'</b><span style="font-size:.55rem">GPIO</span></div>';
+  return '<div class="rhythm-vis"><div class="rhythm-lanes">'+lanes+'</div><div class="rhythm-hit"></div><div class="rhythm-pads">'+pads+'</div></div>';
+}
+function visualFor(kind){
+  if (kind==="rag") return ragVisual();
+  if (kind==="agent") return agentVisual();
+  if (kind==="music") return musicVisual();
+  return rhythmVisual();
+}
+
+/* ================= render: projects ================= */
+(function(){
+  var stack = document.getElementById("projectStack");
+  stack.innerHTML = PROJECTS.map(function(p){
+    var nameWords = p.name.split(" ").map(function(w){
+      return '<span class="mask"><span class="proj-line" style="display:block">'+w+'</span></span>';
+    }).join("");
+    var tags = p.tags.map(function(t){ return '<li class="t-mono">'+t+'</li>'; }).join("");
+    var links = p.links.map(function(l){
+      return '<a href="'+l.href+'" target="_blank" rel="noreferrer" data-cursor="Open" class="t-mono u-link" style="font-weight:600">'+l.label+' ↗</a>';
+    }).join("");
+    var points = p.points.map(function(pt){
+      return '<li><span class="sq"></span><span>'+pt+'</span></li>';
+    }).join("");
+    var tone = (p.theme==="bone"||p.theme==="flame") ? ' data-nav-tone="ink"' : "";
+    return '<article class="project theme-'+p.theme+'" aria-labelledby="proj-'+p.id+'"'+tone+'>'+
+      '<div class="project-inner">'+
+        '<div class="proj-meta t-mono"><span>'+p.index+' <span class="proj-sub">/ 04</span></span><span class="proj-sub">'+p.kind+'</span><span>'+p.year+'</span></div>'+
+        '<div class="proj-grid">'+
+          '<div class="proj-left"><div><h3 class="proj-name t-display" id="proj-'+p.id+'">'+nameWords+'</h3><p class="proj-blurb proj-fade">'+p.blurb+'</p></div>'+
+          '<div class="proj-fade"><ul class="tagrow">'+tags+'</ul><div class="proj-links">'+links+'</div></div></div>'+
+          '<div class="proj-right"><div class="proj-visual">'+visualFor(p.visual)+'</div><ul class="proj-points proj-fade">'+points+'</ul></div>'+
+        '</div>'+
+      '</div><div class="veil"></div></article>';
+  }).join("");
+})();
+
+/* ================= render: toolkit + socials ================= */
+/* Real product icons (Simple Icons, brand colours, stored locally under
+   assets/icons/). Compound tools carry both product marks. Tools with no
+   product icon anywhere — REST · SSE and Docling — render as plain text
+   boxes rather than a drawn look-alike. */
+var TK_ICONS = {
+  "TypeScript":["typescript"], "React":["react"], "Vite":["vite"], "Next.js":["nextdotjs"],
+  "GSAP":["greensock"], "Three.js":["threedotjs"], "Tailwind CSS":["tailwindcss"],
+  "Java · Spring Boot":["openjdk","springboot"], "Python · FastAPI":["python","fastapi"],
+  "Node · Express":["nodedotjs","express"], "Django":["django"], "PHP":["php"],
+  "SQL · MySQL":["mysql"], "SQLite · Turso":["sqlite","turso"], "Qdrant":["qdrant"],
+  "LangChain · LangGraph":["langchain"], "MCP":["modelcontextprotocol"],
+  "Git · GitHub":["git","github"], "Vercel":["vercel"], "GitHub Pages":["githubpages"],
+  "Let’s Encrypt":["letsencrypt"], "C++":["cplusplus"]
+};
+(function(){
+  var wrap = document.getElementById("tkGroups");
+  wrap.innerHTML = TOOLKIT.map(function(g,gi){
+    var boxes = g.items.map(function(it){
+      var slugs = TK_ICONS[it];
+      if (!slugs) return '<li class="tk-box tk-box--text"><span class="tk-name">'+it+'</span></li>';
+      var imgs = slugs.map(function(s){
+        return '<img src="assets/icons/'+s+'.svg" alt="" width="26" height="26" loading="lazy"/>';
+      }).join("");
+      return '<li class="tk-box"><span class="tk-chip'+(slugs.length>1?' duo':'')+'" aria-hidden="true">'+imgs+'</span><span class="tk-name">'+it+'</span></li>';
+    }).join("");
+    return '<div class="tk-group"><div class="tk-group-head">'+
+      '<span class="t-mono n">0'+(gi+1)+'</span><h3 class="t-narrow">'+g.group+'</h3>'+
+      '<span class="t-mono cnt">'+g.items.length+' tools</span></div>'+
+      '<ul class="tk-grid">'+boxes+'</ul></div>';
+  }).join("");
+  var soc = document.getElementById("socialsList");
+  soc.innerHTML = SOCIALS.map(function(s){
+    return '<li><a href="'+s.href+'" target="_blank" rel="noreferrer" data-cursor="Visit">'+
+      '<span class="s-top t-mono">'+s.label+'<b>↗</b></span><span class="handle">'+s.handle+'</span></a></li>';
+  }).join("");
+})();
+
+/* ================= terminal typing ================= */
+(function(){
+  var body = document.getElementById("termBody");
+  if (!body) return;
+  var lines = [
+    { t:"$ npx -y github:Vincent-CLY/agentic-skills-mcp", c:"ok" },
+    { t:"› scanning workspace…", c:"dm" },
+    { t:"✓ detected  cursor · claude-code", c:"ok" },
+    { t:"✓ 00-core-os.md", c:"ok" },
+    { t:"✓ 01-ui-ux-master.md", c:"ok" },
+    { t:"✓ AGENTS.md left untouched", c:"ok" },
+    { t:"ready.", c:"fl" }
+  ];
+  var n = 1;
+  function render(){
+    var html = "";
+    var upto = Math.min(n, lines.length);
+    for (var i=0;i<upto;i++) html += '<div class="'+lines[i].c+'">'+lines[i].t+'</div>';
+    html += '<span class="term-caret"></span>';
+    body.innerHTML = html;
+  }
+  render();
+  if (!reduced) setInterval(function(){ n = n >= lines.length+3 ? 1 : n+1; render(); }, 750);
+})();
+
+/* no live clock anywhere — the top nav is links + progress only */
+
+/* ================= anchor scrolling (native) ================= */
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener("click", function(e){
+    var id = a.getAttribute("href");
+    if (id.length < 2) return;
+    var target = document.querySelector(id);
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: reduced ? "auto" : "smooth" });
+  });
+});
+document.getElementById("toTop").addEventListener("click", function(){ window.scrollTo({top:0, behavior: reduced?"auto":"smooth"}); });
+
+/* ================= copy email ================= */
+(function(){
+  var btn = document.getElementById("copyEmail");
+  var timer = null;
+  function openMail(){
+    var a = document.createElement("a");
+    a.href = "mailto:" + EMAIL;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+  btn.addEventListener("click", function(){
+    function done(){
+      btn.textContent = "Copied ✓";
+      clearTimeout(timer);
+      timer = setTimeout(function(){ btn.innerHTML = "Copy&nbsp;email"; }, 2200);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(EMAIL).then(done).catch(openMail);
+    } else { openMail(); }
+  });
+})();
+
+/* ================= magnetic circles ================= */
+if (window.matchMedia("(hover: hover) and (pointer: fine)").matches && !reduced && hasGsap) {
+  document.querySelectorAll(".magnet").forEach(function(el){
+    var xTo = gsap.quickTo(el, "x", { duration:0.8, ease:"elastic.out(1, 0.5)" });
+    var yTo = gsap.quickTo(el, "y", { duration:0.8, ease:"elastic.out(1, 0.5)" });
+    el.addEventListener("mousemove", function(e){
+      var r = el.getBoundingClientRect();
+      xTo((e.clientX - (r.left + r.width/2)) * 0.35);
+      yTo((e.clientY - (r.top + r.height/2)) * 0.35);
+    });
+    el.addEventListener("mouseleave", function(){ xTo(0); yTo(0); });
+  });
+}
+
+/* ================= cursor ================= */
+(function(){
+  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+  var dot = document.getElementById("cursorDot");
+  var label = document.getElementById("cursorLabel");
+  var mx = -100, my = -100, x = -100, y = -100;
+  document.addEventListener("pointermove", function(e){ mx = e.clientX; my = e.clientY; }, { passive:true });
+  (function loop(){
+    x += (mx - x) * 0.22; y += (my - y) * 0.22;
+    dot.style.left = x + "px"; dot.style.top = y + "px";
+    requestAnimationFrame(loop);
+  })();
+  document.querySelectorAll("a, button").forEach(function(el){
+    el.addEventListener("pointerenter", function(){ dot.classList.add("is-ring"); });
+    el.addEventListener("pointerleave", function(){ dot.classList.remove("is-ring"); });
+  });
+  document.querySelectorAll("[data-cursor]").forEach(function(el){
+    el.addEventListener("pointerenter", function(){ label.textContent = el.getAttribute("data-cursor"); dot.classList.add("is-label"); });
+    el.addEventListener("pointerleave", function(){ dot.classList.remove("is-label"); });
+  });
+})();
+
+/* ================= nav tone over light panels ================= */
+(function(){
+  var rootEl = document.documentElement;
+  var lightSections = document.querySelectorAll('[data-nav-tone="ink"]');
+  if (!("IntersectionObserver" in window) || !lightSections.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    var any = false;
+    entries.forEach(function(en){ if (en.isIntersecting) any = true; });
+    /* recompute from all observed */
+    var hit = false;
+    lightSections.forEach(function(s){
+      var r = s.getBoundingClientRect();
+      if (r.top < window.innerHeight * 0.5 && r.bottom > window.innerHeight * 0.5) hit = true;
+    });
+    rootEl.setAttribute("data-tone", hit ? "ink" : "");
+    if (!hit) rootEl.removeAttribute("data-tone");
+  }, { threshold: [0, 0.25, 0.5, 0.75, 1] });
+  lightSections.forEach(function(s){ obs.observe(s); });
+})();
+
+/* ================= scroll progress ================= */
+(function(){
+  var bar = document.getElementById("scrollProgressBar");
+  function onScroll(){
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    var p = max > 0 ? (h.scrollTop || document.body.scrollTop) / max : 0;
+    bar.style.transform = "scaleX(" + p + ")";
+  }
+  document.addEventListener("scroll", onScroll, { passive:true });
+  onScroll();
+})();
+
+/* ================= hero portrait as a settled square grid =================
+   The "one field" idea from the cobalt version, without an engine: the
+   Firefly cut-out is sampled into grid cells (colour averaged per cell by
+   the browser's own smoothing draw), and the settled frame IS the grid of
+   squares — the plain photograph is never drawn over it. Squares settle
+   in from the top, centre-out, once, when the preloader lifts. */
+
+/* ================= terrain-lines backdrop (Scene) =================
+   Fixed WebGL backdrop restored from the original project: a displaced
+   ridge grid drawn twice — an ink occluder mesh that hides the far side
+   of each ridge, and one line strip per row on top of it, lifted by
+   uLift. Shared mutable sceneState is driven by the preloader (intro)
+   and by the scroll moods bound in the GSAP section below. */
+var sceneState = { opacity: 1, pitch: 0, amp: 1, freq: 1, warm: 0, intro: reduced ? 1 : 0 };
+var terrainState = null;
+(function initTerrain(){
+  var holder = document.getElementById("terrainBg");
+  if (!holder || !window.THREE) return;
+  var renderer;
+  try {
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
+  } catch (e) { return; }
+  if (!renderer) return;
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setClearColor(0x000000, 0);
+  holder.appendChild(renderer.domElement);
+
+  var scene = new THREE.Scene();
+  var aspect = window.innerWidth / Math.max(1, window.innerHeight);
+  var camera = new THREE.PerspectiveCamera(aspect < 0.8 ? 52 : 38, aspect, 0.1, 100);
+  camera.position.set(0, 2.1, 8.2);
+  camera.lookAt(0, 0.1, -4.5);
+
+  var shared = {
+    uTime:   { value: 0 },
+    uAmp:    { value: 1 },
+    uFreq:   { value: 1 },
+    uIntro:  { value: sceneState.intro },
+    uWarm:   { value: 0 },
+    uMouse:  { value: new THREE.Vector2(99, 99) },
+    uClick:  { value: new THREE.Vector3(0, 0, -99) },
+    uLift:   { value: 0 },
+    uBone:   { value: new THREE.Color(0xe9e5db) },
+    uFlame:  { value: new THREE.Color(0xf2461f) },
+    uBg:     { value: new THREE.Color(0x0b0b0a) }
+  };
+  /* Vertex shader: the original Scene terrain, verbatim. Height varies
+     mainly along X (1.1 / 2.7 / 6.1 + two pow7 spikes on X), so every row
+     line zig-zags into sharp ridges left-to-right — that X-frequency is
+     what makes the dense mountain-range look in the reference. */
+  var vertexShader = [
+    "uniform float uTime;",
+    "uniform float uAmp;",
+    "uniform float uFreq;",
+    "uniform float uIntro;",
+    "uniform vec2 uMouse;",
+    "uniform vec3 uClick;",
+    "uniform float uLift;",
+    "varying float vH;",
+    "varying float vDist;",
+    "float spike(float x){",
+    "  float s = abs(sin(x));",
+    "  return pow(s, 7.0);",
+    "}",
+    "float terrain(vec2 p){",
+    "  float env = exp(-pow(p.x / 5.2, 2.0));",
+    "  float t = uTime;",
+    "  float f = uFreq;",
+    "  float n = 0.0;",
+    "  n += sin(p.x * 1.1 * f + t * 0.30 + p.y * 0.55) * 0.55;",
+    "  n += sin(p.x * 2.7 * f - t * 0.46 + p.y * 1.60) * 0.28;",
+    "  n += sin(p.x * 6.1 * f + t * 0.85 - p.y * 2.20) * 0.12;",
+    "  n += spike(p.x * 3.3 * f + p.y * 1.9 - t * 0.6) * 0.42;",
+    "  n += spike(p.x * 1.7 * f - p.y * 0.8 + t * 0.4 + 2.0) * 0.35;",
+    "  float near = mix(0.5, 1.0, smoothstep(2.5, -7.0, p.y));",
+    "  float h = n * (0.25 + env * 1.05) * near;",
+    "  float age = mod(t, 5.0);",
+    "  float ring = exp(-pow(distance(p, vec2(0.0, -7.0)) - age * 4.5, 2.0) * 1.2);",
+    "  h += ring * 0.55 * exp(-age * 0.45);",
+    "  float d = distance(p, uMouse);",
+    "  h += 1.15 * exp(-d * d * 0.55);",
+    "  float ca = t - uClick.z;",
+    "  if (ca > 0.0 && ca < 4.0) {",
+    "    float cr = exp(-pow(distance(p, uClick.xy) - ca * 4.2, 2.0) * 2.4);",
+    "    h += cr * 1.5 * exp(-ca * 0.9);",
+    "  }",
+    "  return h;",
+    "}",
+    "void main(){",
+    "  vec3 pos = position;",
+    "  float h = terrain(pos.xz) * uAmp * uIntro;",
+    "  vec3 p = vec3(pos.x, pos.y + h, pos.z);",
+    "  vH = p.y;",
+    "  p.y += uLift;",
+    "  vec4 mv = modelViewMatrix * vec4(p, 1.0);",
+    "  vDist = -mv.z;",
+    "  gl_Position = projectionMatrix * mv;",
+    "}"
+  ].join("\n");
+  var lineFragment = [
+    "uniform vec3 uBone;",
+    "uniform vec3 uFlame;",
+    "uniform float uWarm;",
+    "varying float vH;",
+    "varying float vDist;",
+    "void main(){",
+    "  float fade = 1.0 - smoothstep(10.0, 22.0, vDist);",
+    "  float peak = smoothstep(0.7, 1.9, vH);",
+    "  vec3 col = mix(uBone, uFlame, clamp(peak + uWarm * 0.55, 0.0, 1.0));",
+    "  float a = fade * (0.28 + 0.72 * smoothstep(-0.05, 0.9, vH));",
+    "  gl_FragColor = vec4(col, a);",
+    "}"
+  ].join("\n");
+  var occluderFragment = [
+    "uniform vec3 uBg;",
+    "void main(){ gl_FragColor = vec4(uBg, 1.0); }"
+  ].join("\n");
+
+  function buildGeometries(isMobile){
+    var COLS = isMobile ? 140 : 280;
+    var ROWS = isMobile ? 40 : 64;
+    var W = 26, Z_FAR = -15, Z_NEAR = 3;
+    var count = COLS * ROWS;
+    var pos = new Float32Array(count * 3);
+    var k = 0;
+    for (var j = 0; j < ROWS; j++) {
+      for (var i = 0; i < COLS; i++) {
+        pos[k++] = -W / 2 + (i / (COLS - 1)) * W;
+        pos[k++] = 0;
+        pos[k++] = Z_FAR + (j / (ROWS - 1)) * (Z_NEAR - Z_FAR);
+      }
+    }
+    var meshGeo = new THREE.BufferGeometry();
+    meshGeo.setAttribute("position", new THREE.BufferAttribute(pos.slice(), 3));
+    var idx = [];
+    for (var mj = 0; mj < ROWS - 1; mj++) {
+      for (var mi = 0; mi < COLS - 1; mi++) {
+        var a = mj * COLS + mi, b = a + 1, c = a + COLS, d = c + 1;
+        idx.push(a, c, b, b, c, d);
+      }
+    }
+    meshGeo.setIndex(idx);
+    var lineGeo = new THREE.BufferGeometry();
+    lineGeo.setAttribute("position", new THREE.BufferAttribute(pos.slice(), 3));
+    var lidx = [];
+    for (var lj = 0; lj < ROWS; lj++) {
+      for (var li = 0; li < COLS - 1; li++) {
+        var s = lj * COLS + li;
+        lidx.push(s, s + 1);
+      }
+    }
+    lineGeo.setIndex(lidx);
+    return { meshGeo: meshGeo, lineGeo: lineGeo };
+  }
+
+  var isMobile = window.innerWidth < 768;
+  var geos = buildGeometries(isMobile);
+  var occluderUniforms = {
+    uTime: shared.uTime, uAmp: shared.uAmp, uFreq: shared.uFreq, uIntro: shared.uIntro,
+    uMouse: shared.uMouse, uClick: shared.uClick, uLift: { value: 0 }, uBg: shared.uBg
+  };
+  var lineUniforms = {
+    uTime: shared.uTime, uAmp: shared.uAmp, uFreq: shared.uFreq, uIntro: shared.uIntro,
+    uMouse: shared.uMouse, uClick: shared.uClick, uLift: { value: 0.012 },
+    uBone: shared.uBone, uFlame: shared.uFlame, uWarm: shared.uWarm
+  };
+  var occluderMat = new THREE.ShaderMaterial({
+    uniforms: occluderUniforms, vertexShader: vertexShader, fragmentShader: occluderFragment,
+    polygonOffset: true, polygonOffsetFactor: 1.5, polygonOffsetUnits: 1.5
+  });
+  var lineMat = new THREE.ShaderMaterial({
+    uniforms: lineUniforms, vertexShader: vertexShader, fragmentShader: lineFragment,
+    transparent: true, depthWrite: false
+  });
+  var occluder = new THREE.Mesh(geos.meshGeo, occluderMat);
+  occluder.renderOrder = 0;
+  occluder.frustumCulled = false;
+  var lines = new THREE.LineSegments(geos.lineGeo, lineMat);
+  lines.renderOrder = 1;
+  lines.frustumCulled = false;
+  scene.add(occluder);
+  scene.add(lines);
+
+  var clock = new THREE.Clock();
+  var elapsed = 0;
+  var parallax = { x: 0, y: 0 };
+  var parallaxTarget = { x: 0, y: 0 };
+  var rafId = 0;
+  var disposed = false;
+
+  /* Pointer → terrain, as in the original: raycast onto the y = 0 plane
+     so the bump sits under the true world point of the cursor, and the
+     mouse uniform rests at (99, 99) — far off-grid — when the pointer
+     is out of the document. */
+  var raycaster = new THREE.Raycaster();
+  var groundPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
+  var ndc = new THREE.Vector2(0, 0);
+  var hitPoint = new THREE.Vector3();
+  var mouseTarget = new THREE.Vector2(99, 99);
+  var pointerIn = false;
+  function setNdc(cx, cy){
+    ndc.set((cx / window.innerWidth) * 2 - 1, -(cy / window.innerHeight) * 2 + 1);
+  }
+  function raycastGround(){
+    raycaster.setFromCamera(ndc, camera);
+    return raycaster.ray.intersectPlane(groundPlane, hitPoint) ? hitPoint : null;
+  }
+  window.addEventListener("pointermove", function(e){
+    parallaxTarget.x = (e.clientX / window.innerWidth) * 2 - 1;
+    parallaxTarget.y = (e.clientY / window.innerHeight) * 2 - 1;
+    setNdc(e.clientX, e.clientY);
+    pointerIn = true;
+  }, { passive: true });
+  window.addEventListener("pointerdown", function(e){
+    setNdc(e.clientX, e.clientY);
+    camera.updateMatrixWorld();
+    var hit = raycastGround();
+    if (hit) shared.uClick.value.set(hit.x, hit.z, elapsed);
+  }, { passive: true });
+  document.documentElement.addEventListener("pointerleave", function(){ pointerIn = false; });
+
+  function onResize(){
+    var w = window.innerWidth, h = Math.max(1, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+    renderer.setSize(w, h);
+    var a = w / h;
+    camera.aspect = a;
+    camera.fov = a < 0.8 ? 52 : 38;
+    camera.updateProjectionMatrix();
+    var nowMobile = w < 768;
+    if (nowMobile !== isMobile) {
+      isMobile = nowMobile;
+      var old = geos;
+      geos = buildGeometries(isMobile);
+      occluder.geometry = geos.meshGeo;
+      lines.geometry = geos.lineGeo;
+      old.meshGeo.dispose(); old.lineGeo.dispose();
+    }
+    if (reduced) drawFrame(2.0);
+  }
+  window.addEventListener("resize", onResize);
+
+  function drawFrame(time){
+    shared.uTime.value = time;
+    shared.uAmp.value = sceneState.amp;
+    shared.uFreq.value = sceneState.freq;
+    shared.uIntro.value = sceneState.intro;
+    shared.uWarm.value = sceneState.warm;
+    holder.style.opacity = String(sceneState.opacity);
+    if (sceneState.opacity < 0.01) return;
+    parallax.x += (parallaxTarget.x - parallax.x) * 0.04;
+    parallax.y += (parallaxTarget.y - parallax.y) * 0.04;
+    var p = sceneState.pitch;
+    camera.position.set(parallax.x * 0.7, 2.1 + p * 5.5 - parallax.y * 0.25, 8.2 - p * 2.5);
+    camera.lookAt(parallax.x * 0.25, 0.1 - p * 0.4, -4.5);
+    camera.updateMatrixWorld();
+    if (pointerIn) {
+      var hit = raycastGround();
+      if (hit) mouseTarget.set(hit.x, hit.z);
+    } else {
+      mouseTarget.set(99, 99);
+    }
+    var mu = shared.uMouse.value;
+    if (mu.x > 90) mu.copy(mouseTarget);
+    else mu.lerp(mouseTarget, 0.12);
+    renderer.render(scene, camera);
+  }
+  function loop(){
+    if (disposed) return;
+    rafId = requestAnimationFrame(loop);
+    if (document.hidden) return;
+    /* accumulated delta time, as in the original: the wave clock only
+       advances while the backdrop is actually on screen */
+    var dt = Math.min(clock.getDelta(), 0.05);
+    if (sceneState.opacity >= 0.01) elapsed += dt;
+    drawFrame(elapsed);
+  }
+  terrainState = { state: sceneState };
+  if (reduced) { sceneState.intro = 1; drawFrame(2.0); }
+  else { loop(); }
+  window.addEventListener("pagehide", function(){
+    disposed = true;
+    if (rafId) cancelAnimationFrame(rafId);
+    geos.meshGeo.dispose(); geos.lineGeo.dispose();
+    occluderMat.dispose(); lineMat.dispose();
+    renderer.dispose();
+    if (renderer.domElement && renderer.domElement.parentNode) renderer.domElement.parentNode.removeChild(renderer.domElement);
+  });
+})();
+
+/* ================= preloader + hero entrance ================= */
+var heroIntroPlayed = false;
+function initHeroParallax(){
+  if (!hasGsap || reduced || !window.ScrollTrigger) return;
+  /* Hero-exit parallax, timed to the pinned phase exactly. #top is
+     200dvh tall and the marquee is pulled up by -100dvh, so the next
+     section's top edge reaches the viewport top at precisely 100dvh of
+     scroll — the trigger's 50% mark. Both tweens below run start "top
+     top" -> end "50% top", so the name and the portrait keep moving for
+     that whole first viewport of scroll and finish moving at the exact
+     moment the next section arrives at the top, with the hero ending up
+     behind it (marquee / About are opaque and later in the DOM).
+       - BOTH layers scroll UP, at different speeds: the name rises
+         34vh, the portrait rises only 15vh, so the portrait lingers
+         lower and the two separate by ~19vh while both stay on screen
+         (nothing exits the top before the incoming section covers the
+         stage from below, and nothing fades — opacity stays 1).
+       - portrait keeps a gentle growth, 1 -> 1.07 from its feet; the
+         name scales 1 -> 1.04 from its base; the halo rises between
+         the two rates (-24vh) and dims only to 0.5.
+       - terrain backdrop shifts at its own third rate (scroll moods).
+     No sideways split, no rotation. The portrait layer sits in front of
+     the name at every scroll position (.hero-visual z-index 2 over
+     .giant z-index 1). After the pinned phase the stage releases and
+     scrolls away by translation only, still behind the next section.
+     A separate black-out overlay (below) dims the whole stage to ink
+     over this same range — the layers move, the overlay darkens. */
+  var vh = window.innerHeight || 800;
+  var heroSt = { trigger: "#top", start: "top top", end: "50% top", scrub: true };
+  gsap.to(".giant", { y: -0.34 * vh, scale: 1.04, transformOrigin: "50% 100%", ease: "none", scrollTrigger: heroSt });
+  gsap.fromTo("#heroVisual",
+    { y: 0, scale: 1 },
+    { y: -0.15 * vh, scale: 1.07, transformOrigin: "50% 100%", ease: "none", scrollTrigger: heroSt });
+  gsap.to("#heroHalo", { y: -0.24 * vh, scale: 1.06, opacity: 0.5, ease: "none", scrollTrigger: heroSt });
+  /* Slow black-out: a separate ink overlay above all hero layers fades
+     0 -> 1 linearly (ease "none", scrubbed) across this same range, so
+     the hero is fully blacked out at the exact moment the next section's
+     top reaches the viewport top, and un-blacks on scroll-up. The name
+     and portrait layers themselves keep opacity 1 — the overlay does
+     all the dimming. */
+  gsap.fromTo("#heroBlackout", { opacity: 0 }, { opacity: 1, ease: "none", scrollTrigger: heroSt });
+  ScrollTrigger.refresh();
+}
+function playHeroIntro(){
+  if (heroIntroPlayed) return; heroIntroPlayed = true;
+  if (!hasGsap || reduced) return;
+  var tl = gsap.timeline({ defaults:{ ease:"expo.out" }, onComplete: initHeroParallax });
+  tl.fromTo(".giant .char", { yPercent: 115 }, { yPercent: 0, duration: 1.3, stagger: 0.045 }, 0)
+    .fromTo("#heroVisual", { y: 90, opacity: 0 }, { y: 0, opacity: 1, duration: 1.5 }, 0.15);
+}
+(function(){
+  var pre = document.getElementById("preloader");
+  var num = document.getElementById("preNum");
+  var bar = document.getElementById("preBar");
+  document.body.style.overflow = "hidden";
+  function finish(){
+    document.body.style.overflow = "";
+    if (hasGsap && !reduced) {
+      gsap.to(pre, { yPercent: -100, duration: 1.1, ease: "expo.inOut", onComplete: function(){ pre.style.display = "none"; } });
+      playHeroIntro();
+    } else {
+      pre.style.display = "none";
+    }
+    if (hasGsap && window.ScrollTrigger) setTimeout(function(){ ScrollTrigger.refresh(); }, 120);
+  }
+  if (reduced || !hasGsap) {
+    sceneState.intro = 1;
+    num.textContent = "100"; bar.style.transform = "scaleX(1)";
+    setTimeout(finish, 120);
+    return;
+  }
+  var counter = { v: 0 };
+  gsap.to(sceneState, { intro: 1, duration: 3.2, ease: "power2.out" });
+  gsap.to(counter, {
+    v: 100, duration: 1.5, ease: "power2.inOut",
+    onUpdate: function(){
+      num.textContent = String(Math.round(counter.v)).padStart(3, "0");
+      bar.style.transform = "scaleX(" + (counter.v/100) + ")";
+    },
+    onComplete: function(){ setTimeout(finish, 180); }
+  });
+})();
+
+/* ================= GSAP scroll motion ================= */
+if (hasGsap && !reduced) {
+
+  /* --- marquee: velocity-responsive ticker --- */
+  (function(){
+    var el = document.getElementById("marqueeTrack");
+    var setX = gsap.quickSetter(el, "x", "px");
+    var skewTo = gsap.quickTo(el, "skewX", { duration: 0.5, ease: "power3" });
+    var x = 0, dir = -1, boost = 0;
+    gsap.ticker.add(function(_t, dt){
+      var half = el.scrollWidth / 2;
+      if (!half) return;
+      x += (dir * (60 + Math.abs(boost) * 0.18) * dt) / 1000;
+      if (x <= -half) x += half;
+      if (x > 0) x -= half;
+      setX(x);
+      boost *= 0.92;
+    });
+    ScrollTrigger.create({
+      trigger: "#marquee", start: "top bottom", end: "bottom top",
+      onUpdate: function(self){
+        var vel = self.getVelocity();
+        if (vel !== 0) dir = vel > 0 ? -1 : 1;
+        boost = Math.min(Math.abs(vel), 6000);
+        skewTo(gsap.utils.clamp(-8, 8, vel / -300));
+      }
+    });
+  })();
+
+  /* --- about: word-by-word statement scrub --- */
+  gsap.fromTo(".about-word", { opacity: 0.14 }, {
+    opacity: 1, ease: "none", stagger: 0.12,
+    scrollTrigger: { trigger: "#aboutStatement", start: "top 78%", end: "bottom 50%", scrub: 0.6 }
+  });
+  /* about portrait: clip reveal + inner parallax */
+  gsap.fromTo("#aboutPortrait", { clipPath: "inset(100% 0% 0% 0%)" }, {
+    clipPath: "inset(0% 0% 0% 0%)", duration: 1.6, ease: "expo.inOut",
+    scrollTrigger: { trigger: "#aboutPortrait", start: "top 85%" }
+  });
+  gsap.fromTo("#aboutPortraitInner", { yPercent: -7, scale: 1.12 }, {
+    yPercent: 7, scale: 1, ease: "none",
+    scrollTrigger: { trigger: "#aboutPortrait", start: "top bottom", end: "bottom top", scrub: true }
+  });
+  /* facts: rules draw, text rises */
+  gsap.utils.toArray(".fact").forEach(function(row){
+    var tl = gsap.timeline({ scrollTrigger: { trigger: row, start: "top 90%" } });
+    tl.fromTo(row.querySelector(".fact-rule"), { scaleX: 0 }, { scaleX: 1, duration: 1.4, ease: "expo.out" }, 0)
+      .fromTo(row.querySelectorAll(".fact-t"), { yPercent: 110 }, { yPercent: 0, duration: 1.1, ease: "expo.out", stagger: 0.08 }, 0.1);
+  });
+
+  /* --- work: title reveal, card entrances, sticky stack squeeze --- */
+  gsap.fromTo(".work-title .char-line", { yPercent: 110 }, {
+    yPercent: 0, duration: 1.4, ease: "expo.out", stagger: 0.1,
+    scrollTrigger: { trigger: ".work-title", start: "top 85%" }
+  });
+  gsap.utils.toArray(".project").forEach(function(card){
+    var tl = gsap.timeline({ scrollTrigger: { trigger: card, start: "top 62%" } });
+    tl.fromTo(card.querySelectorAll(".proj-line"), { yPercent: 110 }, { yPercent: 0, duration: 1.3, ease: "expo.out", stagger: 0.08 }, 0)
+      .fromTo(card.querySelectorAll(".proj-fade"), { y: 28, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "expo.out", stagger: 0.1 }, 0.15)
+      .fromTo(card.querySelector(".proj-visual"), { clipPath: "inset(0 0 100% 0)" }, { clipPath: "inset(0 0 0% 0)", duration: 1.4, ease: "expo.inOut" }, 0.1);
+  });
+  var mm = gsap.matchMedia();
+  mm.add("(min-width: 768px)", function(){
+    var cards = gsap.utils.toArray(".project");
+    cards.forEach(function(card, i){
+      var next = cards[i+1];
+      if (!next) return;
+      gsap.to(card.querySelector(".project-inner"), {
+        scale: 0.93, yPercent: -4, ease: "none",
+        scrollTrigger: { trigger: next, start: "top bottom", end: "top top", scrub: true }
+      });
+      gsap.to(card.querySelector(".veil"), {
+        opacity: 0.7, ease: "none",
+        scrollTrigger: { trigger: next, start: "top bottom", end: "top top", scrub: true }
+      });
+    });
+  });
+  /* --- toolkit: group head rises, boxes stagger in --- */
+  gsap.utils.toArray(".tk-group").forEach(function(g){
+    var tl = gsap.timeline({ scrollTrigger: { trigger: g, start: "top 82%" } });
+    tl.fromTo(g.querySelector(".tk-group-head"), { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "expo.out" }, 0)
+      .fromTo(g.querySelectorAll(".tk-box"), { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "expo.out", stagger: 0.05 }, 0.1);
+  });
+
+  /* --- contact: title + fade-ins --- */
+  gsap.fromTo(".ct-line", { yPercent: 112 }, {
+    yPercent: 0, duration: 1.5, ease: "expo.out", stagger: 0.12,
+    scrollTrigger: { trigger: ".ct-title", start: "top 80%" }
+  });
+  gsap.fromTo(".ct-fade", { y: 30, opacity: 0 }, {
+    y: 0, opacity: 1, duration: 1.1, ease: "expo.out", stagger: 0.08,
+    scrollTrigger: { trigger: ".ct-email-grid", start: "top 90%" }
+  });
+
+  /* --- terrain backdrop: scroll moods on the shared sceneState --- */
+  gsap.to(sceneState, {
+    opacity: 0.2, pitch: 0.7, amp: 1.6, freq: 1.35, warm: 0, ease: "none",
+    scrollTrigger: { trigger: "#top", start: "top top", end: "22.5% top", scrub: 0.8 }
+  });
+  gsap.fromTo(sceneState, { opacity: 0.2 }, {
+    opacity: 0, ease: "none", immediateRender: false,
+    scrollTrigger: { trigger: "#work", start: "top 85%", end: "top 25%", scrub: 0.8 }
+  });
+  gsap.fromTo(sceneState, { opacity: 0, pitch: 0.7, amp: 1.6, freq: 1.35 }, {
+    opacity: 0.3, pitch: 0.75, amp: 1.5, freq: 1.5, ease: "none", immediateRender: false,
+    scrollTrigger: { trigger: "#toolkit", start: "top 95%", end: "top 25%", scrub: 0.8 }
+  });
+  gsap.fromTo(sceneState, { opacity: 0.3, pitch: 0.75, amp: 1.5, freq: 1.5, warm: 0 }, {
+    opacity: 1, pitch: 0.08, amp: 0.7, freq: 0.8, warm: 1, ease: "none", immediateRender: false,
+    scrollTrigger: { trigger: "#contact", start: "top 95%", end: "top 20%", scrub: 0.8 }
+  });
+
+  window.addEventListener("load", function(){ ScrollTrigger.refresh(); });
+}
+})();
+</script>
+</body>
+</html>
