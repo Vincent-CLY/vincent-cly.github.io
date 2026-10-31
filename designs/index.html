@@ -1,0 +1,154 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Vincent Chung — Portfolio Design Variants</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e0e10;--card:#17171a;--line:rgba(255,255,255,.09);--ink:#f2efe9;--muted:#9a968e;--gold:#d4af7a}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;min-height:100vh;padding:clamp(2rem,5vw,4rem)}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+h1{font-family:'Fraunces',serif;font-weight:560;font-size:clamp(2.2rem,6vw,4rem);letter-spacing:-.02em;line-height:1.05;max-width:20ch}
+h1 em{font-style:italic;color:var(--gold);font-weight:400}
+.sub{color:var(--muted);margin-top:1rem;max-width:60ch;line-height:1.7}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin-top:3rem}
+.card{background:var(--card);border:1px solid var(--line);padding:1.5rem;display:flex;flex-direction:column;gap:.9rem;text-decoration:none;color:inherit;transition:transform .35s cubic-bezier(.22,1,.36,1),border-color .35s}
+.card:hover{transform:translateY(-6px);border-color:var(--gold)}
+.swatches{display:flex;gap:.4rem}
+.sw{width:2.2rem;height:2.2rem;border-radius:4px;border:1px solid rgba(255,255,255,.12)}
+.card h2{font-family:'Fraunces',serif;font-weight:560;font-size:1.5rem;letter-spacing:-.01em}
+.card p{color:var(--muted);font-size:.9rem;line-height:1.6}
+.meta{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-top:auto;padding-top:.8rem;border-top:1px solid var(--line)}
+.note{margin-top:2.5rem;color:var(--muted);font-size:.85rem;line-height:1.7;border-left:2px solid var(--gold);padding-left:1rem}
+code{font-family:'JetBrains Mono',monospace;color:var(--gold)}
+</style></head><body>
+<div class="eyebrow">Portfolio Redesign — 3 Variants</div>
+<h1>Pick a <em>direction.</em></h1>
+<p class="sub">All three share the same content architecture (Hero → About → Selected Work → Toolkit → Trajectory → Contact), the same motion system (GSAP ScrollTrigger + word-reveal hero), and the same Formspree-ready contact form. They differ in palette, typography mood and hero treatment.</p>
+<div class="grid">
+  <a class="card" href="./01-luxe-hotel-lobby/index.html">
+    <div class="swatches"><div class="sw" style="background:#091223"></div><div class="sw" style="background:#132a3e"></div><div class="sw" style="background:#2b4c5f"></div><div class="sw" style="background:#b08d57"></div><div class="sw" style="background:#ede6d8"></div></div>
+    <h2>01 — Luxe Hotel Lobby</h2>
+    <p>Your palette, refined. Deep midnight navy + brass gold + warm ivory. Fraunces serif display, hairline gold rules, Three.js gold particle constellation. Quiet-luxury, editorial, grubogrubo-adjacent.</p>
+    <div class="meta">Dark · Serif · Particles · Recommended</div>
+  </a>
+  <a class="card" href="./03-obsidian-noir/index.html">
+    <div class="swatches"><div class="sw" style="background:#0b1f22"></div><div class="sw" style="background:#123034"></div><div class="sw" style="background:#c98a5a"></div><div class="sw" style="background:#e0a878"></div><div class="sw" style="background:#e9e4d8"></div></div>
+    <h2>03 — Obsidian Noir</h2>
+    <p>Deep teal-black + copper. Same bones as 01 but cooler and moodier, with a rotating copper wireframe torus knot as the hero signature object. More "creative technologist" than "hotel lobby".</p>
+    <div class="meta">Dark · Serif · 3D Object · Moody</div>
+  </a>
+  <a class="card" href="./06-tunnel-full-bleed/index.html">
+    <div class="swatches"><div class="sw" style="background:#0e0f11"></div><div class="sw" style="background:#16181c"></div><div class="sw" style="background:#c8a86e"></div><div class="sw" style="background:#e8cc96"></div><div class="sw" style="background:#ece6d8"></div></div>
+    <h2>06 — Tunnel Full-Bleed</h2>
+    <p>Your real photo (IMG_6964, blue-lit futuristic tunnel) as a full-bleed darkened background, giant DM Serif type overlaid. The johnbolster / DramaOwns pattern. Most cinematic, needs the tunnel shot to land.</p>
+    <div class="meta">Dark · Full-Bleed · Real Photo · Cinematic</div>
+  </a>
+  <a class="card" href="./07-lantern-ghost/index.html">
+    <div class="swatches"><div class="sw" style="background:#14100c"></div><div class="sw" style="background:#1f1812"></div><div class="sw" style="background:#c9a06a"></div><div class="sw" style="background:#e8c890"></div><div class="sw" style="background:#ede0d0"></div></div>
+    <h2>07 — Lantern Ghost (Black-Brown)</h2>
+    <p>Your lantern photo as a faded sepia ghost on the right, dissolving into deep espresso via mask-image gradient. Warm bronze + champagne + warm cream. The "old money" take.</p>
+    <div class="meta">Dark · Ghost Fade · Real Photo · Old Money</div>
+  </a>
+  <a class="card" href="./07a-lantern-low-sat/index.html">
+    <div class="swatches"><div class="sw" style="background:hsl(184deg 8% 7%)"></div><div class="sw" style="background:hsl(184deg 8% 11%)"></div><div class="sw" style="background:#c9a06a"></div><div class="sw" style="background:#e8c890"></div><div class="sw" style="background:#ede0d0"></div></div>
+    <h2>07a — Lantern Ghost (Low-Sat Teal)</h2>
+    <p>Same ghost layout, but the base is <code>hsl(184deg 8% 7%)</code> — a near-neutral dark teal-charcoal with very low saturation. Subtle, sophisticated, lets the lantern warm tones pop.</p>
+    <div class="meta">Dark · Ghost Fade · Low-Sat Teal · Subtle</div>
+  </a>
+  <a class="card" href="./07b-lantern-high-sat/index.html">
+    <div class="swatches"><div class="sw" style="background:hsl(184deg 28% 7%)"></div><div class="sw" style="background:hsl(184deg 28% 11%)"></div><div class="sw" style="background:#c9a06a"></div><div class="sw" style="background:#e8c890"></div><div class="sw" style="background:#ede0d0"></div></div>
+    <h2>07b — Lantern Ghost (High-Sat Teal)</h2>
+    <p>Same ghost layout, but the base is <code>hsl(184deg 28% 7%)</code> — a richer, more saturated dark teal. More dramatic, more "deep ocean", stronger contrast with the warm lantern.</p>
+    <div class="meta">Dark · Ghost Fade · High-Sat Teal · Dramatic</div>
+  </a>
+  <a class="card" href="./10-tunnel-ghost/index.html">
+    <div class="swatches"><div class="sw" style="background:#050f1a"></div><div class="sw" style="background:#0c1f2e"></div><div class="sw" style="background:#6ec8e8"></div><div class="sw" style="background:#a8e4ff"></div><div class="sw" style="background:#e4f0f6"></div></div>
+    <h2>10 — Tunnel Ghost</h2>
+    <p>Your tunnel photo (IMG_6964) as a cool blue-teal ghost on the right, dissolving into deep teal via mask-image gradient. Sci-fi, atmospheric, pairs with the blue neon in the shot.</p>
+    <div class="meta">Dark · Ghost Fade · Real Photo · Sci-Fi</div>
+  </a>
+  <a class="card" href="./07c-lantern-indigo/index.html">
+    <div class="swatches"><div class="sw" style="background:hsl(244deg 25% 14%)"></div><div class="sw" style="background:hsl(244deg 25% 18%)"></div><div class="sw" style="background:#c9a06a"></div><div class="sw" style="background:#e8c890"></div><div class="sw" style="background:#ede0d0"></div></div>
+    <h2>07c — Lantern Ghost (Indigo)</h2>
+    <p>Same ghost layout, base is <code>hsl(244deg 25% 14%)</code> — a dark indigo/navy with moderate saturation. Cooler than black-brown, warmer than pure navy, pairs with bronze + champagne.</p>
+    <div class="meta">Dark · Ghost Fade · Indigo · Cool-Warm Balance</div>
+  </a>
+  <a class="card" href="./13-tunnel-01-schema/index.html">
+    <div class="swatches"><div class="sw" style="background:#091223"></div><div class="sw" style="background:#132a3e"></div><div class="sw" style="background:#b08d57"></div><div class="sw" style="background:#d4af7a"></div><div class="sw" style="background:#ede6d8"></div></div>
+    <h2>13 — Tunnel Full-Bleed (01 Schema)</h2>
+    <p>Exact copy of 06 Tunnel Full-Bleed but with 01 Luxe Hotel Lobby's color schema — midnight navy + brass gold + warm ivory. The tunnel photo in the signature palette.</p>
+    <div class="meta">Dark · Full-Bleed · 01 Palette · Tunnel Photo</div>
+  </a>
+  <a class="card" href="./08-cutout-stage/index.html">
+    <div class="swatches"><div class="sw" style="background:#1a120a"></div><div class="sw" style="background:#241a10"></div><div class="sw" style="background:#c9a06a"></div><div class="sw" style="background:#e8c890"></div><div class="sw" style="background:#ede0d0"></div></div>
+    <h2>08 — Full-Bleed White Shirt</h2>
+    <p>Your cafe-wide.jpg as a full-bleed background. Palette pulled from the photo itself — deep espresso, warm walnut, amber, cream, olive. The johnbolster / DramaOwns pattern, fully warm-toned.</p>
+    <div class="meta">Dark · Full-Bleed · Warm Brown · Photo-Matched</div>
+  </a>
+  <a class="card" href="./17-city-street/index.html">
+    <div class="swatches"><div class="sw" style="background:#0d0b08"></div><div class="sw" style="background:#161310"></div><div class="sw" style="background:#f0bc73"></div><div class="sw" style="background:#ffd89a"></div><div class="sw" style="background:#f0e4d4"></div></div>
+    <h2>17 — City Street</h2>
+    <p>Your city-street.jpg (warm bokeh, night street) as a faded ghost. Deep charcoal + warm amber bokeh + cream. The "urban night" take.</p>
+    <div class="meta">Dark · Ghost Fade · City Night · Warm Bokeh</div>
+  </a>
+  <a class="card" href="./17-forest-daylight/index.html">
+    <div class="swatches"><div class="sw" style="background:#0a120c"></div><div class="sw" style="background:#121c14"></div><div class="sw" style="background:#b8c878"></div><div class="sw" style="background:#d8e89a"></div><div class="sw" style="background:#e8ecd8"></div></div>
+    <h2>17 — Forest Daylight</h2>
+    <p>Your forest-daylight.jpg (sunlit forest) as a faded ghost. Deep forest green + moss + warm cream. The "natural light" take.</p>
+    <div class="meta">Dark · Ghost Fade · Forest · Sunlit</div>
+  </a>
+  <a class="card" href="./17-forest-teal/index.html">
+    <div class="swatches"><div class="sw" style="background:#060f12"></div><div class="sw" style="background:#0d1a1f"></div><div class="sw" style="background:#6ec8d8"></div><div class="sw" style="background:#a8e4f0"></div><div class="sw" style="background:#e0ecef"></div></div>
+    <h2>17 — Forest Teal</h2>
+    <p>Your forest-teal.jpg (teal-tinted forest) as a faded ghost. Deep teal + cyan + pale cream. The "deep ocean" take.</p>
+    <div class="meta">Dark · Ghost Fade · Forest · Teal</div>
+  </a>
+  <a class="card" href="./17-forest-sunbeam/index.html">
+    <div class="swatches"><div class="sw" style="background:#0c100a"></div><div class="sw" style="background:#141a10"></div><div class="sw" style="background:#e0c878"></div><div class="sw" style="background:#f8e8a8"></div><div class="sw" style="background:#ece8d4"></div></div>
+    <h2>17 — Forest Sunbeam</h2>
+    <p>Your forest-sunbeam.jpg (sunbeam through trees) as a faded ghost. Deep forest + warm sunbeam gold + cream. The "golden hour" take.</p>
+    <div class="meta">Dark · Ghost Fade · Forest · Sunbeam</div>
+  </a>
+  <a class="card" href="./18-city-street-amber/index.html">
+    <div class="swatches"><div class="sw" style="background:#120c06"></div><div class="sw" style="background:#1c140c"></div><div class="sw" style="background:#ffc878"></div><div class="sw" style="background:#ffe0a0"></div><div class="sw" style="background:#f4e8d4"></div></div>
+    <h2>18 — City Street Amber</h2>
+    <p>City-street.jpg with a warmer, more saturated amber palette — leans into the warm bokeh in the photo. Deep espresso + amber + cream. The "golden city night" take.</p>
+    <div class="meta">Dark · Ghost Fade · City Night · Warm Amber</div>
+  </a>
+  <a class="card" href="./19-forest-sunbeam-bright/index.html">
+    <div class="swatches"><div class="sw" style="background:#0e1208"></div><div class="sw" style="background:#161c0e"></div><div class="sw" style="background:#f8e8a8"></div><div class="sw" style="background:#fff8c8"></div><div class="sw" style="background:#f0ecd8"></div></div>
+    <h2>19 — Forest Sunbeam Bright</h2>
+    <p>Forest-sunbeam.jpg with a brighter, higher-contrast gold palette — leans into the sunbeam in the photo. Deep forest + bright gold + cream. The "golden hour" take.</p>
+    <div class="meta">Dark · Ghost Fade · Forest · Bright Gold</div>
+  </a>
+  <a class="card" href="./20-awwwards-import/index.html">
+    <div class="swatches"><div class="sw" style="background:#0a0a0a"></div><div class="sw" style="background:#1a1a1a"></div><div class="sw" style="background:#c9a06a"></div><div class="sw" style="background:#e8c890"></div><div class="sw" style="background:#ede0d0"></div></div>
+    <h2>20 — Awwwards Import</h2>
+    <p>Imported from "Vincent Chung Awwwards Portfolio.html" — an Awwwards-style portfolio with your portrait-knit.jpg. Dark, editorial, award-site aesthetic.</p>
+    <div class="meta">Dark · Awwwards · Import · Portrait</div>
+  </a>
+  <a class="card" href="./21-chung-lai-yin-import/index.html">
+    <div class="swatches"><div class="sw" style="background:#0a0a0a"></div><div class="sw" style="background:#1a1a1a"></div><div class="sw" style="background:#c9a06a"></div><div class="sw" style="background:#e8c890"></div><div class="sw" style="background:#ede0d0"></div></div>
+    <h2>21 — Chung Lai Yin Import</h2>
+    <p>Imported from "Chung Lai Yin Vincent Portfolio.html" — a dark, editorial portfolio with Fraunces + Inter + JetBrains Mono. Base64 images extracted to local assets.</p>
+    <div class="meta">Dark · Editorial · Import · Fraunces</div>
+  </a>
+  <a class="card" href="./22-tunnel-front-full-bleed/index.html">
+    <div class="swatches"><div class="sw" style="background:#0e0f11"></div><div class="sw" style="background:#16181c"></div><div class="sw" style="background:#c8a86e"></div><div class="sw" style="background:#e8cc96"></div><div class="sw" style="background:#ece6d8"></div></div>
+    <h2>22 — Tunnel Front Full-Bleed</h2>
+    <p>06 full-bleed template with tunnel-front.jpg (the 10-tunnel-ghost image) as a full-bleed background. Charcoal + antique gold. The front-facing tunnel shot, edge to edge.</p>
+    <div class="meta">Dark · Full-Bleed · Tunnel Front · Charcoal + Gold</div>
+  </a>
+  <a class="card" href="./23-tunnel-ghost-redesign/index.html">
+    <div class="swatches"><div class="sw" style="background:#050f1a"></div><div class="sw" style="background:#0c1f2e"></div><div class="sw" style="background:#6ec8e8"></div><div class="sw" style="background:#a8e4ff"></div><div class="sw" style="background:#e4f0f6"></div></div>
+    <h2>23 — Tunnel Ghost (06 + Ghost Fade)</h2>
+    <p>Duplicate of 06-tunnel-full-bleed with the hero image swapped to the ghost-fade treatment — tunnel-wide-1.jpg as a right-side ghost dissolving into charcoal via mask-image gradient. Charcoal + antique gold. Vignette + grain added, reduce-scope bug fixed.</p>
+    <div class="meta">Dark · Ghost Fade · Charcoal + Gold · 06 Duplicate</div>
+  </a>
+  <a class="card" href="./27-best-mix/index.html">
+    <div class="swatches"><div class="sw" style="background:#0b0b0a"></div><div class="sw" style="background:#151513"></div><div class="sw" style="background:#f2461f"></div><div class="sw" style="background:#e9e5db"></div><div class="sw" style="background:#d5d0c3"></div></div>
+    <h2>27 — Best Mix</h2>
+    <p>Imported from "Vincent Chung Portfolio Best Mix.html" — ink/graphite/bone palette with flame accent, Archivo display type, WebGL terrain backdrop, preloader, custom cursor. Base64 assets extracted to local files.</p>
+    <div class="meta">Dark · Editorial · Import · Archivo · WebGL</div>
+  </a>
+</div>
+<p class="note"><strong>Notes</strong><br>• All copy is placeholder-but-plausible — swap in real projects, dates and metrics before shipping.<br>• Contact form posts to <code>https://formspree.io/f/YOUR_FORM_ID</code> — create a free Formspree form and replace the ID.<br>• Portraits: <code>Photos/portrait-knit.jpg</code> (hero) and <code>Photos/portrait-white-shirt.jpg</code> (About) — Gemini-generated cutouts from your photos. <code>Photos/hero-tunnel.jpg</code> and <code>Photos/night-lanterns.jpg</code> are your real photos, ready for a full-bleed / frame-lock hero if you want one.<br>• Open <code>designs/index.html</code> in a browser to compare. Nothing in the repo root has been touched yet.</p>
+</body></html>
