@@ -1,0 +1,41 @@
+name: Update Resume
+run-name: ${{ github.actor }} Updateing Resume on ${{ github.repository }} at ${{ github.ref }}
+on:
+    schedule:
+        - cron: '0 0 * * *'
+          timezone: 'Asia/Hong_Kong'
+    workflow_dispatch:     # 允許喺 GitHub Actions 頁面隨時手動㩒掣跑
+
+permissions:
+  contents: write
+
+jobs:
+  update-resume:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Checkout repository
+          uses: actions/checkout@v6
+
+        - name: Download Resume PDF
+          env:
+            DOC_ID: ${{ secrets.RESUME_DOC_ID }}
+          run:
+            curl -fsSL "https://docs.google.com/document/d/${DOC_ID}/export?format=pdf" -o /tmp/resume.pdf
+
+        - name: Check if Resume PDF is downloaded correclty
+          run: |
+            # 確認下載到嘅真係 PDF (防 Google 回傳登入頁 HTML 蓋壞舊檔）
+            head -c 4 /tmp/resume.pdf | grep -q '%PDF'
+            mv /tmp/resume.pdf "resume/Web Dev Resume.pdf"
+
+        - name: Commit and push if changed
+          run: |
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            if ! git diff --quiet "resume/Web Dev Resume.pdf"; then
+                git add "resume/Web Dev Resume.pdf"
+                git commit -m "chore(resume): sync latest PDF from Google Docs"
+                git push
+            else
+                echo "No changes in resume PDF."
+            fi
