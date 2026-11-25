@@ -243,12 +243,42 @@ section.block{position:relative;z-index:10;padding:18vh 20px}
 .proj-name{font-size:clamp(2.6rem,7.4vw,8.4rem);margin:0}
 .proj-blurb{margin:1.5rem 0 0;max-width:36rem;font-size:1rem;font-weight:500;line-height:1.45}
 @media(min-width:768px){.proj-blurb{font-size:1.12rem}}
-.tagrow{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1.5rem;padding:0;list-style:none}
-.tagrow li{border:1px solid;padding:.3rem .65rem}
-.theme-bone .tagrow li{border-color:rgba(11,11,10,.3)} .theme-flame .tagrow li{border-color:rgba(11,11,10,.35)}
-.theme-graphite .tagrow li,.theme-ink .tagrow li{border-color:var(--line)}
-.proj-links{display:flex;flex-wrap:wrap;gap:1rem 2rem}
-.proj-links a{font-weight:600}
+.tagrow{display:flex;flex-wrap:wrap;gap:.45rem;margin:0 0 1.25rem;padding:0;list-style:none}
+.tagrow li{border:1px solid;border-radius:2px;padding:.24rem .58rem;font-size:.64rem;font-weight:500;letter-spacing:.05em;user-select:none}
+.theme-bone .tagrow li{background:#dfdace;border-color:#d2ccbe;color:#434039}
+.theme-graphite .tagrow li{background:#1e1e1b;border-color:#2b2a26;color:#b8b3a6}
+.theme-flame .tagrow li{background:#ffbbab;border-color:#bd7562;color:#6b362a}
+.theme-ink .tagrow li{background:#161614;border-color:#262522;color:#b8b3a6}
+.proj-companion{position:relative;display:flex;align-items:center;justify-content:space-between;gap:1rem;max-width:34rem;margin:0 0 1rem;padding:.78rem 1rem .78rem 1.15rem;border:1px solid rgba(11,11,10,.26);background:rgba(11,11,10,.045);transition:background-color .24s ease,border-color .24s ease,transform .28s var(--ease-out-expo)}
+.proj-companion::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--flame)}
+.proj-companion:hover{background:var(--ink);border-color:var(--ink);color:var(--bone);transform:translateY(-2px)}
+.proj-comp-left{display:flex;flex-direction:column;gap:.2rem;min-width:0}
+.proj-comp-kicker{display:inline-flex;align-items:center;gap:.45rem;font-size:.6rem;letter-spacing:.1em;opacity:.72}
+.proj-comp-name{font-size:.94rem;font-weight:700;letter-spacing:-.01em;line-height:1.2}
+.proj-comp-right{display:inline-flex;align-items:center;gap:.35rem;flex:none;font-size:.64rem;font-weight:600;letter-spacing:.06em;opacity:.82}
+.proj-companion:hover .proj-comp-kicker,.proj-companion:hover .proj-comp-right{opacity:1}
+.proj-companion:hover .proj-arr{transform:translate(2px,-2px);color:var(--flame)}
+.proj-links{display:flex;flex-wrap:wrap;gap:.65rem .75rem}
+.proj-btn{display:inline-flex;align-items:center;gap:.5rem;min-height:40px;padding:.58rem 1.05rem;border:1px solid;font-weight:700;letter-spacing:.07em;transition:background-color .24s ease,border-color .24s ease,color .24s ease,transform .24s var(--ease-out-expo)}
+.proj-btn:hover{transform:translateY(-1px)}
+.proj-btn .proj-ico{width:14px;height:14px;flex:none;display:block}
+.proj-btn .proj-arr{display:inline-block;transition:transform .26s var(--ease-out-expo)}
+.proj-btn:hover .proj-arr{transform:translate(2px,-2px)}
+.proj-live-dot{position:relative;display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--flame);flex:none}
+.proj-live-dot::after{content:"";position:absolute;inset:-3px;border-radius:50%;border:1.5px solid var(--flame);opacity:0;animation:ab-beacon 2.2s cubic-bezier(0.16,1,0.3,1) infinite}
+.theme-bone .proj-btn--live,.theme-flame .proj-btn--live{background:var(--ink);border-color:var(--ink);color:var(--bone)}
+.theme-bone .proj-btn--live:hover{background:var(--flame);border-color:var(--flame);color:var(--ink)}
+.theme-bone .proj-btn--live:hover .proj-live-dot{background:var(--ink)}
+.theme-flame .proj-btn--live:hover{background:var(--bone);border-color:var(--bone);color:var(--ink)}
+.theme-graphite .proj-btn--live,.theme-ink .proj-btn--live{background:var(--flame);border-color:var(--flame);color:var(--ink)}
+.theme-graphite .proj-btn--live .proj-live-dot,.theme-ink .proj-btn--live .proj-live-dot{background:var(--ink)}
+.theme-graphite .proj-btn--live:hover,.theme-ink .proj-btn--live:hover{background:var(--bone);border-color:var(--bone);color:var(--ink)}
+.theme-bone .proj-btn--src{border-color:var(--ink);background:transparent;color:var(--ink)}
+.theme-bone .proj-btn--src:hover{background:var(--ink);border-color:var(--ink);color:var(--bone)}
+.theme-flame .proj-btn--src{border-color:var(--ink);background:var(--bone);color:var(--ink)}
+.theme-flame .proj-btn--src:hover{background:var(--ink);border-color:var(--ink);color:var(--flame)}
+.theme-graphite .proj-btn--src,.theme-ink .proj-btn--src{border-color:rgba(233,229,219,.45);background:rgba(233,229,219,.06);color:var(--bone)}
+.theme-graphite .proj-btn--src:hover,.theme-ink .proj-btn--src:hover{border-color:var(--flame);color:var(--flame);background:rgba(242,70,31,.10)}
 .proj-visual{height:18rem;flex:none}
 @media(min-width:768px){.proj-visual{height:auto;flex:1;min-height:0}}
 .proj-points{list-style:none;margin:0;padding:0}
@@ -269,7 +299,10 @@ section.block{position:relative;z-index:10;padding:18vh 20px}
   .proj-visual{flex:none;height:14.5rem}
   .proj-blurb{margin-top:.85rem;font-size:.94rem}
   .proj-points li{padding:.55rem 0;font-size:.82rem}
-  .tagrow{margin-bottom:1rem}
+  .tagrow{margin-bottom:.85rem}
+  .proj-companion{padding:.62rem .8rem .62rem .95rem;margin-bottom:.75rem;flex-wrap:wrap;gap:.45rem}
+  .proj-comp-name{font-size:.86rem}
+  .proj-btn{min-height:36px;padding:.46rem .82rem;font-size:.64rem}
   .proj-meta{flex-wrap:wrap;gap:.35rem .75rem}
 }
 /* project visuals */
@@ -2354,7 +2387,7 @@ var RECOGNITION = [
 /* ================= render: work visuals ================= */
 function ragVisual(){
   var nodes = [
-    { y:18, label:"MCP / REST client", sub:"Claude Desktop · Cursor" },
+    { y:18, label:"MCP / REST client", sub:"Chicerone UI · Claude · Cursor" },
     { y:100, label:"Gateway", sub:"Spring Boot · virtual threads" },
     { y:182, label:"AI plane", sub:"FastAPI · LangGraph · Docling" },
     { y:264, label:"Vector store", sub:"Qdrant · hybrid retrieval" }
@@ -2413,13 +2446,26 @@ function visualFor(kind){
 /* ================= render: projects ================= */
 (function(){
   var stack = document.getElementById("projectStack");
+  var GH_ICO = '<svg class="proj-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>';
   stack.innerHTML = PROJECTS.map(function(p){
     var nameWords = p.name.split(" ").map(function(w){
       return '<span class="mask"><span class="proj-line" style="display:block">'+w+'</span></span>';
     }).join("");
     var tags = p.tags.map(function(t){ return '<li class="t-mono">'+t+'</li>'; }).join("");
+    var compHtml = p.companion ? (
+      '<a class="proj-companion" href="'+p.companion.href+'" target="_blank" rel="noreferrer" data-cursor="Demo">'+
+        '<span class="proj-comp-left">'+
+          '<span class="proj-comp-kicker t-mono"><span class="proj-live-dot" aria-hidden="true"></span>'+p.companion.badge+'</span>'+
+          '<span class="proj-comp-name">'+p.companion.name+'</span>'+
+        '</span>'+
+        '<span class="proj-comp-right t-mono">'+p.companion.meta+' <span class="proj-arr" aria-hidden="true">↗</span></span>'+
+      '</a>'
+    ) : "";
     var links = p.links.map(function(l){
-      return '<a href="'+l.href+'" target="_blank" rel="noreferrer" data-cursor="Open" class="t-mono u-link" style="font-weight:600">'+l.label+' ↗</a>';
+      var isLive = l.label.toLowerCase().indexOf("live") !== -1 || l.label.toLowerCase().indexOf("demo") !== -1;
+      var cls = "proj-btn t-mono " + (isLive ? "proj-btn--live" : "proj-btn--src");
+      var lead = isLive ? '<span class="proj-live-dot" aria-hidden="true"></span>' : GH_ICO;
+      return '<a href="'+l.href+'" target="_blank" rel="noreferrer" data-cursor="'+(isLive ? 'Live' : 'Code')+'" class="'+cls+'">'+lead+'<span>'+l.label+'</span><span class="proj-arr" aria-hidden="true">↗</span></a>';
     }).join("");
     var points = p.points.map(function(pt){
       return '<li><span class="sq"></span><span>'+pt+'</span></li>';
@@ -2430,7 +2476,7 @@ function visualFor(kind){
         '<div class="proj-meta t-mono"><span>'+p.index+' <span class="proj-sub">/ 04</span></span><span class="proj-sub">'+p.kind+'</span><span>'+p.year+'</span></div>'+
         '<div class="proj-grid">'+
           '<div class="proj-left"><div><h3 class="proj-name t-display" id="proj-'+p.id+'">'+nameWords+'</h3><p class="proj-blurb proj-fade">'+p.blurb+'</p></div>'+
-          '<div class="proj-fade"><ul class="tagrow">'+tags+'</ul><div class="proj-links">'+links+'</div></div></div>'+
+          '<div class="proj-fade"><ul class="tagrow">'+tags+'</ul>'+compHtml+'<div class="proj-links">'+links+'</div></div></div>'+
           '<div class="proj-right"><div class="proj-visual">'+visualFor(p.visual)+'</div><ul class="proj-points proj-fade">'+points+'</ul></div>'+
         '</div>'+
       '</div><div class="veil"></div></article>';
