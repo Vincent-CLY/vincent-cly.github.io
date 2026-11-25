@@ -1,5 +1,5 @@
 name: Update Resume
-run-name: ${{ github.actor }} Updateing Resume on ${{ github.repository }} at ${{ github.ref }}
+run-name: ${{ github.actor }} Updating Resume on ${{ github.repository }} at ${{ github.ref }}
 on:
     schedule:
         - cron: '0 0 * * *'
@@ -22,7 +22,7 @@ jobs:
           run:
             curl -fsSL "https://docs.google.com/document/d/${DOC_ID}/export?format=pdf" -o /tmp/resume.pdf
 
-        - name: Check if Resume PDF is downloaded correclty
+        - name: Check if Resume PDF is downloaded correctly
           run: |
             # 確認下載到嘅真係 PDF (防 Google 回傳登入頁 HTML 蓋壞舊檔）
             head -c 4 /tmp/resume.pdf | grep -q '%PDF'
