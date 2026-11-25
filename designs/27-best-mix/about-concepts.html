@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>About Me — Shortlisted Designs Comparison · Vincent Chung</title>
+<link rel="icon" href="data:,"/>
+<style>
+:root{
+  --ink:#0b0b0a; --graphite:#151513; --line:#2a2926; --bone:#e9e5db; --sand:#d5d0c3; --dim:#8b887f; --flame:#f2461f;
+  --ease-out-expo:cubic-bezier(0.16,1,0.3,1);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{margin:0;background:var(--ink);color:var(--bone);font-family:"Archivo","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip}
+::selection{background:var(--flame);color:var(--ink)}
+a{color:inherit;text-decoration:none}
+button{font:inherit;background:none;border:0;color:inherit;cursor:pointer}
+.t-mono{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase}
+.t-display{font-weight:800;font-stretch:112%;line-height:.94;letter-spacing:-.035em;text-transform:uppercase}
+.t-mega{font-weight:800;font-stretch:125%;line-height:.84;letter-spacing:-.045em;text-transform:uppercase}
+.u-link{position:relative;display:inline-block}
+.u-link::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:1px;background:currentColor;transform-origin:right;transform:scaleX(0);transition:transform .5s var(--ease-out-expo)}
+.u-link:hover::after{transform-origin:left;transform:scaleX(1)}
+
+.grain::after{content:"";position:fixed;inset:-50%;z-index:90;pointer-events:none;opacity:.055;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.9 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}
+#terrainBg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.34}
+#terrainBg canvas{display:block;width:100%;height:100%}
+
+.lab-nav{position:fixed;left:50%;transform:translateX(-50%);top:12px;z-index:160;width:calc(100% - 24px);max-width:940px;padding:6px;display:flex;flex-wrap:wrap;gap:4px;background:rgba(11,11,10,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.lab-nav a{flex:1 1 auto;text-align:center;padding:8px 10px;font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:.58rem;letter-spacing:.07em;text-transform:uppercase;color:var(--sand);border:1px solid transparent;transition:.2s}
+.lab-nav a:hover{color:var(--bone);border-color:rgba(242,70,31,.55);background:rgba(242,70,31,.12)}
+
+main{position:relative;z-index:10}
+.intro-banner{min-height:36svh;display:flex;flex-direction:column;justify-content:flex-end;padding:108px 24px 36px;border-bottom:1px solid var(--line)}
+@media(min-width:768px){.intro-banner{padding:108px 40px 44px}}
+.intro-banner h1{margin:0;font-size:clamp(2rem,5.2vw,4.5rem)}
+.intro-banner h1 span{color:var(--flame)}
+.intro-banner p{margin:.85rem 0 0;color:var(--dim);max-width:64ch;font-size:.92rem;line-height:1.58}
+
+/* Shared Unslopped Availability Masthead + Typography */
+.stage-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px;padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:22px;font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:.62rem;letter-spacing:.1em;color:var(--dim)}
+.stage-head b{color:var(--flame)}
+.ab-mast{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem 1.5rem;padding:11px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.ab-avail{display:inline-flex;flex-wrap:wrap;align-items:center;gap:10px 14px;max-width:100%}
+.ab-avail-stamp{display:inline-flex;align-items:center;padding:5px 11px;background:var(--flame);color:var(--ink);font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:.66rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;transition:background-color .22s ease}
+.ab-avail:hover .ab-avail-stamp{background:var(--bone)}
+.ab-avail-meta{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--bone)}
+.ab-avail-meta em{font-style:normal;color:var(--dim);margin:0 6px}
+.ab-actions{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center}
+.ab-link{display:inline-flex;align-items:center;gap:.35rem;font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:.66rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--bone);padding:3px 0}
+.ab-link--flame{color:var(--flame)}
+.ab-btn{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;padding:.6rem 1.15rem;border:1px solid rgba(233,229,219,.26);font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--bone);transition:.2s}
+.ab-btn:hover{border-color:var(--flame);color:var(--flame)}
+.ab-btn--flame{background:var(--flame);border-color:var(--flame);color:var(--ink);font-weight:700}
+.ab-btn--flame:hover{background:var(--bone);border-color:var(--bone);color:var(--ink)}
+.lead-h{margin:0;font-size:clamp(1.55rem,2.9vw,2.7rem);line-height:1.06;letter-spacing:-.035em}
+.lead-h span{color:var(--flame)}
+.lead-p{margin:0;max-width:48ch;font-size:.95rem;line-height:1.62;color:var(--sand)}
+.c-top{display:flex;justify-content:space-between;font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:.58rem;letter-spacing:.13em;opacity:.76}
+.c-q{margin:auto 0;font-family:Georgia,"Times New Roman",serif;font-style:italic;font-size:clamp(1.16rem,1.75vw,1.5rem);line-height:1.25}
+.c-q strong{font-style:normal;font-family:"Archivo",sans-serif;font-weight:800}
+.c-v{margin:0;font-size:clamp(1.08rem,1.55vw,1.38rem);font-weight:700;line-height:1.24}
+.c-foot{padding-top:10px;border-top:1px solid currentColor;opacity:.72;font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:.56rem;letter-spacing:.1em}
+.two-col{display:grid;grid-template-columns:1fr;gap:2rem;align-items:center}
+@media(min-width:920px){.two-col{grid-template-columns:1.05fr .95fr;gap:3rem}}
+.col-left{display:flex;flex-direction:column;gap:1.25rem}
+
+/* =====================================================================
+   01 — 3D INTERACTIVE CARD DECK (UPGRADED WITH UNSLOPPED OPEN TO WORK)
+   ===================================================================== */
+.s-block{position:relative;padding:88px 24px 76px;border-bottom:1px solid var(--line)}
+@media(min-width:768px){.s-block{padding:92px 40px 84px}}
+.deck-stage{position:relative;height:320px;display:grid;place-items:center;perspective:1200px}
+.deck-card{position:absolute;width:min(90%,350px);height:230px;padding:24px 24px;border:1px solid var(--line);display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;user-select:none;transition:transform .58s var(--ease-out-expo),opacity .45s ease,box-shadow .4s ease;box-shadow:0 24px 52px rgba(0,0,0,.64);will-change:transform}
+.deck-card--flame{background:var(--flame);border-color:var(--flame);color:var(--ink)}
+.deck-card--bone{background:var(--bone);border-color:var(--bone);color:var(--ink)}
+.deck-card--graphite{background:#181815;color:var(--bone)}
+.deck-card--ink{background:#0e0e0c;border-color:rgba(242,70,31,.65);color:var(--bone)}
+
+/* =====================================================================
+   02 — EXPLODED CAD ISOMETRIC STACK (PREVIOUS #1)
+   ===================================================================== */
+.x1-runway{position:relative;height:200vh;border-bottom:1px solid var(--line)}
+.x1-stage{position:sticky;top:0;height:100svh;display:flex;flex-direction:column;justify-content:center;padding:86px 24px 32px;overflow:hidden}
+@media(min-width:768px){.x1-stage{padding:86px 40px 36px}}
+.x1-cad{position:relative;height:370px;display:grid;place-items:center;perspective:1200px}
+.x1-laser{position:absolute;left:50%;top:18%;bottom:18%;width:1px;background:linear-gradient(to bottom,transparent,var(--flame),transparent);opacity:.55;pointer-events:none}
+.x1-slab{position:absolute;width:min(86%,340px);height:192px;padding:20px 22px;border:1px solid var(--line);display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;transform-style:preserve-3d;transition:transform .55s var(--ease-out-expo),border-color .25s ease,box-shadow .35s ease;will-change:transform;box-shadow:0 24px 44px rgba(0,0,0,.62)}
+.x1-slab--flame{background:var(--flame);border-color:var(--flame);color:var(--ink)}
+.x1-slab--bone{background:var(--bone);border-color:var(--bone);color:var(--ink)}
+.x1-slab--graphite{background:#181815;color:var(--bone)}
+.x1-slab--ink{background:#0e0e0c;border-color:rgba(242,70,31,.65);color:var(--bone)}
+.x1-slab.is-focus{z-index:20 !important;box-shadow:0 30px 64px rgba(242,70,31,.28),0 18px 40px rgba(0,0,0,.8)}
+
+/* =====================================================================
+   03 — 3D ORBITAL CAROUSEL (PREVIOUS #4)
+   ===================================================================== */
+.x4-runway{position:relative;height:210vh;border-bottom:1px solid var(--line)}
+.x4-stage{position:sticky;top:0;height:100svh;display:flex;flex-direction:column;justify-content:center;padding:86px 24px 32px;overflow:hidden}
+@media(min-width:768px){.x4-stage{padding:86px 40px 36px}}
+.x4-orbit{position:relative;height:360px;display:grid;place-items:center;perspective:1200px}
+.x4-ring-guide{position:absolute;width:320px;height:120px;border-radius:50%;border:1px dashed rgba(242,70,31,.35);transform:rotateX(68deg);pointer-events:none}
+.x4-card{position:absolute;width:min(78%,310px);height:230px;padding:22px 24px;border:1px solid var(--line);display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;will-change:transform,opacity;box-shadow:0 22px 46px rgba(0,0,0,.62);transition:border-color .25s ease}
+.x4-card:hover{border-color:var(--flame)}
+.x4-card--flame{background:var(--flame);border-color:var(--flame);color:var(--ink)}
+.x4-card--bone{background:var(--bone);border-color:var(--bone);color:var(--ink)}
+.x4-card--graphite{background:#181815;color:var(--bone)}
+.x4-card--ink{background:#0e0e0c;border-color:rgba(242,70,31,.6);color:var(--bone)}
+
+/* =====================================================================
+   04 — SCROLL-SCRUBBED INVERTED PRINT-BLADE × INTERLOCKING SWISS GRID
+   ===================================================================== */
+.pb-blade{position:relative;border:1px solid var(--line);overflow:hidden;isolation:isolate;margin-top:1.5rem}
+.pb-layer{padding:clamp(1.5rem,3.4vw,2.7rem) clamp(1.2rem,3vw,2.5rem);display:flex;flex-direction:column;gap:.2rem}
+.pb-base{background:rgba(14,14,12,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.pb-reveal{position:absolute;inset:0;background:var(--flame);clip-path:inset(0 100% 0 0);will-change:clip-path;pointer-events:none}
+.pb-line{display:block;font-weight:800;font-stretch:116%;text-transform:uppercase;font-size:clamp(1.75rem,4.6vw,4.2rem);line-height:.94;letter-spacing:-.035em}
+.pb-base .pb-line--1{color:var(--bone)}
+.pb-base .pb-line--2{color:transparent;-webkit-text-stroke:1.3px rgba(233,229,219,.48)}
+.pb-reveal .pb-line--1{color:var(--ink)}
+.pb-reveal .pb-line--2{color:var(--bone)}
+.pb-edge{position:absolute;top:0;bottom:0;left:0;width:2px;background:var(--bone);z-index:4;pointer-events:none;box-shadow:0 0 16px rgba(233,229,219,.6);will-change:transform,opacity}
+.pb-grid{display:grid;grid-template-columns:1fr;gap:2rem;margin-top:1.9rem;align-items:stretch}
+@media(min-width:860px){.pb-grid{grid-template-columns:minmax(0,1.18fr) minmax(0,.95fr);gap:clamp(2rem,4.5vw,4.2rem)}}
+.pb-stack{display:grid;grid-template-columns:1fr;gap:14px;align-content:space-between}
+.pb-creed{padding:22px 24px;background:var(--bone);color:var(--ink);border:1px solid var(--bone);will-change:transform}
+.pb-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--line);background:rgba(15,15,13,.88);will-change:transform}
+@media(max-width:460px){.pb-stats{grid-template-columns:1fr}}
+.pb-stat{padding:15px 16px}
+.pb-stat + .pb-stat{border-left:1px solid var(--line)}
+@media(max-width:460px){.pb-stat + .pb-stat{border-left:0;border-top:1px solid var(--line)}}
+.pb-stat-v{display:block;font-weight:800;font-stretch:115%;font-size:clamp(1.1rem,1.6vw,1.42rem);color:var(--bone)}
+.pb-stat-v .fl{color:var(--flame)}
+.pb-stat-k{display:block;margin-top:5px;font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+
+/* =====================================================================
+   05 — FINALE: KINETIC VARIABLE-AXIS MONOLITH × 14° SLANTED CURTAIN
+   ===================================================================== */
+.ab-mast-fill{position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--flame);transform-origin:0 50%;transform:scaleX(0);will-change:transform;pointer-events:none}
+.ab-kinetic{position:relative;margin:clamp(1.8rem,4vw,3rem) 0;padding:.2rem 0;user-select:none}
+.ab-k-row{position:relative;display:block;width:fit-content;max-width:100%;font-stretch:118%;will-change:transform,font-stretch}
+.ab-k-row + .ab-k-row{margin-top:.1em}
+.ab-k-row--2{margin-left:auto}
+@media(min-width:768px){.ab-k-row--3{margin-left:10vw}}
+.ab-k-txt{display:block;font-weight:800;font-stretch:inherit;text-transform:uppercase;font-size:clamp(2.05rem,6.5vw,6rem);line-height:.88;letter-spacing:-.04em;white-space:nowrap}
+@media(max-width:640px){.ab-k-txt{white-space:normal;font-size:clamp(1.9rem,10vw,3.1rem);line-height:.92}}
+.ab-k-hollow{color:transparent;-webkit-text-stroke:1.3px rgba(233,229,219,.42)}
+.ab-k-solid{position:absolute;inset:0;clip-path:polygon(0 0,-14% 0,-26% 100%,0 100%);will-change:clip-path;pointer-events:none}
+.ab-k-row--1 .ab-k-solid,.ab-k-row--3 .ab-k-solid{color:var(--bone)}
+.ab-k-row--2 .ab-k-solid{color:var(--flame)}
+.ab-colophon{position:relative;padding-top:2rem;display:grid;grid-template-columns:1fr;gap:2rem;align-items:start;border-top:1px solid var(--line)}
+@media(min-width:860px){.ab-colophon{grid-template-columns:minmax(0,1.32fr) minmax(0,.88fr);gap:clamp(2.5rem,5.5vw,5.5rem)}}
+.ab-ledger{list-style:none;margin:0;padding:0}
+.ab-lrow{display:grid;grid-template-columns:6.2rem minmax(0,1fr);gap:.35rem 1rem;padding:12px 0;border-top:1px solid var(--line);align-items:baseline}
+.ab-lrow:first-child{border-top:0}
+.ab-lrow-k{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.ab-lrow-v{font-size:.96rem;font-weight:600;line-height:1.4;color:var(--bone)}
+.ab-langs{display:inline-flex;flex-wrap:wrap;gap:.2rem .75rem}
+.ab-lang{font-size:.94rem;font-weight:600;color:var(--bone)}
+.ab-lang + .ab-lang::before{content:"/";color:var(--flame);margin-right:.75rem;font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-weight:400}
+
+/* =====================================================================
+   06 — EDITORIAL MONOGRAPH × KINETIC SEAL (REFINED FROM SCREENSHOT)
+   ===================================================================== */
+.em-wrap{position:relative;overflow:hidden;border-bottom:0;background:radial-gradient(62% 58% at 92% 10%,rgba(242,70,31,.18),rgba(242,70,31,.04) 44%,transparent 74%)}
+.em-gridlines{position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.22;background-image:linear-gradient(to right,rgba(233,229,219,.08) 1px,transparent 1px);background-size:16.666% 100%}
+.em-inner{position:relative;z-index:2}
+.em-topbar{position:relative;display:grid;grid-template-columns:1fr;gap:6px;align-items:center;padding-bottom:14px;border-bottom:1px solid var(--line);font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:.62rem;letter-spacing:.11em;text-transform:uppercase;color:var(--dim)}
+@media(min-width:720px){.em-topbar{grid-template-columns:1fr auto 1fr}}
+.em-topbar-l{display:inline-flex;align-items:center;gap:9px;color:var(--bone)}
+.em-sq{width:7px;height:7px;background:var(--flame);display:inline-block;flex:0 0 auto}
+.em-topbar-c{text-align:left;color:var(--dim)}
+@media(min-width:720px){.em-topbar-c{text-align:center}}
+.em-topbar-r{text-align:left;font-variant-numeric:tabular-nums}
+@media(min-width:720px){.em-topbar-r{text-align:right}}
+.em-topbar-r b{color:var(--bone);font-weight:600;margin:0 4px}
+.em-topbar-fill{position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--flame);transform-origin:0 50%;transform:scaleX(0);will-change:transform}
+.em-hero{margin:clamp(2rem,4.8vw,3.6rem) 0 clamp(2.2rem,5vw,4rem)}
+.em-h{margin:0;font-weight:800;font-stretch:102%;font-size:clamp(2.2rem,6.4vw,5.8rem);line-height:.94;letter-spacing:-.042em;color:var(--bone);will-change:font-stretch}
+.em-h-line{display:block;overflow:hidden;padding-bottom:.06em}
+.em-h-in{display:block;will-change:transform}
+.em-h em{font-family:Georgia,"Times New Roman",serif;font-style:italic;font-weight:400;color:var(--flame);letter-spacing:-.02em;padding-right:.06em}
+.em-mid{display:grid;grid-template-columns:1fr;gap:2.2rem;align-items:center;margin-bottom:clamp(2.4rem,5vw,3.8rem)}
+@media(min-width:960px){.em-mid{grid-template-columns:minmax(0,1.08fr) auto minmax(0,1.05fr);gap:clamp(1.8rem,3.4vw,3.2rem)}}
+.em-hello{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;color:var(--flame);margin:0 0 1rem}
+.em-bio{margin:0;font-size:clamp(1rem,1.25vw,1.14rem);line-height:1.68;color:var(--dim);max-width:44ch}
+.em-bio strong{color:var(--bone);font-weight:600}
+.em-bio u{text-decoration:none;color:var(--bone);border-bottom:1px solid rgba(242,70,31,.65);padding-bottom:1px}
+.em-seal-wrap{display:grid;place-items:center}
+.em-seal{position:relative;width:154px;height:154px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;background:rgba(11,11,10,.84);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:border-color .3s ease,transform .45s var(--ease-out-expo)}
+.em-seal:hover{border-color:var(--flame);transform:scale(1.04)}
+.em-seal-ring{position:absolute;inset:0;width:100%;height:100%;will-change:transform}
+.em-seal-core{position:relative;z-index:2;width:62px;height:62px;border-radius:50%;border:1px solid rgba(242,70,31,.55);display:grid;place-items:center;background:rgba(242,70,31,.08);transition:background-color .3s ease,border-color .3s ease}
+.em-seal:hover .em-seal-core{background:var(--flame);border-color:var(--flame)}
+.em-seal-reticle{position:absolute;inset:6px;will-change:transform}
+.em-seal-vc{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:.76rem;font-weight:700;letter-spacing:.12em;color:var(--bone);transition:color .3s ease}
+.em-seal:hover .em-seal-vc{color:var(--ink)}
+.em-seal:hover .em-seal-reticle line,.em-seal:hover .em-seal-reticle circle{stroke:var(--ink)}
+.em-card{position:relative;padding:clamp(1.35rem,2.6vw,2rem);background:rgba(21,21,19,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);border-top:2px solid var(--flame);will-change:transform}
+.em-card-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:.58rem;letter-spacing:.13em;text-transform:uppercase;margin-bottom:1.1rem}
+.em-card-top span:first-child{color:var(--flame);font-weight:700}
+.em-card-top span:last-child{color:var(--dim)}
+.em-quote{margin:0;font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.25rem,2vw,1.72rem);line-height:1.32;color:var(--bone);font-weight:400}
+.em-quote em{font-style:italic;color:var(--flame)}
+.em-card-foot{margin-top:1.4rem;padding-top:1rem;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px 18px}
+.em-ledger{display:grid;grid-template-columns:1fr;border:1px solid var(--line);background:rgba(11,11,10,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+@media(min-width:640px){.em-ledger{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(min-width:1060px){.em-ledger{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.em-cell{position:relative;padding:18px 18px 20px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;border-top:1px solid var(--line);transition:background-color .25s ease}
+.em-cell:first-child{border-top:0}
+@media(min-width:640px){.em-cell{border-top:1px solid var(--line);border-left:1px solid var(--line)}.em-cell:nth-child(odd){border-left:0}.em-cell:nth-child(-n+2){border-top:0}}
+@media(min-width:1060px){.em-cell{border-top:0;border-left:1px solid var(--line)}.em-cell:first-child{border-left:0}}
+.em-cell-top{display:flex;justify-content:space-between;align-items:baseline;font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.em-cell-top b{color:var(--flame);font-weight:600}
+.em-cell-v{margin:0;font-size:clamp(1.02rem,1.25vw,1.22rem);font-weight:700;line-height:1.2;color:var(--bone);letter-spacing:-.02em}
+.em-cell-v .zh{color:var(--flame);font-weight:600;font-size:.82em;margin-left:5px}
+.em-cell-sub{margin:0;font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:.56rem;letter-spacing:.06em;color:var(--dim);line-height:1.45}
+.em-cell--avail{background:var(--flame);color:var(--ink)}
+.em-cell--avail .em-cell-top,.em-cell--avail .em-cell-top b,.em-cell--avail .em-cell-v,.em-cell--avail .em-cell-sub{color:var(--ink)}
+.em-cell--avail .em-cell-top{opacity:.78}
+.em-cell--avail .em-cell-sub{opacity:.85}
+.em-cell--avail:hover{background:var(--bone)}
+</style>
+</head>
+<body class="grain">
+<div id="terrainBg" aria-hidden="true"></div>
+
+<nav class="lab-nav" aria-label="Jump to shortlisted About concept">
+  <a href="#s1">01 3D Card Deck</a>
+  <a href="#s2">02 Exploded CAD</a>
+  <a href="#s3">03 3D Orbit</a>
+  <a href="#s4">04 Print Blade</a>
+  <a href="#s5">05 Finale Monolith</a>
+  <a href="#s6" style="color:var(--flame)">06 Editorial Seal ★</a>
+</nav>
+
+<main>
+  <header class="intro-banner">
+    <h1 class="t-mega">Shortlist <span>01–06.</span></h1>
+    <p>Every About Me concept you rated as good / solid — plus 06, a refined Swiss Brutalist × Kinetic Seal take on your reference screenshot. All upgraded with unslopped Open to Work treatments and live 3D terrain backdrop.</p>
+  </header>
+
+  <!-- ==================== 01: 3D INTERACTIVE CARD DECK ==================== -->
+  <section class="s-block" id="s1">
+    <div class="stage-head"><span><b>01</b> // 3D INTERACTIVE CARD DECK (UNSLOPPED OPEN TO WORK)</span><span>CLICK DECK OR BUTTON TO CYCLE · ZERO PINNING</span></div>
+    <div class="ab-mast" style="margin-bottom:2rem">
+      <a class="ab-avail" href="index.html#contact"><span class="ab-avail-stamp">Open to Work</span><span class="ab-avail-meta">Class of ’26<em>/</em>Available Now</span></a>
+      <div class="ab-actions"><a class="ab-link ab-link--flame u-link" href="index.html#contact">Get in touch →</a><a class="ab-link u-link" href="../../resume/Web%20Dev%20Resume.pdf" target="_blank" rel="noreferrer">Résumé PDF ↗</a></div>
+    </div>
+    <div class="two-col">
+      <div class="col-left">
+        <h2 class="lead-h t-display">I build for the web <span>end to end.</span></h2>
+        <p class="lead-p">Interfaces that feel considered, services that stay out of the way, and the AI plumbing behind both. BEng in Computer Engineering (Minor in Japanese) at The University of Hong Kong.</p>
+        <div style="display:flex;gap:10px;align-items:center"><button type="button" class="ab-btn ab-btn--flame" id="deckNext">Next Card →</button><span class="t-mono" id="deckIdx" style="color:var(--dim)">01 / 04</span></div>
+      </div>
+      <div class="deck-stage" id="deckStage">
+        <article class="deck-card deck-card--flame"><div class="c-top"><span>01 // APPROACH</span><span>SINCE 2022</span></div><blockquote class="c-q">“I learn fastest by <strong>shipping something real</strong>, then taking it apart.”</blockquote><div class="c-foot">Vincent Chung · Hong Kong</div></article>
+        <article class="deck-card deck-card--bone"><div class="c-top"><span>02 // EDUCATION</span><span>HKU ’26</span></div><p class="c-v">BEng in Computer Engineering<br/>Minor in Japanese</p><div class="c-foot">The University of Hong Kong</div></article>
+        <article class="deck-card deck-card--graphite"><div class="c-top"><span>03 // LANGUAGES</span><span>4 SPOKEN</span></div><p class="c-v">Cantonese · English · Mandarin · Japanese</p><div class="c-foot">Hong Kong · HKT</div></article>
+        <article class="deck-card deck-card--ink"><div class="c-top"><span>04 // AVAILABILITY</span><span>CLASS OF ’26</span></div><p class="c-v" style="color:var(--flame)">Open to Work — Available Now</p><div class="c-foot">Hybrid · On-site · Remote</div></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 02: EXPLODED CAD ISOMETRIC STACK ==================== -->
+  <section class="x1-runway" id="s2">
+    <div class="x1-stage">
+      <div class="stage-head"><span><b>02</b> // EXPLODED CAD ISOMETRIC STACK</span><span>SCROLL TO EXPLODE LAYERS · HOVER OR CLICK TO FLATTEN</span></div>
+      <div class="two-col">
+        <div class="col-left">
+          <div class="ab-mast">
+            <a class="ab-avail" href="index.html#contact"><span class="ab-avail-stamp">Open to Work</span><span class="ab-avail-meta">Class of ’26</span></a>
+            <div class="ab-actions"><a class="ab-link ab-link--flame u-link" href="index.html#contact">Hire →</a><a class="ab-link u-link" href="../../resume/Web%20Dev%20Resume.pdf" target="_blank" rel="noreferrer">CV ↗</a></div>
+          </div>
+          <h2 class="lead-h t-display">I build for the web <span>end to end.</span></h2>
+          <p class="lead-p">HKU Computer Engineering graduate (Class of ’26, Minor in Japanese). Scrolling separates the 4 architectural slabs along the Z-axis; hover any slab to slide it flat.</p>
+        </div>
+        <div class="x1-cad" id="x1Cad">
+          <div class="x1-laser" aria-hidden="true"></div>
+          <article class="x1-slab x1-slab--ink"><div class="c-top"><span>LAYER 04 // STATUS</span><span>CLASS OF ’26</span></div><p class="c-v" style="color:var(--flame)">Open to Work — Available Now</p><div class="c-foot">Hong Kong · Hybrid / Remote</div></article>
+          <article class="x1-slab x1-slab--graphite"><div class="c-top"><span>LAYER 03 // LANGUAGES</span><span>4 SPOKEN</span></div><p class="c-v">Cantonese · English · Mandarin · Japanese</p><div class="c-foot">Minor in Japanese · HKU</div></article>
+          <article class="x1-slab x1-slab--bone"><div class="c-top"><span>LAYER 02 // BASE &amp; EDU</span><span>HKU ’26</span></div><p class="c-v">Hong Kong · BEng CE<br/>Shipping since 2022</p><div class="c-foot">The University of Hong Kong</div></article>
+          <article class="x1-slab x1-slab--flame"><div class="c-top"><span>LAYER 01 // APPROACH</span><span>CRAFT</span></div><blockquote class="c-q">“I learn fastest by <strong>shipping something real</strong>, then taking it apart.”</blockquote><div class="c-foot">Vincent Chung · Since 2022</div></article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 03: 3D ORBITAL CAROUSEL ==================== -->
+  <section class="x4-runway" id="s3">
+    <div class="x4-stage">
+      <div class="stage-head"><span><b>03</b> // 3D ORBITAL CAROUSEL</span><span>SCROLL TO ORBIT · CLICK ANY CARD TO SNAP FORWARD</span></div>
+      <div class="two-col">
+        <div class="col-left">
+          <div class="ab-mast">
+            <a class="ab-avail" href="index.html#contact"><span class="ab-avail-stamp">Open to Work</span><span class="ab-avail-meta">Class of ’26</span></a>
+            <div class="ab-actions"><a class="ab-link ab-link--flame u-link" href="index.html#contact">Hire →</a><a class="ab-link u-link" href="../../resume/Web%20Dev%20Resume.pdf" target="_blank" rel="noreferrer">CV ↗</a></div>
+          </div>
+          <h2 class="lead-h t-display">I build for the web <span>end to end.</span></h2>
+          <p class="lead-p">4 facets orbiting on a tilted 3D elliptical ring with live Z-depth scaling. Scroll to rotate the orbit, or click any card to bring it straight to the front.</p>
+        </div>
+        <div class="x4-orbit" id="x4Orbit">
+          <div class="x4-ring-guide" aria-hidden="true"></div>
+          <article class="x4-card x4-card--flame"><div class="c-top"><span>01 // APPROACH</span><span>SINCE 2022</span></div><blockquote class="c-q">“I learn fastest by <strong>shipping something real</strong>, then taking it apart.”</blockquote><div class="c-foot">Vincent Chung</div></article>
+          <article class="x4-card x4-card--bone"><div class="c-top"><span>02 // BASE &amp; EDU</span><span>HKU ’26</span></div><p class="c-v">Hong Kong · HKU BEng CE</p><div class="c-foot">Shipping since 2022</div></article>
+          <article class="x4-card x4-card--graphite"><div class="c-top"><span>03 // LANGUAGES</span><span>4 SPOKEN</span></div><p class="c-v">Cantonese · English · Mandarin · Japanese</p><div class="c-foot">Minor in Japanese</div></article>
+          <article class="x4-card x4-card--ink"><div class="c-top"><span>04 // STATUS</span><span>AVAILABLE</span></div><p class="c-v" style="color:var(--flame)">Open to Work — Class of ’26</p><div class="c-foot">Hybrid · On-site · Remote</div></article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 04: INVERTED PRINT-BLADE APERTURE ==================== -->
+  <section class="s-block" id="s4">
+    <div class="stage-head"><span><b>04</b> // SCROLL-SCRUBBED INVERTED PRINT-BLADE × INTERLOCKING GRID</span><span>SHORT 1-PAGE · ZERO PINNING</span></div>
+    <div class="ab-mast">
+      <a class="ab-avail" href="index.html#contact"><span class="ab-avail-stamp">Open to Work</span><span class="ab-avail-meta">Class of ’26<em>/</em>Available Now</span></a>
+      <div class="ab-actions"><a class="ab-link ab-link--flame u-link" href="index.html#contact">Get in touch →</a><a class="ab-link u-link" href="../../resume/Web%20Dev%20Resume.pdf" target="_blank" rel="noreferrer">Résumé PDF ↗</a></div>
+    </div>
+    <div class="pb-blade" id="pbBlade">
+      <div class="pb-layer pb-base"><span class="pb-line pb-line--1">Ship something real.</span><span class="pb-line pb-line--2">Take it apart.</span></div>
+      <div class="pb-layer pb-reveal" id="pbReveal" aria-hidden="true"><span class="pb-line pb-line--1">Ship something real.</span><span class="pb-line pb-line--2">Take it apart.</span></div>
+      <div class="pb-edge" id="pbEdge" aria-hidden="true"></div>
+    </div>
+    <div class="pb-grid">
+      <div class="col-left">
+        <p style="margin:0;font-size:clamp(1.25rem,2.1vw,1.85rem);font-weight:600;line-height:1.22;max-width:29ch">I build for the web end to end: <span style="color:var(--flame)">interfaces</span> that feel considered, <span style="color:var(--flame)">services</span> that stay out of the way, and the <span style="color:var(--flame)">AI plumbing</span> behind both.</p>
+        <p class="lead-p">BEng in Computer Engineering (Minor in Japanese) at The University of Hong Kong. Cantonese / English / Mandarin / Japanese.</p>
+      </div>
+      <div class="pb-stack">
+        <blockquote class="pb-creed" id="pbCreed" style="margin:0"><p class="c-q">“I learn fastest by <strong>shipping something real</strong>, then taking it apart.”</p><div class="c-foot" style="margin-top:12px">Vincent Chung · Hong Kong</div></blockquote>
+        <div class="pb-stats" id="pbStats">
+          <div class="pb-stat"><span class="pb-stat-v">2022<span class="fl">+</span></span><span class="pb-stat-k">Shipping Since</span></div>
+          <div class="pb-stat"><span class="pb-stat-v">HKU <span class="fl">’26</span></span><span class="pb-stat-k">BEng CE · JP Minor</span></div>
+          <div class="pb-stat"><span class="pb-stat-v">HKG</span><span class="pb-stat-k">Based</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 05: FINALE KINETIC VARIABLE-AXIS MONOLITH ==================== -->
+  <section class="s-block" id="s5">
+    <div class="stage-head"><span><b>05</b> // FINALE — KINETIC VARIABLE-AXIS MONOLITH × 14° SLANTED CURTAIN</span><span>CURRENTLY LIVE IN INDEX.HTML · ZERO PINNING</span></div>
+    <div class="ab-mast">
+      <a class="ab-avail" href="index.html#contact"><span class="ab-avail-stamp">Open to Work</span><span class="ab-avail-meta">Class of ’26<em>/</em>Available Now</span></a>
+      <div class="ab-actions"><a class="ab-link ab-link--flame u-link" href="index.html#contact">Get in touch →</a><a class="ab-link u-link" href="../../resume/Web%20Dev%20Resume.pdf" target="_blank" rel="noreferrer">Résumé PDF ↗</a></div>
+      <span class="ab-mast-fill" id="mMastFill" aria-hidden="true"></span>
+    </div>
+    <div class="ab-kinetic" id="mKin">
+      <div class="ab-k-row ab-k-row--1" id="mRow1"><span class="ab-k-txt ab-k-hollow">Build end to end.</span><span class="ab-k-txt ab-k-solid" id="mSol1" aria-hidden="true">Build end to end.</span></div>
+      <div class="ab-k-row ab-k-row--2" id="mRow2"><span class="ab-k-txt ab-k-hollow">Ship something real.</span><span class="ab-k-txt ab-k-solid" id="mSol2" aria-hidden="true">Ship something real.</span></div>
+      <div class="ab-k-row ab-k-row--3" id="mRow3"><span class="ab-k-txt ab-k-hollow">Take it apart.</span><span class="ab-k-txt ab-k-solid" id="mSol3" aria-hidden="true">Take it apart.</span></div>
+    </div>
+    <div class="ab-colophon">
+      <div class="col-left">
+        <p style="margin:0;font-size:clamp(1.32rem,2.2vw,2rem);font-weight:600;line-height:1.18;max-width:27ch">I build for the web end to end: <span style="color:var(--flame)">interfaces</span> that feel considered, <span style="color:var(--flame)">services</span> that stay out of the way, and the <span style="color:var(--flame)">AI plumbing</span> behind both.</p>
+        <p class="lead-p">BEng in Computer Engineering (Minor in Japanese) at The University of Hong Kong. Shipping since 2022.</p>
+      </div>
+      <ul class="ab-ledger">
+        <li class="ab-lrow"><span class="ab-lrow-k">Based</span><span class="ab-lrow-v">Hong Kong</span></li>
+        <li class="ab-lrow"><span class="ab-lrow-k">Education</span><span class="ab-lrow-v">HKU BEng CE ’26</span></li>
+        <li class="ab-lrow"><span class="ab-lrow-k">Shipping</span><span class="ab-lrow-v">Since 2022</span></li>
+        <li class="ab-lrow"><span class="ab-lrow-k">Languages</span><span class="ab-lrow-v ab-langs"><span class="ab-lang">Cantonese</span><span class="ab-lang">English</span><span class="ab-lang">Mandarin</span><span class="ab-lang">Japanese</span></span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ==================== 06: EDITORIAL MONOGRAPH × KINETIC SEAL (REFINED) ==================== -->
+  <section class="s-block em-wrap" id="s6">
+    <div class="em-gridlines" aria-hidden="true"></div>
+    <div class="em-inner">
+      <div class="stage-head"><span><b>06</b> // EDITORIAL MONOGRAPH × KINETIC SEAL (REFINED FROM YOUR SCREENSHOT)</span><span>SCROLL-SCRUBBED SEAL + VARIABLE HEADLINE · ZERO AI SLOP</span></div>
+
+      <div class="em-topbar">
+        <span class="em-topbar-l"><span class="em-sq" aria-hidden="true"></span>02 &nbsp;ABOUT ME</span>
+        <span class="em-topbar-c">( NO HEADSHOT — JUST THE FACTS )</span>
+        <span class="em-topbar-r">HKG <b id="emClock">--:--:--</b> UTC+8</span>
+        <span class="em-topbar-fill" id="emTopFill" aria-hidden="true"></span>
+      </div>
+
+      <div class="em-hero">
+        <h2 class="em-h" id="emHero">
+          <span class="em-h-line"><span class="em-h-in" id="emH1">Build end to end,</span></span>
+          <span class="em-h-line"><span class="em-h-in" id="emH2"><em>wholly</em> obsessed with shipping.</span></span>
+        </h2>
+      </div>
+
+      <div class="em-mid">
+        <div>
+          <p class="em-hello">( HELLO · 你好 )</p>
+          <p class="em-bio">I’m <strong>Vincent Chung</strong>, based in <strong>Hong Kong</strong>, shipping for the web since <strong>2022</strong>. I build across the whole stack — <u>interfaces that feel considered</u>, services that stay out of the way, and the AI plumbing behind both.</p>
+        </div>
+
+        <div class="em-seal-wrap">
+          <a class="em-seal" href="index.html#contact" aria-label="Open to Work — Contact Vincent Chung">
+            <svg class="em-seal-ring" id="emSealRing" viewBox="0 0 160 160" aria-hidden="true">
+              <defs><path id="emCirclePath" d="M 80,80 m -59,0 a 59,59 0 1,1 118,0 a 59,59 0 1,1 -118,0"/></defs>
+              <text fill="#e9e5db" font-family="JetBrains Mono, ui-monospace, monospace" font-size="8.4" letter-spacing="2.35">
+                <textPath href="#emCirclePath">OPEN TO WORK · HONG KONG · CLASS OF ’26 · </textPath>
+              </text>
+            </svg>
+            <span class="em-seal-core">
+              <svg class="em-seal-reticle" id="emSealReticle" viewBox="0 0 50 50" aria-hidden="true">
+                <circle cx="25" cy="25" r="21" fill="none" stroke="#f2461f" stroke-width="0.9" stroke-dasharray="4 4"/>
+                <line x1="25" y1="1" x2="25" y2="7" stroke="#f2461f" stroke-width="1.1"/>
+                <line x1="25" y1="43" x2="25" y2="49" stroke="#f2461f" stroke-width="1.1"/>
+                <line x1="1" y1="25" x2="7" y2="25" stroke="#f2461f" stroke-width="1.1"/>
+                <line x1="43" y1="25" x2="49" y2="25" stroke="#f2461f" stroke-width="1.1"/>
+              </svg>
+              <span class="em-seal-vc">VC</span>
+            </span>
+          </a>
+        </div>
+
+        <aside class="em-card" id="emCard">
+          <div class="em-card-top"><span>Philosophy</span><span>Method — On Repeat</span></div>
+          <blockquote class="em-quote">“I learn fastest by shipping something real, then <em>taking it apart.</em>”</blockquote>
+          <div class="em-card-foot">
+            <a class="ab-link ab-link--flame u-link" href="index.html#contact">Get in touch →</a>
+            <a class="ab-link u-link" href="../../resume/Web%20Dev%20Resume.pdf" target="_blank" rel="noreferrer">Résumé PDF ↗</a>
+          </div>
+        </aside>
+      </div>
+
+      <div class="em-ledger">
+        <div class="em-cell">
+          <div class="em-cell-top"><span>Base</span><b>01</b></div>
+          <p class="em-cell-v">Hong Kong<span class="zh">香港</span></p>
+          <p class="em-cell-sub">22.32°N · 114.17°E</p>
+        </div>
+        <div class="em-cell">
+          <div class="em-cell-top"><span>Shipping Since</span><b>02</b></div>
+          <p class="em-cell-v">2022</p>
+          <p class="em-cell-sub">Web · Systems · AI</p>
+        </div>
+        <div class="em-cell">
+          <div class="em-cell-top"><span>Education</span><b>03</b></div>
+          <p class="em-cell-v">HKU BEng CE</p>
+          <p class="em-cell-sub">Minor in Japanese · ’26</p>
+        </div>
+        <div class="em-cell">
+          <div class="em-cell-top"><span>Languages</span><b>04</b></div>
+          <p class="em-cell-v">4 Spoken</p>
+          <p class="em-cell-sub">Cantonese / English / Mandarin / Japanese</p>
+        </div>
+        <a class="em-cell em-cell--avail" href="index.html#contact">
+          <div class="em-cell-top"><span>Availability</span><b>05</b></div>
+          <p class="em-cell-v">OPEN TO WORK</p>
+          <p class="em-cell-sub">Class of ’26 · Available Now →</p>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="assets/script-0.js"></script>
+<script>
+(function(){
+"use strict";
+var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function clamp01(v){ return v < 0 ? 0 : (v > 1 ? 1 : v); }
+function easeInOut(t){ return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+
+/* 01: 3D Interactive Card Deck */
+var deckCards = Array.prototype.slice.call(document.querySelectorAll("#deckStage .deck-card"));
+var deckIdxEl = document.getElementById("deckIdx");
+var deckCur = 0;
+function renderDeck(){
+  var n = deckCards.length;
+  deckCards.forEach(function(c, i){
+    var pos = (i - deckCur + n) % n;
+    c.style.zIndex = n - pos;
+    c.style.opacity = pos === 3 ? "0.45" : String(1 - pos * 0.16);
+    c.style.transform = "translate3d(" + (pos * 18) + "px," + (pos * 10) + "px," + (-pos * 55) + "px) rotateZ(" + (pos * 2.5 - 1.5) + "deg)";
+  });
+  if (deckIdxEl) deckIdxEl.textContent = "0" + (deckCur + 1) + " / 0" + n;
+}
+function nextDeck(){ deckCur = (deckCur + 1) % deckCards.length; renderDeck(); }
+document.getElementById("deckNext").addEventListener("click", nextDeck);
+document.getElementById("deckStage").addEventListener("click", nextDeck);
+renderDeck();
+
+/* 02: Exploded CAD Isometric Stack */
+var s2 = document.getElementById("s2");
+var slabs = Array.prototype.slice.call(document.querySelectorAll("#x1Cad .x1-slab"));
+var focusedSlab = -1;
+slabs.forEach(function(s, i){
+  s.addEventListener("pointerenter", function(){ focusedSlab = i; syncScroll(); });
+  s.addEventListener("pointerleave", function(){ focusedSlab = -1; syncScroll(); });
+  s.addEventListener("click", function(){ focusedSlab = focusedSlab === i ? -1 : i; syncScroll(); });
+});
+
+/* 03: 3D Orbital Carousel */
+var s3 = document.getElementById("s3");
+var orbCards = Array.prototype.slice.call(document.querySelectorAll("#x4Orbit .x4-card"));
+var orbOffset = 0, orbCur = 0;
+orbCards.forEach(function(c, i){
+  c.addEventListener("click", function(){
+    var r = s3.getBoundingClientRect();
+    var p = clamp01(-r.top / Math.max(1, s3.offsetHeight - window.innerHeight));
+    orbOffset = -(p * Math.PI * 1.5 + i * (Math.PI / 2));
+  });
+});
+
+/* 04: Inverted Print-Blade + Interlocking Grid */
+var s4 = document.getElementById("s4");
+var pbBlade = document.getElementById("pbBlade");
+var pbReveal = document.getElementById("pbReveal");
+var pbEdge = document.getElementById("pbEdge");
+var pbCreed = document.getElementById("pbCreed");
+var pbStats = document.getElementById("pbStats");
+
+/* 05: Finale Kinetic Variable-Axis Monolith */
+var s5 = document.getElementById("s5");
+var mMastFill = document.getElementById("mMastFill");
+var mKin = document.getElementById("mKin");
+var mRows = [document.getElementById("mRow1"), document.getElementById("mRow2"), document.getElementById("mRow3")];
+var mSols = [document.getElementById("mSol1"), document.getElementById("mSol2"), document.getElementById("mSol3")];
+
+/* 06: Editorial Monograph × Kinetic Seal */
+var s6 = document.getElementById("s6");
+var emTopFill = document.getElementById("emTopFill");
+var emHero = document.getElementById("emHero");
+var emH1 = document.getElementById("emH1");
+var emH2 = document.getElementById("emH2");
+var emSealRing = document.getElementById("emSealRing");
+var emSealReticle = document.getElementById("emSealReticle");
+var emCard = document.getElementById("emCard");
+var emClock = document.getElementById("emClock");
+function tickHkt(){
+  if (!emClock) return;
+  try {
+    emClock.textContent = new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Hong_Kong", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false }).format(new Date());
+  } catch (e) { emClock.textContent = "HKT"; }
+}
+tickHkt();
+setInterval(tickHkt, 1000);
+
+function syncScroll(){
+  var vh = Math.max(1, window.innerHeight);
+
+  /* 02 Exploded CAD */
+  var r2 = s2.getBoundingClientRect();
+  var p2 = clamp01(-r2.top / Math.max(1, s2.offsetHeight - vh));
+  var spread = 14 + p2 * 70;
+  slabs.forEach(function(s, i){
+    var isF = focusedSlab === i;
+    s.classList.toggle("is-focus", isF);
+    if (isF) { s.style.transform = "translate3d(0,0,90px) rotateX(0deg) rotateZ(0deg) scale(1.06)"; }
+    else {
+      s.style.zIndex = i + 1;
+      s.style.transform = "translate3d(0," + (-(i - 1.5) * spread).toFixed(1) + "px,0) rotateX(50deg) rotateZ(-30deg)";
+    }
+  });
+
+  /* 04 Print-Blade */
+  if (pbBlade && pbReveal) {
+    var br = pbBlade.getBoundingClientRect();
+    var bp = easeInOut(clamp01((vh * 0.86 - br.top) / Math.max(1, vh * 0.58)));
+    pbReveal.style.clipPath = "inset(0 " + ((1 - bp) * 100).toFixed(2) + "% 0 0)";
+    if (pbEdge) {
+      pbEdge.style.transform = "translate3d(" + (bp * br.width).toFixed(1) + "px,0,0)";
+      pbEdge.style.opacity = (bp > 0.02 && bp < 0.98) ? "1" : "0";
+    }
+    if (window.innerWidth >= 860 && pbCreed && pbStats) {
+      var lock = clamp01((vh * 0.95 - pbCreed.getBoundingClientRect().top) / Math.max(1, vh * 0.5));
+      var rem = Math.pow(1 - lock, 3);
+      pbCreed.style.transform = "translate3d(" + (rem * 26).toFixed(1) + "px,0,0)";
+      pbStats.style.transform = "translate3d(" + (-rem * 26).toFixed(1) + "px,0,0)";
+    } else if (pbCreed && pbStats) {
+      pbCreed.style.transform = pbStats.style.transform = "";
+    }
+  }
+
+  /* 05 Finale Monolith */
+  if (s5 && mKin) {
+    var sr5 = s5.getBoundingClientRect();
+    var sp5 = clamp01((vh - sr5.top) / (vh + sr5.height));
+    if (mMastFill) mMastFill.style.transform = "scaleX(" + easeInOut(clamp01((vh * 0.9 - sr5.top) / Math.max(1, sr5.height * 0.7))).toFixed(4) + ")";
+    var kr = mKin.getBoundingClientRect();
+    var wide = window.innerWidth >= 900;
+    var drift = (0.5 - sp5) * 5.0;
+    for (var i = 0; i < 3; i++) {
+      var p = easeInOut(clamp01((vh * (0.92 - i * 0.065) - kr.top) / Math.max(1, vh * 0.52)));
+      if (mSols[i]) mSols[i].style.clipPath = "polygon(0 0," + (-14 + p * 130).toFixed(2) + "% 0," + (-26 + p * 130).toFixed(2) + "% 100%,0 100%)";
+      if (mRows[i]) {
+        mRows[i].style.fontStretch = (90 + p * 30).toFixed(1) + "%";
+        mRows[i].style.transform = wide ? "translate3d(" + ((i === 1 ? -drift : drift)).toFixed(2) + "%,0,0)" : "";
+      }
+    }
+  }
+
+  /* 06 Editorial Monograph × Kinetic Seal */
+  if (s6) {
+    var sr6 = s6.getBoundingClientRect();
+    var sp6 = clamp01((vh - sr6.top) / (vh + sr6.height));
+    if (emTopFill) emTopFill.style.transform = "scaleX(" + easeInOut(clamp01((vh * 0.92 - sr6.top) / Math.max(1, sr6.height * 0.65))).toFixed(4) + ")";
+    if (emHero) {
+      var hp = easeInOut(clamp01((vh * 0.95 - emHero.getBoundingClientRect().top) / Math.max(1, vh * 0.52)));
+      emHero.style.fontStretch = (96 + hp * 14).toFixed(1) + "%";
+      if (emH1) emH1.style.transform = "translate3d(0," + ((1 - hp) * 32).toFixed(1) + "%,0)";
+      if (emH2) emH2.style.transform = "translate3d(0," + ((1 - hp) * 46).toFixed(1) + "%,0)";
+    }
+    if (emSealRing) emSealRing.style.transform = "rotate(" + (sp6 * 240).toFixed(1) + "deg)";
+    if (emSealReticle) emSealReticle.style.transform = "rotate(" + (-sp6 * 75).toFixed(1) + "deg)";
+    if (emCard) {
+      var cp = clamp01((vh * 0.96 - emCard.getBoundingClientRect().top) / Math.max(1, vh * 0.55));
+      emCard.style.transform = window.innerWidth >= 960 ? "translate3d(0," + (Math.pow(1 - cp, 3) * 24).toFixed(1) + "px,0)" : "";
+    }
+  }
+}
+
+function orbitTick(){
+  requestAnimationFrame(orbitTick);
+  var vh = Math.max(1, window.innerHeight);
+  var r3 = s3.getBoundingClientRect();
+  var p3 = clamp01(-r3.top / Math.max(1, s3.offsetHeight - vh));
+  var target = p3 * Math.PI * 1.5 + orbOffset;
+  orbCur += (target - orbCur) * 0.12;
+  var rx = Math.min(135, window.innerWidth * 0.24);
+  orbCards.forEach(function(c, i){
+    var a = orbCur + i * (Math.PI / 2);
+    var sin = Math.sin(a), cos = Math.cos(a);
+    c.style.zIndex = Math.round((cos + 1) * 10);
+    c.style.opacity = (0.32 + (cos + 1) * 0.34).toFixed(3);
+    c.style.transform = "translate3d(" + (sin * rx).toFixed(1) + "px," + (-cos * 26).toFixed(1) + "px,0) scale(" + (0.78 + (cos + 1) * 0.14).toFixed(3) + ")";
+  });
+}
+
+window.addEventListener("scroll", syncScroll, { passive: true });
+window.addEventListener("resize", syncScroll, { passive: true });
+syncScroll();
+orbitTick();
+
+/* Live Three.js WebGL Terrain Backdrop */
+(function(){
+  var holder = document.getElementById("terrainBg");
+  if (!holder || !window.THREE) return;
+  var renderer;
+  try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); } catch (e) { return; }
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  holder.appendChild(renderer.domElement);
+  var scene = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(40, window.innerWidth / Math.max(1, window.innerHeight), 0.1, 100);
+  camera.position.set(0, 3.2, 7.6);
+  camera.lookAt(0, 0, -4.5);
+  var uTime = { value: 0 };
+  var vs = "uniform float uTime; varying float vH; void main(){ vec3 p=position; float h=(sin(p.x*1.2+uTime*.35+p.z*.6)*.45+sin(p.x*2.6-uTime*.45+p.z*1.5)*.22)*exp(-pow(p.x/6.0,2.0)); p.y+=h; vH=p.y; gl_Position=projectionMatrix*modelViewMatrix*vec4(p,1.0); }";
+  var fs = "varying float vH; void main(){ vec3 c=mix(vec3(.91,.89,.85),vec3(.95,.27,.12),smoothstep(.15,.65,vH)); gl_FragColor=vec4(c,.45); }";
+  var COLS = 120, ROWS = 38, pos = new Float32Array(COLS * ROWS * 3), idx = [], k = 0;
+  for (var j = 0; j < ROWS; j++) for (var i = 0; i < COLS; i++) { pos[k++] = -13 + (i / (COLS - 1)) * 26; pos[k++] = 0; pos[k++] = -15 + (j / (ROWS - 1)) * 18; }
+  for (var r = 0; r < ROWS; r++) for (var c = 0; c < COLS - 1; c++) { var s = r * COLS + c; idx.push(s, s + 1); }
+  var geo = new THREE.BufferGeometry();
+  geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+  geo.setIndex(idx);
+  scene.add(new THREE.LineSegments(geo, new THREE.ShaderMaterial({ uniforms: { uTime: uTime }, vertexShader: vs, fragmentShader: fs, transparent: true })));
+  window.addEventListener("resize", function(){ renderer.setSize(window.innerWidth, window.innerHeight); camera.aspect = window.innerWidth / Math.max(1, window.innerHeight); camera.updateProjectionMatrix(); });
+  var clock = new THREE.Clock();
+  (function loop(){
+    if (!reduced) requestAnimationFrame(loop);
+    uTime.value += Math.min(clock.getDelta(), 0.05);
+    renderer.render(scene, camera);
+  })();
+})();
+})();
+</script>
+</body>
+</html>
