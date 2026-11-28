@@ -104,8 +104,8 @@ var CREDENTIALS = [
 ];
 var RECOGNITION = [
   { date: "2026", title: "HKCERT CTF — Round 1", issuer: "HKCERT · Capture The Flag", badge: "Rank #52 · R1", href: "https://ctf.hkcert.org/", icon: "ctf" },
-  { date: "2026", title: "HackerRank Certificate", issuer: "HackerRank · Add credential URL", badge: "Certificate", href: "", icon: "cert", isSlot: true },
-  { date: "Year", title: "Award / Honour Title", issuer: "Institution or Competition", badge: "Award", href: "", icon: "award", isSlot: true }
+  { date: "2026", title: "Software Engineer Certificate", issuer: "HackerRank", badge: "Certificate", href: "https://www.hackerrank.com/certificates/4295fd056a84", icon: "hackerrank_software_engineer_cert", isSlot: true },
+  // { date: "Year", title: "Award / Honour Title", issuer: "Institution or Competition", badge: "Award", href: "", icon: "award", isSlot: true }
 ];
 
 var TK_ICONS = {

@@ -278,6 +278,7 @@ syncChamferPolygons();
     voice: '<svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="27" stroke="#f2461f" stroke-width="1.6" stroke-dasharray="3 3"/><circle cx="32" cy="32" r="21" stroke="#e9e5db" stroke-opacity=".45" stroke-width="1.2"/><path d="M34 14L22 34h9l-3 16 14-22h-9l1-14z" fill="#f2461f" fill-opacity=".2" stroke="#f2461f" stroke-width="1.6" stroke-linejoin="round"/><text x="32" y="56" text-anchor="middle" fill="#e9e5db" font-family="JetBrains Mono,monospace" font-size="7.5" font-weight="700" letter-spacing="1">EMSD</text></svg>',
     edu: '<svg viewBox="0 0 64 64" fill="none"><path d="M14 12h36v20c0 13-10 21-18 24-8-3-18-11-18-24V12z" fill="rgba(242,70,31,.12)" stroke="#f2461f" stroke-width="1.7"/><path d="M14 25h36M32 12v44" stroke="#e9e5db" stroke-opacity=".32" stroke-width="1.1"/><text x="32" y="22" text-anchor="middle" fill="#e9e5db" font-family="Archivo,sans-serif" font-size="9" font-weight="800" letter-spacing="1">HKU</text><text x="32" y="42" text-anchor="middle" fill="#f2461f" font-family="JetBrains Mono,monospace" font-size="7" font-weight="700">1911</text></svg>',
     ctf: '<svg viewBox="0 0 64 64" fill="none"><polygon points="32,6 54,18 54,46 32,58 10,46 10,18" fill="rgba(242,70,31,.1)" stroke="#f2461f" stroke-width="1.6"/><path d="M23 45V19M23 20h19l-4 6 4 6H23" stroke="#e9e5db" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><text x="32" y="52" text-anchor="middle" fill="#f2461f" font-family="JetBrains Mono,monospace" font-size="6.8" font-weight="700" letter-spacing=".8">HKCERT</text></svg>',
+    hackerrank_software_engineer_cert: '<svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="27" fill="#0b0b0a" stroke="#e9e5db" stroke-opacity=".55" stroke-width="1.4"/><path d="M23 22v20M39 22v20M23 32h16" stroke="#e9e5db" stroke-width="3.4" stroke-linecap="round"/><rect x="43" y="24" width="7" height="7" fill="#2ec866"/></svg>',
     cert: '<svg viewBox="0 0 64 64" fill="none"><polygon points="32,7 53,19 53,45 32,57 11,45 11,19" fill="rgba(233,229,219,.05)" stroke="#e9e5db" stroke-opacity=".55" stroke-width="1.4"/><path d="M22 22v20M34 22v20M22 32h12" stroke="#e9e5db" stroke-width="2.6" stroke-linecap="round"/><rect x="38" y="36" width="8" height="6" fill="#f2461f"/></svg>',
     award: '<svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="28" r="16" fill="rgba(242,70,31,.12)" stroke="#f2461f" stroke-width="1.6"/><path d="M25 42l-4 14 11-5 11 5-4-14" stroke="#e9e5db" stroke-width="1.6" stroke-linejoin="round"/><polygon points="32,18 35,25 42,25 36.5,29.5 38.5,36 32,32 25.5,36 27.5,29.5 22,25 29,25" fill="#f2461f"/></svg>'
   };
@@ -370,15 +371,20 @@ syncChamferPolygons();
   }
 
   /* Cursor vicinity tracker + large icon-only square with exaggerated spring switch */
-  if (section && window.matchMedia('(hover: hover) and (pointer: fine)').matches && !reduced) {
+  /* Floating preview builds on every pointer type (mouse + touch); touch pins via tap, see below. */
+  if (section && !reduced) {
     var badge = document.createElement('div');
     badge.id = 'credFloatIcon';
     badge.setAttribute('aria-hidden', 'true');
     badge.innerHTML = '<div class="cfi-stage"></div>';
     document.body.appendChild(badge);
     var stageEl = badge.querySelector('.cfi-stage');
-    var BADGE_IMGS = { voice: { src: 'assets/badges/emsd.svg', cls: 'cfi-img cfi-img--emsd' }, edu: { src: 'assets/badges/University_of_Hong_Kong.svg', cls: 'cfi-img cfi-img--hku' } };
+    var BADGE_IMGS = { voice: { src: 'assets/badges/emsd.svg', cls: 'cfi-img cfi-img--emsd' }, edu: { src: 'assets/badges/University_of_Hong_Kong.svg', cls: 'cfi-img cfi-img--hku' }, hackerrank_software_engineer_cert: { src: 'assets/badges/hackerrank-software-engineer-cert.jpg', cls: 'cfi-img cfi-img--cert' } };
     var inside = false, tx = 0, ty = 0, cx = 0, cy = 0, vx = 0, raf = 0, currentItem = null, currentIconKey = '', currentIdx = -1;
+    var isCoarse = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+    var pinnedEl = null;
+    var tiltX = 0, tiltY = 0; /* smoothed cursor-direction tilt, degrees */
+    function setCertVariant(iconKey){ badge.classList.toggle('is-cert', iconKey === 'hackerrank_software_engineer_cert'); }
 
     function buildSlotContent(iconKey){
       var fallback = FIELD_ICONS[iconKey] || FIELD_ICONS.cert;
@@ -432,6 +438,7 @@ syncChamferPolygons();
         if (currentItem) {
           currentItem.classList.add('is-near');
           var iconKey = currentItem.getAttribute('data-icon') || 'cert';
+          setCertVariant(iconKey);
           if (iconKey !== currentIconKey) {
             var dir = (prevIdx === -1 || currentIdx >= prevIdx) ? 1 : -1;
             currentIconKey = iconKey;
@@ -446,25 +453,54 @@ syncChamferPolygons();
     }
     function tickFloat(){
       raf = 0;
-      cx += (tx - cx) * 0.18;
-      cy += (ty - cy) * 0.18;
-      badge.style.transform = 'translate3d(' + (cx + 38).toFixed(1) + 'px,' + (cy - 56).toFixed(1) + 'px,0) scale(' + (inside && currentItem ? 1 : 0.86) + ')';
+      if (isCoarse) return; /* touch: the frame is docked by CSS, never cursor-followed */
+      var dvx = tx - cx, dvy = ty - cy;
+      cx += dvx * 0.18;
+      cy += dvy * 0.18;
+      /* Tilt with the cursor: rightward drag leans right, upward drag leans forward; settles flat at rest. */
+      tiltY += (Math.max(-18, Math.min(18, dvx * 0.28)) - tiltY) * 0.22;
+      tiltX += (Math.max(-14, Math.min(14, -dvy * 0.28)) - tiltX) * 0.22;
+      var frameW = 112;
+      var px = Math.min(cx + 38, window.innerWidth - frameW - 12);
+      var py = Math.max(12, cy - 56);
+      badge.style.transform = 'translate3d(' + px.toFixed(1) + 'px,' + py.toFixed(1) + 'px,0) rotateX(' + tiltX.toFixed(1) + 'deg) rotateY(' + tiltY.toFixed(1) + 'deg) scale(' + (inside && currentItem ? 1 : 0.86) + ')';
       if (inside || Math.abs(tx - cx) > 0.5 || Math.abs(ty - cy) > 0.5) raf = requestAnimationFrame(tickFloat);
     }
     section.addEventListener('pointerenter', function(e){
       inside = true; tx = cx = e.clientX; ty = cy = e.clientY;
       syncNearest();
-      if (!raf) raf = requestAnimationFrame(tickFloat);
+      if (!raf && !isCoarse) raf = requestAnimationFrame(tickFloat);
     });
     section.addEventListener('pointermove', function(e){
       inside = true; tx = e.clientX; ty = e.clientY;
       syncNearest();
-      if (!raf) raf = requestAnimationFrame(tickFloat);
+      if (!raf && !isCoarse) raf = requestAnimationFrame(tickFloat);
     }, { passive: true });
     section.addEventListener('pointerleave', function(){
+      if (pinnedEl) return; /* a tap-pinned preview stays until the next tap */
       inside = false;
       badge.classList.remove('is-visible');
       if (currentItem) { currentItem.classList.remove('is-near'); currentItem = null; currentIconKey = ''; }
+    });
+    /* Touch: first tap pins the preview (same frame as desktop hover), second tap follows the link. */
+    wrap.addEventListener('click', function(e){
+      if (!isCoarse) return;
+      var row = e.target.closest('.recog-row.is-link');
+      if (!row) return;
+      if (pinnedEl === row) { pinnedEl = null; row.classList.remove('is-pinned'); return; }
+      e.preventDefault();
+      if (pinnedEl) pinnedEl.classList.remove('is-pinned');
+      pinnedEl = row;
+      row.classList.add('is-pinned');
+      if (currentItem) currentItem.classList.remove('is-near');
+      currentItem = row;
+      row.classList.add('is-near');
+      var iconKey = row.getAttribute('data-icon') || 'cert';
+      setCertVariant(iconKey);
+      currentIconKey = '';
+      swapIcon(iconKey, 1);
+      currentIconKey = iconKey;
+      badge.classList.add('is-visible');
     });
     window.addEventListener('scroll', function(){ if (inside) syncNearest(); }, { passive: true });
   }
